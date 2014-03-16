@@ -1,0 +1,387 @@
+﻿@using eZeroOne.eHorakelle.Models
+@model eZeroOne.eHorakelle.Models.BookingFlowModel
+@{
+    ViewBag.Title = "Payments";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link href="@Url.Content("~/Content/AjaxForms.css")" rel="stylesheet" type="text/css"/>
+<link href="@Url.Content("~/Content/jquery-ui.css")" rel="stylesheet" type="text/css"/>
+@*<link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">*@
+<script type="text/javascript" src="/js/jquery-1.9.1.js"></script>
+<script type="text/javascript" src="/Scripts/jquery.validate.min.js"></script>
+<script type="text/javascript" src="/Scripts/jquery.validate.unobtrusive.js"></script>
+<div id="page-header" >
+			<h2>Reservation: Place Your Reservation</h2>
+		</div>
+
+
+@*<div class="booking-main-wrapper" id="dialog" style="display:none;" >
+        
+<div class="booking-main">
+    	             
+        <h4 class="title-style4">Login Details<span class="title-block"></span></h4>
+
+        <div class="input-left">
+							
+            <label for="Email">User Name</label>
+            <input type="text" name="Email" id="uname">
+							
+            <label for="Password">Password</label>
+            <input type="password" name="Password" id="pword" >
+						
+            <input class="btn btn-primary"  type="submit" value="Sign In"/>	
+							
+        </div>
+    </div>
+</div>*@
+
+<!-- delete record-->
+@*<div class="modal hide" id="deleteRecord">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">
+            x
+        </button>
+        <h3>Delete Accomodation type</h3>
+    </div>
+    <div class="modal-body">
+        <span> Are you sure ? do you wish to delete this <span style="color:red;font-size:14px">Accomodation type</span> ?</span>
+    </div>
+    <div class="modal-footer">
+        <a href="#" id="btncancel" class="btn" data-dismiss="modal">No </a>
+        <a href="#" id="btndelete" class="btn btn-primary" data-dismiss="modal">Yes </a>
+    </div>
+</div>*@
+
+<!-- BEGIN .content-wrapper -->
+<div class="content-wrapper clearfix">
+			
+    <!-- BEGIN .booking-step-wrapper -->
+    <div class="booking-step-wrapper clearfix">
+			
+        <div class="step-wrapper">
+            <div class="step-icon-wrapper">
+                <div class="step-icon">1.</div>
+            </div>
+            <div class="step-title">Choose Your Date</div>
+        </div>
+			
+        <div class="step-wrapper">
+            <div class="step-icon-wrapper">
+                <div class="step-icon">2.</div>
+            </div>
+            <div class="step-title">Choose Your Room</div>
+        </div>
+			
+				
+        @{
+            var tempData = (TempBooking)ViewBag.TempData;
+            var dateDiff = (@tempData.CheckOut - @tempData.CheckIn).TotalDays;
+            var starDate = tempData.CheckIn;
+
+            var priceBreakDown = (List<DayWiseRate>)ViewBag.PriceBreakDowns;
+        }			
+
+        <div class="step-wrapper">
+            <div class="step-icon-wrapper">
+                <div class="step-icon step-icon-current">3.</div>
+            </div>
+            <div class="step-title">Place Your Reservation</div>
+        </div>
+			
+        <div class="step-wrapper last-col">
+            <div class="step-icon-wrapper">
+                <div class="step-icon">4.</div>
+            </div>
+            <div class="step-title">Confirmation</div>
+        </div>
+			    
+        <div class="step-line"></div>
+			
+        <!-- END .booking-step-wrapper -->
+    </div>
+			
+    <div class="booking-main-wrapper">
+        
+		 
+        <div class="booking-main">
+            <ul class="room-list-wrapper clearfix">
+                 <h4 class="title-style4" >Do you have a login ?<span class="title-block"></span></h4>
+                    <div class="input-left">
+							
+                    <label for="userName">User Name</label>
+                    <input type="text" name="userName" id="userName">
+							
+                    <label for="LastName">Password</label>
+                    <input type="password" name="password" id="password" >
+				    <br/><br/>
+                    <input id="btnLogin" class="btn btn-primary"  type="submit" value="Sign In"/>	
+							<span id="spnError" style="color:yellow;font-size:14px;display:none"> Invalid login !!!</span>
+                </div>
+            </ul>	
+        </div>
+          <div>&nbsp;</div>
+        <div class="booking-main">
+			 
+	        <div class="clearfix"></div><br/>
+            <h4 class="title-style4">Guest Details ( *New user will be created as a Visitor)<span class="title-block"></span></h4>
+            
+           <form id="frmpayment" action="/Property/Payment" class="clearfix" method="post">
+                
+                @Html.Label("Invalid", "")
+                @Html.HiddenFor(m => m.TotalAmount)
+                @Html.HiddenFor(m => m.DiscountAmount)
+                @Html.HiddenFor(m => m.ItemDescription)
+                @Html.HiddenFor(m => m.UserId)
+                <div class="input-left">
+							
+                    <label for="FirstName">First Name</label>
+                    <input type="text" name="FirstName" id="FirstName">
+							
+                    <label for="LastName">Last Name</label>
+                    <input type="text" name="LastName" id="LastName">
+							
+                    <label for="Email">Email Address</label>
+                    <input type="text" name="Email" id="Email">
+							
+                    <label for="Phone">Telephone Number</label>
+                    <input type="text" name="Phone" id="Phone">
+							
+                    <label for="Adderss">Address Line 1</label>
+                    <input type="text" name="Adderss" id="Adderss">
+							
+                </div>
+						
+                <div class="input-right">
+							
+                    <label for="Passport">Passport/NIC</label>
+                    <input type="text" name="Passport" id="Passport">
+							
+                    <label for="City">City</label>
+                    <input type="text" name="City" id="City">
+							
+                    <label for="State">State / County</label>
+                    <input type="text" name="State" id="State">
+							
+                    <label for="ZipCode">Zip / Postcode</label>
+                    <input type="text" name="ZipCode" id="ZipCode">
+							
+                    <label for="Country">Country</label>
+                    <input type="text" name="Country" id="Country">
+							
+                </div>
+						
+                <label for="SpecialRequirement">Special Requirments</label>
+                <textarea name="SpecialRequirement" id="SpecialRequirement" rows="10"></textarea>
+					
+                <p class="terms"><input type="checkbox" name="PayFull" id="PayFull" checked="checked"> Pay Full Amount</p>
+				
+                <p class="terms"><input type="checkbox" name="terms" checked="checked"> I have read and accept the <a href="#">terms and conditions</a>.</p>
+						
+                <img src="/images/payment.png" alt="" class="payment-image" />
+						
+                <div class="clearfix"></div>	
+                <a id="book-deposit"class="button3 " >Book Now & Pay </a>
+
+            </form>
+
+        </div>
+				
+    </div>
+			
+    <div class="booking-side-wrapper">
+				
+        <div class="booking-side clearfix">
+            @{
+                var tottalAmount = Convert.ToDecimal(ViewBag.AfterDiscountPrice);
+
+                var deposit = Convert.ToDecimal(ViewBag.Deposit);
+
+                var dayWises = (List<DateWisePrice>)ViewBag.DayWisePrices;
+            }
+            <h4 class="title-style4">Your Reservation<span class="title-block"></span></h4>
+					
+            <ul>
+                <li><span>Check in Date: </span> @String.Format("{0:ddd, MMM d, yyyy}", @tempData.CheckIn)</li>
+                <li><span>Check Out Date: </span> @String.Format("{0:ddd, MMM d, yyyy}", @tempData.CheckOut)</li>
+               
+                <li><span>No of Nights: </span> @dateDiff</li>
+                <li><span>Guests: </span> @tempData.Adult Adults</li>
+                <li><span>Below 12 years: </span>  @tempData.Children</li>
+                <li><span>Below 6 years(*Kid): </span> @tempData.Below6Yrs</li>
+            </ul>
+					
+            <div class="price-details">
+						
+                <p class="deposit">Total Price</p>
+                @*<h3 class="price">$@deposit.ToString("#0.00")</h3>
+                <hr class="total-line" />
+                <p class="total">Total Price</p>*@
+                <h3 class="total-price">$ @tottalAmount.ToString("#0.00")</h3>
+                        
+                <p class="price-breakdown">
+                    <span>
+                        Discount : $ @ViewBag.Discount.ToString("#0.00") <br/> -(@ViewBag.DiscountPercentage.ToString("#0.00")) % 
+                    </span>
+                </p>
+                <p class="price-breakdown"><a href="#price-breakdown-display">View Price Breakdown</a></p>
+                <p id="price-breakdown-display" class="price-breakdown-display">
+					        
+                    @foreach (var d in priceBreakDown.Where(w => w.Rooms.Count > 0).OrderBy(o => o.Date))
+                    {
+                        if (@d.Rate == 0)
+                        {
+                            continue;
+                        }
+                        <span>@String.Format("{0:ddd, MMM d}", @d.Date):</span>
+                        <b>$ @d.Rate.ToString("#0.00")</b>
+                        <br/>
+                        <span>Accomadation:</span><br/>
+                        foreach (var r in d.Rooms)
+                        {
+                            <b style="margin-right: 20px;float:right">@r.Name $ @r.Rate.ToString("#0.00")</b>
+                            <br />
+                        }
+                        <span>Meal Plan:</span><br/>
+                        foreach (var m in d.Dinings)
+                        {
+                            <b style="margin-right: 20px;float:right">@m.Name $ @m.Rate.ToString("#0.00")</b>
+                            <br />
+                        }
+                        <span>Activities:</span><br/>
+                        foreach (var a in d.Activities)
+                        {
+                            <b style="margin-right: 20px;float:right">@a.Name $@a.Rate.ToString("#0.00")</b>
+                            <br />
+                        }
+                    }
+                    <span>Transports</span><br />
+                    @foreach (var d in priceBreakDown)
+                    {
+                        foreach (var a in d.Transports)
+                        {
+                            <b style="margin-right: 20px;float:right">@a.Name $@a.Rate.ToString("#0.00")</b><br />
+                        }
+
+                    }
+                </p>
+						
+            </div>
+					
+            <hr class="space9" />
+					
+            <a href="/Property/ChooseDate" class="button3">Edit Reservation</a>
+					
+        </div>
+				
+    </div>
+			
+    <!-- END .content-wrapper -->
+</div>
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        
+       $('#btnLogin').click(function () {
+
+           var un = $("#userName").val();
+            un = un.replace("a", "-");
+            un = un.replace("e", "*");
+            un = un.replace("i", "=");
+
+            var pw = $("#password").val();
+            pw = pw.replace("a", "-");
+            pw = pw.replace("e", "*");
+            pw = pw.replace("i", "#");
+
+            checkLogin(un.toString(), pw.toString());
+        });
+        
+        
+       $('#book-deposit').click(function () {
+          
+           if (checkuserId())
+           {
+               if (checkEmailExist())
+                 $("#frmpayment").submit();
+           }
+       });
+        
+       function checkuserId() {
+          
+           if (parseInt($("#UserId").val()) > 0) {
+               return true;
+               
+           }
+              
+           else {
+               
+               if (validateinputs()) {
+                   return true;
+
+               } else {
+                   
+                   alert("please fill the guest details");
+               }
+              
+               return false;
+           }
+       }
+        
+        function checkLogin(userName,password) {
+            $.ajax({
+                type: "POST",
+                url: "/Property/CheckLogin",
+                data: { 'uname': userName, 'pw': password },
+                success: function (data) {
+                    if (data == "ok")
+                        window.location.reload();
+                    else {
+                        $("#spnError").show();
+                    }
+                },
+                dataType: "json",
+                traditional: true
+            });
+        }
+        
+        function validateinputs()
+        {
+            if ($("#FirstName").val() == "" || $("#LastName").val() == "" || $("#Email").val() == "" || $("#Address").val() == ""
+            || $("#Phone").val() == "" || $("#Passport").val() == "") {
+                
+                return false;
+            }
+            return true;
+
+        }
+       
+        function checkEmailExist() {
+            $.ajax({
+                type: "GET",
+                url: "/Property/CheckEmailExists",
+                data: { 'uname': $("#Email").val() },
+                success: function (data) {
+                    
+                    //alert(data)
+                    if (data == "true") {
+
+                        $("#spnError").html("Email is existing..!!");
+                        $("#spnError").show();
+                        return true;
+                    }
+                        
+                    else {
+                        return false;
+                    
+                    }
+                },
+                dataType: "json",
+                traditional: true
+            });
+        }
+       
+    });
+    
+</script>

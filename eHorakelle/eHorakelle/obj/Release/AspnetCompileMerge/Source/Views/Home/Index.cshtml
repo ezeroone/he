@@ -1,0 +1,531 @@
+﻿@using eZeroOne.Domain
+@using eZeroOne.eHorakelle.Models
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
+	<script type="text/javascript" src="/js/jquery-1.9.1.js"></script>
+@{ 
+    var property = (PropertyModel)ViewBag.Property;
+  
+}
+
+
+<script type="text/javascript">
+    
+    $(document).ready(function () {
+        
+
+        $("#datefrom").change(function (e) {
+            var selectedDate = $('#datefrom').val();
+            var a = new Date(selectedDate);
+            var now = new Date();
+            if (a < now) {
+                // $('#datefrom').val("");
+                alert("please select future dates");
+            }
+        });
+        
+        $("#dateto").change(function (e) {
+            var selectedDate = $('#dateto').val();
+            var a = new Date(selectedDate);
+            var now = new Date();
+            if (a < now) {
+                //$('#dateto').val("");
+                alert("please select future dates");
+            }
+        });
+        
+        $(".bookbutton").click(function (e) {
+          
+            var checkIn = $("#datefrom").val();
+            var checkout = $("#dateto").val();
+            var adult = $("#adults").val();
+            var child = $("#children").val();
+            var below = $("#belowYrs").val();
+            if (checkIn != "" && checkout != "" && adult != 0) {
+                if (!checkdates(checkIn, checkout)) {
+                    return false;
+                }
+                var url = "/Property/ChooseRoom?checkIn=" + checkIn + "&checkOut=" + checkout + "&adult=" + adult + "&child=" + child + "&yrsbelow=" + below;
+                window.location = url;
+            } else {
+                alert("Please select check in,check out dates & adults for find availability ");
+            }
+         
+        });
+
+        function checkdates(d1, d2) {
+            
+            var a = new Date(d1);
+            var b = new Date(d2);
+            var now = new Date();
+            if (a < now) {
+                
+                alert("please select future dates");
+                
+                return false;
+            }
+            if (b < now) {
+
+                alert("please select future dates");
+                return false;
+            }
+
+           
+
+            return true;
+        }
+    });
+</script>
+
+<!-- Adding users -->
+<div class="modal hide" id="validateMsg">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">x </button>
+        <h3>Validations</h3>
+    </div>
+    <div class="modal-body">
+
+    </div>
+    <div class="modal-footer">
+        <span id="delValidationMessage" style="color: red"></span>
+
+        <a href="#" id="btcancel" class="btn" data-dismiss="modal">Cancel </a>
+       
+    </div>
+</div>
+
+<div id="slider">
+			
+			<!-- BEGIN .slider -->
+			<div class="slider">
+			    <ul class="slides">
+			        @{ var sliderimages = (List<BannerImage>)ViewBag.SliderImages;}
+                    @foreach (var img in sliderimages)
+                    {
+                        var url = "/PropertyImages/SliderImages/" + @img.ImageName;
+                       <li>
+			            <img src="@url" alt="" />
+			            <div class="slider-caption-wrapper">
+			                <div class="slider-caption">
+			                    <p class="colour-caption medium-caption">@img.PlaceName</p>
+			                    <div class="clearboth"></div>
+			                    <p class="dark-caption large-caption">@img.ImageDescription</p>
+			                </div>
+			            </div>
+			        </li>
+                    }
+	
+			    </ul>
+			<!-- END .slider -->
+			</div>
+			
+			<!-- BEGIN .home-reservation-box -->
+			<div class="home-reservation-box clearfix">
+				
+				<div class="booking-form" name="bookroom" >
+						
+					<input type="text" id="datefrom" name="book_date_from" value="Check In" class="datepicker">
+					<input type="text" id="dateto" name="book_date_to" value="Check Out" class="datepicker">
+						
+					<div class="select-wrapper">
+						<select id="adults" name="book_room_adults">
+							<option value="0">Adult</option>
+							<option value="1">1</option>
+							<option value="2">2</option>
+							<option value="3">3</option>
+							<option value="4">4</option>
+						    <option value="5">5</option>
+						    <option value="6">6</option>
+						    <option value="7">7</option>
+						    <option value="8">8</option>
+						    <option value="9">9</option>
+
+						</select>
+					</div>
+					
+					<div class="select-wrapper">
+						<select id="children" name="book_room_children">
+							<option value="0">Children Below 12 yrs</option>
+							<option value="1">1</option>
+							<option value="2">2</option>
+							<option value="3">3</option>
+							<option value="4">4</option>
+							<option value="5">5</option>
+						</select>
+					</div>
+                    
+					<div class="select-wrapper">
+						<select id="belowYrs" name="book_tripple">
+							<option value="0">Children Below 6 yrs</option>
+							<option value="1">1</option>
+							<option value="2">2</option>
+							<option value="3">3</option>
+							
+						</select>
+					</div>
+                    					
+					<input class="bookbutton" type="submit" value="Check Availability" />
+
+				</div>
+				
+			<!-- END .home-reservation-box -->
+			</div>
+			
+		</div>
+
+		<!-- BEGIN .content-wrapper -->
+		<div class="content-wrapper clearfix">
+			
+			<!-- BEGIN .clearfix -->
+			<div class="clearfix">
+				
+				<!-- BEGIN .one-third -->
+				<div class="one-third clearfix" style="height:300px">
+					<h3 class="title-style1">Horakelle<span class="title-block"></span></h3>
+					<img src="@property.DefaultImageUrl" alt="" class="image-style1 respond-img" />
+				    <p style="height:60px">
+				        @if (property.Description.Length > 50)
+				        {
+				            property.Description.Substring(0, 50);
+				        }
+				        else
+				        {
+				            @property.Description
+				        }
+
+				    </p>
+					<p><a href="#" class="button1">Read More</a></p>
+				<!-- END .one-third -->	
+				</div>
+				
+				<!-- BEGIN .one-third -->
+				<div class="one-third clearfix" style="height:300px">
+					<h3 class="title-style1">Hotel Overview<span class="title-block"></span></h3>
+				    <ul class="list-style1">
+				        @{ var features = (List<Features>)ViewBag.FeatureList;}
+                        @foreach (var feature in features.Take(9))
+                        {
+                                <li>@feature.Name</li>
+                        }
+				      
+				    </ul>
+					@*<p><a href="#" class="button1">Read More</a></p>*@
+				<!-- END .one-third -->	
+				</div>
+				
+				<!-- BEGIN .one-third -->
+				<div class="one-third last-col clearfix" style="height:300px">
+					<h3 class="title-style1">Location<span class="title-block"></span></h3>
+					
+					<div id="google-map" style="height: 175px;"></div>
+
+					<script type="text/javascript">
+
+					    var lat = '@property.Latitude';
+					    var longi = '@property.Longitude';
+					    
+					    var latlng = new google.maps.LatLng(lat, longi);
+					    var myOptions = {
+					        zoom: 10,
+					        center: latlng,
+					        scrollwheel: true,
+					        scaleControl: false,
+					        disableDefaultUI: false,
+					        mapTypeId: google.maps.MapTypeId.ROADMAP
+					    };
+
+					    mapContent = new google.maps.Map(document.getElementById("google-map"),myOptions);
+					    var contentStringContent = '<div class="gmap-content"><h2>Horakelle estate</h2><p>Dunugha, Gampaha</p></div>';
+					    var infowindowContent = new google.maps.InfoWindow({
+					        content: contentStringContent
+					    });
+
+					    var markerContent = new google.maps.Marker({
+					        position: latlng, 
+					        map: mapContent
+					    });
+
+					    google.maps.event.addListener(markerContent, 'click', function() {
+					        infowindowContent.open(mapContent,markerContent);
+					    });
+	
+					</script>
+
+					<p><a href="/Home/Contactus" class="button1">Directions</a></p>
+					
+				<!-- END .one-third -->	
+				</div>
+				
+			<!-- END .clearfix -->
+			</div>
+            
+		<hr class="space1" />
+
+		@*<!-- BEGIN .content-wrapper -->
+		<div class="content-wrapper">
+
+		<h3 class="title-style1">Photo Gallery<span class="title-block"></span></h3>
+
+		<div class="text-slider-wrapper">
+
+			<!-- BEGIN .slider -->
+			<div class="text-slider">
+				<ul class="slides">
+
+					<li>
+						<img src="/images/demo_image_27.jpg" class="gallery-preview" alt="" />
+						<img src="/images/demo_image_28.jpg" class="gallery-preview" alt="" />
+						<img src="/images/demo_image_29.jpg" class="gallery-preview" alt="" />
+						<img src="/images/demo_image_30.jpg" class="gallery-preview" alt="" />
+						<img src="/images/demo_image_27.jpg" class="gallery-preview" alt="" />
+						<img src="/images/demo_image_28.jpg" class="gallery-preview" alt="" />
+						<img src="/images/demo_image_29.jpg" class="gallery-preview" alt="" />
+					</li>
+					
+					<li>
+						<img src="/images/demo_image_30.jpg" class="gallery-preview" alt="" />
+						<img src="/images/demo_image_29.jpg" class="gallery-preview" alt="" />
+						<img src="/images/demo_image_28.jpg" class="gallery-preview" alt="" />
+						<img src="/images/demo_image_27.jpg" class="gallery-preview" alt="" />
+						<img src="/images/demo_image_30.jpg" class="gallery-preview" alt="" />
+						<img src="/images/demo_image_29.jpg" class="gallery-preview" alt="" />
+						<img src="/images/demo_image_28.jpg" class="gallery-preview" alt="" />
+						<img src="/images/demo_image_27.jpg" class="gallery-preview" alt="" />
+						<img src="/images/demo_image_30.jpg" class="gallery-preview" alt="" />
+					</li>
+		
+				</ul>
+				
+			<!-- END .text-slider -->
+			</div>
+			
+		<!-- END .text-slider -->
+		</div>
+		
+		<!-- END .content-wrapper -->
+		</div>*@
+        
+        
+	@*	<hr class="space1" />
+
+		<!-- BEGIN .content-wrapper -->
+		<div class="content-wrapper">
+	
+		<h3 class="title-style1">Blog<span class="title-block"></span></h3>
+
+		<div class="text-slider-wrapper">
+
+			<!-- BEGIN .slider -->
+			<div class="text-slider">
+				<ul class="slides">
+
+					<li>
+						
+						<!-- BEGIN .clearfix -->
+						<div class="clearfix">		
+			
+							<!-- BEGIN .one-half -->
+							<div class="one-half blog-event-one-half">
+				
+								<div class="blog-preview">
+									<a href="#"><img src="images/demo_image_27.jpg" class="blog-image-thumb" alt="" /></a>
+									<div class="blog-entry-inner">	
+										<h4><a href="#">Standard Blog Post Typography</a> <span>By <a href="#">Admin</a> / August 27th, 2013</span></h4>
+										<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse feugiat neque vitae quam consectetur mattis nam consectetur.</p>
+									</div>
+								</div>
+				
+							<!-- END .one-half -->	
+							</div>
+			
+							<!-- BEGIN .one-half -->
+							<div class="one-half last-col blog-event-one-half">
+				
+								<div class="blog-preview">
+									<a href="#"><img src="images/demo_image_28.jpg" class="blog-image-thumb" alt="" /></a>
+									<div class="blog-entry-inner">	
+										<h4><a href="#">An Additional Blog Post</a> <span>By <a href="#">Admin</a> / August 18th, 2013</span></h4>
+										<p>Consectetur adipiscing elit. Suspendisse feugiat neque vitae quam consectetur mattis nam consectetur.</p>
+									</div>
+								</div>
+				
+							<!-- END .one-half -->	
+							</div>
+
+						<!-- END .clearfix -->
+						</div>
+		
+					</li>
+					
+					<li>
+						
+						<!-- BEGIN .clearfix -->
+						<div class="clearfix">		
+			
+							<!-- BEGIN .one-half -->
+							<div class="one-half blog-event-one-half">
+				
+								<div class="blog-preview">
+									<a href="#"><img src="images/demo_image_28.jpg" class="blog-image-thumb" alt="" /></a>
+									<div class="blog-entry-inner">	
+										<h4><a href="#">An Additional Blog Post</a> <span>By <a href="#">Admin</a> / July 29th, 2013</span></h4>
+										<p>Consectetur adipiscing elit. Suspendisse feugiat neque vitae quam consectetur mattis nam consectetur.</p>
+									</div>
+								</div>
+				
+							<!-- END .one-half -->	
+							</div>
+			
+							<!-- BEGIN .one-half -->
+							<div class="one-half last-col blog-event-one-half">
+				
+								<div class="blog-preview">
+									<a href="#"><img src="images/demo_image_27.jpg" class="blog-image-thumb" alt="" /></a>
+									<div class="blog-entry-inner">	
+										<h4><a href="#">Standard Blog Post Typography</a> <span>By <a href="#">Admin</a> / July 21st, 2013</span></h4>
+										<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse feugiat neque vitae quam consectetur mattis nam consectetur.</p>
+									</div>
+								</div>
+				
+							<!-- END .one-half -->	
+							</div>
+
+						<!-- END .clearfix -->
+						</div>
+		
+					</li>
+		
+				</ul>
+				
+			<!-- END .text-slider -->
+			</div>
+			
+		<!-- END .text-slider -->
+		</div>
+		
+		<!-- END .content-wrapper -->
+		</div> *@                   
+			
+			<hr class="space1" />
+
+@*			<h3 class="title-style1">Testimonials<span class="title-block"></span></h3>
+
+			<div class="text-slider-wrapper">
+
+				<!-- BEGIN .slider -->
+				<div class="text-slider">
+					<ul class="slides">
+
+						<li>
+							
+							<!-- BEGIN .clearfix -->
+							<div class="clearfix">		
+				                @{
+				                    var testimonials = (List<Recommendation>)ViewBag.Testimonials;
+				                }
+							    <!-- BEGIN .one-half -->
+                                @foreach (var t in testimonials)
+                                {
+                                    <div class="one-half testimonial-one-half">
+					                    @{
+					                        var url = "/" + @t.PhotoUrl;
+					                    }
+									<div class="testimonial-wrapper clearfix">
+										<div class="testimonial-image">
+											<img src="@url" alt="" />
+										</div>
+										<p class="testimonial-text">@t.Comments</p>
+										<div class="testimonial-speech"></div>
+									</div>
+									<p class="testimonial-author"><span>@t.Name -</span> @t.Profession</p>
+					
+								<!-- END .one-half -->	
+								</div>
+                                }
+
+								<div class="one-half testimonial-one-half">
+									<div class="testimonial-wrapper clearfix">
+										<div class="testimonial-image">
+											<img src="images/user.png" alt="" />
+										</div>
+										<p class="testimonial-text">"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse feugiat neque vitae quam consectetur mattis"</p>
+										<div class="testimonial-speech"></div>
+									</div>
+									<p class="testimonial-author"><span>John Smith -</span> Double Ensuite Room</p>
+					
+								<!-- END .one-half -->	
+								</div>
+				
+								<!-- BEGIN .one-half -->
+								<div class="one-half last-col testimonial-one-half">
+					      			<div class="testimonial-wrapper clearfix">
+										<div class="testimonial-image">
+											<img src="images/user.png" alt="" />
+										</div>
+										<p class="testimonial-text">"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse feugiat neque vitae quam consectetur mattis"</p>
+										<div class="testimonial-speech"></div>
+									</div>
+									<p class="testimonial-author"><span>Jack Daniels -</span> Double Ensuite Room</p>
+					
+								<!-- END .one-half -->	
+								</div>
+
+							<!-- END .clearfix -->
+							</div>
+			
+						</li>
+						
+						<li>
+							
+							<!-- BEGIN .clearfix -->
+							<div class="clearfix">		
+				
+								<!-- BEGIN .one-half -->
+								<div class="one-half testimonial-one-half">
+					
+									<div class="testimonial-wrapper clearfix">
+										<div class="testimonial-image">
+											<img src="images/user.png" alt="" />
+										</div>
+										<p class="testimonial-text">"Nulla pellentesque orci enim. Etiam a urna condimentum, euismod mauris luctus, accumsan turpis. Vestibulum pharetra"</p>
+										<div class="testimonial-speech"></div>
+									</div>
+									<p class="testimonial-author"><span>Johnnie Walker -</span> Double Ensuite Room</p>
+					
+								<!-- END .one-half -->	
+								</div>
+				
+								<!-- BEGIN .one-half -->
+								<div class="one-half last-col testimonial-one-half">
+					
+									<div class="testimonial-wrapper clearfix">
+										<div class="testimonial-image">
+											<img src="images/user.png" alt="" />
+										</div>
+										<p class="testimonial-text">"Nulla pellentesque orci enim. Etiam a urna condimentum, euismod mauris luctus, accumsan turpis. Vestibulum pharetra"</p>
+										<div class="testimonial-speech"></div>
+									</div>
+									<p class="testimonial-author"><span>John Smith -</span> Double Ensuite Room</p>
+					
+								<!-- END .one-half -->	
+								</div>
+
+							<!-- END .clearfix -->
+							</div>
+			
+						</li>
+			
+					</ul>
+					
+				<!-- END .text-slider -->
+				</div>
+				
+			<!-- END .text-slider -->
+			</div>*@
+
+		<!-- END .content-wrapper -->
+		</div>
+	

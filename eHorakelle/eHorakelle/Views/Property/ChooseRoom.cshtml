@@ -1,0 +1,273 @@
+﻿@model eZeroOne.eHorakelle.Models.BookingRoomModel
+@{
+    ViewBag.Title = "Choose Room";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script type="text/javascript" src="@Url.Content("~/js/jquery-1.9.1.js")"></script>
+
+<div id="page-header">
+			<h2>Reservation: Choose Your Room</h2>
+		</div>
+
+		<!-- BEGIN .content-wrapper -->
+<div class="content-wrapper clearfix">
+			
+    <!-- BEGIN .booking-step-wrapper -->
+    <div class="booking-step-wrapper clearfix">
+			
+        <div class="step-wrapper">
+            <div class="step-icon-wrapper">
+                <div class="step-icon">1.</div>
+            </div>
+            <div class="step-title">Choose Your Date</div>
+        </div>
+			
+        <div class="step-wrapper">
+            <div class="step-icon-wrapper">
+                <div class="step-icon step-icon-current">2.</div>
+            </div>
+            <div class="step-title">Choose Your Room</div>
+        </div>
+			
+        
+        <div class="step-wrapper">
+            <div class="step-icon-wrapper">
+                <div class="step-icon">3.</div>
+            </div>
+            <div class="step-title">Place Your Reservation</div>
+        </div>
+			
+        <div class="step-wrapper last-col">
+            <div class="step-icon-wrapper">
+                <div class="step-icon">4.</div>
+            </div>
+            <div class="step-title">Confirmation</div>
+        </div>
+			
+        <div class="step-line"></div>
+			
+        <!-- END .booking-step-wrapper -->
+    </div>
+			
+    <div class="booking-main-wrapper">
+				
+        <div class="booking-main">
+			<div id="validateMsg" style="color:red;"></div>
+            <h4 class="title-style4" >Choose Your Room<span class="title-block"></span>
+                <input style="float:right" type="button" id="btnBook" class="button3" value="Continue booking"/><br/>
+                
+            </h4>
+				<br/>
+            <h3>
+                <label class="button4" style="float:right">
+                    Triple bed will be a Double share + Single bed
+                </label><br/>  
+            </h3>
+             <div class="clearboth"></div> 
+            <ul class="room-list-wrapper clearfix">
+				
+                		
+                @foreach (var r in Model.Rooms)
+                {
+                    
+                    var bedRateId = "bedRate" + @r.Id;
+                    var occupancyId = "occupancy" + @r.Id;
+                    var childOccupancyId = "childOccupancy" + @r.Id;
+                      
+
+                    <li class="room-item clearfix">
+                        <h4><label><input type="checkbox" id="@r.Id" name="rooms" value="@r.Name"/>#  @r.Name</label></h4>
+							
+                        <!-- BEGIN .room-list-left -->
+                        <div class="room-list-left">
+                            <img src="@r.DefaultImageUrl" alt="" />
+                            <!-- END .room-list-left -->
+                        </div>
+							
+                        <!-- BEGIN .room-list-right -->
+                        <div class="room-list-right">
+                            <div class="room-meta">
+                                <ul>
+                                    <li><span>Occupancy: </span>
+                                        <span id="@occupancyId" style="color:white"> @r.Occupancy</span>  Adults 
+                                        @* <span id="@childOccupancyId" style="color:white">@r.ChildOccupancy</span> Children*@
+
+                                    </li>
+                                    <li><span>Size:</span> @r.Squarefeet /sqf</li>
+                                    <li><span>View:</span> Luxury</li>
+                                </ul>
+                            </div>
+                            <div class="room-price">
+                                <p class="price">Rate: <span id="@bedRateId">$ @r.DisplayPrice</span> / Night</p>
+                               
+                            </div>
+                            <div class="clearboth"></div>
+                            @{ var
+                                   groupName = "beds" + @r.Id;
+                               var bedGroup = "extrabeds" + @r.Id;
+                             }
+                            @foreach (var b in r.Beds.OrderBy(o => o.BedName))
+                            {
+                                <label class="button2"><input class="bedprice" name="@groupName" type="radio" id="@b.Id" style="cursor:pointer;color:blueviolet" data-bedid="@b.Id" data-roomid="@r.Id" data-rate="@b.Rate" data-occupancy="@b.Occupancy" data-childoccupancy="@b.ChildOccupancy" value="@b.BedName"/>@b.BedName </label>
+                                
+                            }
+                            <div class="clearboth"></div>
+                            <b>&nbsp;</b><br/>
+                             <label class="button2"><input class="kidprice" type="checkbox" name="forkids"  style="cursor:pointer;color:blueviolet" data-roomid="@r.Id" />For kid (below 6 yrs) </label>
+                               
+                            <b>&nbsp;</b>
+                            <div class="clearboth"></div>
+                            
+                            <!-- END .room-list-right -->
+                        </div>	
+                    </li>
+                }
+
+            </ul>
+					
+        </div>
+				
+    </div>
+			
+    <div class="booking-side-wrapper">
+				
+        <div class="booking-side clearfix">
+				
+            <h4 class="title-style4">Your Reservation<span class="title-block"></span></h4>
+					
+            <ul>
+                <li><span>Check in Date: </span> @String.Format("{0:ddd, MMM d, yyyy}", @Model.CheckIn)</li>
+                <li><span>Check Out Date: </span> @String.Format("{0:ddd, MMM d, yyyy}", @Model.CheckOut)</li>
+                @{
+                    var dateDiff = (@Model.CheckOut - @Model.CheckIn).TotalDays;
+
+                }
+                 <li><span>No of Nights: </span> @dateDiff</li>
+                <li><span>Guests: </span> @Model.Adult Adults</li>
+                 <li><span>Below 12 years: </span>  @Model.Children</li>
+                <li><span>Below 6 years: </span> @Model.Below6Yrs</li>
+            </ul>
+					
+            <a href="/Property/ChooseDate" class="button3">Edit Reservation</a>
+					
+        </div>
+				
+    </div>
+			
+    <!-- END .content-wrapper -->
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        
+        $('.bedprice').click(function () {
+            
+            var id = $(this).attr("data-roomid");
+            var bedRateId = "bedRate" + id;
+            var occupancyId = "occupancy" + id;
+            //var childOccupancyId = "childOccupancy" + id;
+           
+            $("#" + bedRateId).html("$ " + $(this).attr("data-rate"));
+            $("#" + occupancyId).html($(this).attr("data-occupancy"));
+           // $("#" + childOccupancyId).html($(this).attr("data-childoccupancy"));
+        });
+        
+        $('#btnBook').click(function () {
+
+            var adult = '@Model.Adult';
+            var child = '@Model.Children';
+            var belowYrs = '@Model.Below6Yrs';
+            var checkIn = '@Model.CheckIn';
+            var checkOut = '@Model.CheckOut';
+           
+
+            var selectedRoom_Beds = new Array();
+            var selectedRoom_ExtraBeds = new Array();
+            var selectedAdultBeds = 0;
+            var selectedChildBeds = 0;
+            var selectedyrebelowBeds = 0;
+
+            var canBook = false;
+            var adultOk = false;
+            var childOk = false;
+
+            var adultCount = 0;
+            var childCount = 0;
+            
+            $("input:checkbox[name=rooms]:checked").each(function () {
+                //alert($(this).attr('id'));
+                var roomId = $(this).attr('id');
+                var groupName = "beds" + roomId;
+                var bedGroup = "extrabeds" + roomId;
+                //beds
+                $("input:radio[name=" + groupName + "]:checked").each(function () {
+                    //alert($(this).attr('id'));
+                    selectedAdultBeds = parseInt(selectedAdultBeds) + parseInt($(this).attr('data-occupancy'));
+                    selectedChildBeds = parseInt(selectedChildBeds) + parseInt($(this).attr('data-childoccupancy'));
+
+                    //adultCount = parseInt($(this).attr('data-occupancy')) - parseInt(adult);
+                    //if (adultCount)
+                    selectedRoom_Beds.push(roomId + "-" + $(this).attr('id'));
+                    
+                });
+                
+               
+                
+            });
+           
+            $("input:checkbox[name=forkids]:checked").each(function () {
+                var roomId = $(this).attr('data-roomid');
+                //alert(roomId);
+                //data-roomid
+                selectedRoom_ExtraBeds.push(roomId + "-1");
+            });
+            //alert(adult);
+            //alert(selectedAdultBeds)
+
+            var calAdults = (parseInt(selectedAdultBeds) - parseInt(adult));
+            //alert(calAdults)
+            var url = "/Property/Dinings?checkIn=" + checkIn + "&checkOut=" + checkOut + "&adult=" + adult + "&child=" + child + "&yrsbelow=" + belowYrs;// + "&rooms=" + selectedRoom_Beds + "&extra=" + selectedRoom_ExtraBeds;
+
+          
+            if (parseInt(calAdults) >= 0 && (parseInt(calAdults) >= parseInt(child))) {
+                canBook = true;
+                //alert("ok");
+                //window.location = url;
+            }
+            else
+            {
+                alert("Please select Rooms & Beds for no of persons");
+                return;
+
+            }
+            //alert(selectedRoom_ExtraBeds.length);
+            //alert(belowYrs);
+            
+            if (parseInt(selectedRoom_ExtraBeds.length) != parseInt(belowYrs)) {
+                canBook = false;
+                alert("Please select the rooms for your " + belowYrs + " kids");
+            }
+            
+            var postData = { checkIn: checkIn, checkOut: checkOut, adult: adult, child: child, yrsbelow: belowYrs, rooms: selectedRoom_Beds, extra: selectedRoom_ExtraBeds };
+            if (canBook) {
+                $.ajax({
+                    type: "POST",
+                    url: "/Property/BookingData",
+                    data: postData,
+                    success: function (data) {
+                        if (data == "stored")
+                            window.location = url;
+                        else {
+                            $("#validateMsg").html(data);
+                        }
+                    },
+                    dataType: "json",
+                    traditional: true
+                });
+            }
+  
+        });
+    });
+    
+</script>

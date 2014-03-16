@@ -1,0 +1,155 @@
+﻿@model List<eZeroOne.eHorakelle.Models.PropertyModel>
+@{
+    ViewBag.Title = "Rooms";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+      <script src="@Url.Content("~/Scripts/jquery-1.7.2.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/jquery-ui-1.8.24.min.js")" type="text/javascript"></script>
+  
+<div id="page-header" >
+			<h2>Rooms</h2>
+		</div>
+
+		<!-- BEGIN .content-wrapper -->
+		<div class="content-wrapper page-content clearfix">
+
+			<!-- BEGIN .accommodation-listing -->
+			<ul class="accommodation-listing clearfix">
+                @foreach (var r in Model)
+                {
+                    <li class="col">
+					<a href="@r.PropertyUrl"><img width="150" height="160" src="@r.DefaultImageUrl" alt="" class="accommodation-thumb" /></a>
+					<h3 class="title-style1"><a href="#">@r.Name</a><span class="title-block"></span></h3>
+					<ul class="no-style-list">
+					    @*<li><strong>Beds:</strong> Queen</li>*@
+                        @{
+                            var bedRateId = "bedRate" + @r.Id;
+                            var occupancyId = "occupancy" + @r.Id;
+                            var childOccupancyId = "childOccupancy" + @r.Id;
+                        }
+					
+					    <li><strong  >Occupancy (Adult) :</strong> <span id="@occupancyId">@r.Occupancy</span></li>
+					 @*   <li><strong  >Children Occupancy :</strong> <span id="@childOccupancyId">@r.ChildOccupancy</span></li>*@
+					    <li><strong >Rates :</strong><span id="@bedRateId">$@r.DisplayPrice</span> </li>
+
+                        <li><strong>Size:</strong>@r.Squarefeet sqf</li>
+                        <li><strong> Beds :
+                        @foreach (var b in r.BedModels.OrderBy(o=>o.BedName))
+                        {
+                            <a style="cursor:pointer;color:blueviolet" data-id="@r.Id" data-rate="@b.Rate" data-occupancy="@b.Occupancy" data-childoccupancy="@b.ChildOccupancy" class="bedprice">@b.BedName </a> 
+                           <b>,&nbsp;</b>
+                        }</strong>
+                       </li>
+					   
+					</ul>
+                        <p><a href="@r.PropertyUrl" class="button1">Room Details</a>
+                           <a href="/Property/ChooseDate" class="button2 button-space1">Check Availability</a></p>
+				</li>
+                }
+				@*<li class="col">
+					<a href="#"><img src="/images/demo_image_16.jpg" alt="" class="accommodation-thumb" /></a>
+					<h3 class="title-style1"><a href="#">Hotel Room #1</a><span class="title-block"></span></h3>
+					<ul class="no-style-list">
+						<li><strong>Beds:</strong> Queen</li>
+						<li><strong>Occupancy:</strong> 2 Persons</li>
+						<li><strong>Size:</strong> 35-40sqm / 375-430sqf</li>
+						<li><strong>View:</strong> City</li>
+						<li><strong>Rates From:</strong> $200</li>
+					</ul>
+					<p><a href="/Home/RoomDetail" class="button1">Room Details</a><a href="#" class="button2 button-space1">Check Availability</a></p>
+				</li>*@
+
+				@*<li class="col">
+					<a href="#"><img src="/images/demo_image_17.jpg" alt="" class="accommodation-thumb" /></a>
+					<h3 class="title-style1"><a href="#">Hotel Room #2</a><span class="title-block"></span></h3>
+					<ul class="no-style-list">
+						<li><strong>Beds:</strong> Queen</li>
+						<li><strong>Occupancy:</strong> 2 Persons</li>
+						<li><strong>Size:</strong> 35-40sqm / 375-430sqf</li>
+						<li><strong>View:</strong> City</li>
+						<li><strong>Rates From:</strong> $200</li>
+					</ul>
+					<p><a href="/Home/RoomDetail" class="button1">Room Details</a><a href="#" class="button2 button-space1">Check Availability</a></p>
+				</li>
+				
+				<li class="col">
+					<a href="#"><img src="/images/demo_image_18.jpg" alt="" class="accommodation-thumb" /></a>
+					<h3 class="title-style1"><a href="#">Hotel Room #3</a><span class="title-block"></span></h3>
+					<ul class="no-style-list">
+						<li><strong>Beds:</strong> Queen</li>
+						<li><strong>Occupancy:</strong> 2 Persons</li>
+						<li><strong>Size:</strong> 35-40sqm / 375-430sqf</li>
+						<li><strong>View:</strong> City</li>
+						<li><strong>Rates From:</strong> $200</li>
+					</ul>
+					<p><a href="/Home/RoomDetail" class="button1">Room Details</a><a href="#" class="button2 button-space1">Check Availability</a></p>
+				</li>
+				
+				<li class="col">
+					<a href="#"><img src="/images/demo_image_18.jpg" alt="" class="accommodation-thumb" /></a>
+					<h3 class="title-style1"><a href="#">Hotel Room #4</a><span class="title-block"></span></h3>
+					<ul class="no-style-list">
+						<li><strong>Beds:</strong> Queen</li>
+						<li><strong>Occupancy:</strong> 2 Persons</li>
+						<li><strong>Size:</strong> 35-40sqm / 375-430sqf</li>
+						<li><strong>View:</strong> City</li>
+						<li><strong>Rates From:</strong> $200</li>
+					</ul>
+					<p><a href="/Home/RoomDetail" class="button1">Room Details</a><a href="#" class="button2 button-space1">Check Availability</a></p>
+				</li>
+				
+				<li class="col">
+					<a href="#"><img src="/images/demo_image_16.jpg" alt="" class="accommodation-thumb" /></a>
+					<h3 class="title-style1"><a href="#">Hotel Room #5</a><span class="title-block"></span></h3>
+					<ul class="no-style-list">
+						<li><strong>Beds:</strong> Queen</li>
+						<li><strong>Occupancy:</strong> 2 Persons</li>
+						<li><strong>Size:</strong> 35-40sqm / 375-430sqf</li>
+						<li><strong>View:</strong> City</li>
+						<li><strong>Rates From:</strong> $200</li>
+					</ul>
+					<p><a href="/Home/RoomDetail" class="button1">Room Details</a><a href="#" class="button2 button-space1">Check Availability</a></p>
+				</li>
+				
+				<li class="col">
+					<a href="#"><img src="/images/demo_image_17.jpg" alt="" class="accommodation-thumb" /></a>
+					<h3 class="title-style1"><a href="#">Hotel Room #6</a><span class="title-block"></span></h3>
+					<ul class="no-style-list">
+						<li><strong>Beds:</strong> Queen</li>
+						<li><strong>Occupancy:</strong> 2 Persons</li>
+						<li><strong>Size:</strong> 35-40sqm / 375-430sqf</li>
+						<li><strong>View:</strong> City</li>
+						<li><strong>Rates From:</strong> $200</li>
+					</ul>
+					<p><a href="/Home/RoomDetail" class="button1">Room Details</a><a href="#" class="button2 button-space1">Check Availability</a></p>
+				</li>*@
+				
+			<!-- END .accommodation-listing -->
+			</ul>
+				
+			<hr class="space2" />
+				
+			
+
+		<!-- END .content-wrapper -->
+		</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        
+        $('.bedprice').click(function () {
+
+            //alert($(this).attr("data-rate"));data-id
+            var id = $(this).attr("data-id");
+            
+            var bedRateId = "bedRate" +id;
+            var occupancyId = "occupancy" + id;
+            //var childOccupancyId = "childOccupancy" + id;
+            //alert(bedRateId)
+            //alert($(bedRateId).text());
+            $("#"+bedRateId).html("$ "+$(this).attr("data-rate"));
+            $("#" + occupancyId).html($(this).attr("data-occupancy"));
+            //$("#" + childOccupancyId).html($(this).attr("data-childoccupancy"));
+
+        });
+     });
+</script>

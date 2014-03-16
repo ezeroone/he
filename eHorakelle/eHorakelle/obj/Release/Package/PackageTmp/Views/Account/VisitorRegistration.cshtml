@@ -1,0 +1,89 @@
+﻿
+@using eZeroOne.eHorakelle
+@model eZeroOne.eHorakelle.Models.VisitorModel
+@{
+    ViewBag.Title = "welcome to horakelle estate";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    .field-validation-error {
+	    color: yellow;
+        font-size: small;
+	}
+</style>
+<!-- BEGIN .content-wrapper -->
+    <div class="content-wrapper clearfix">
+			
+		<div class="booking-main-wrapper">
+				
+            <div class="booking-main">
+					
+                <h4 class="title-style4">Visitor Registration<span class="title-block"></span></h4>
+
+                <form action="@Url.Content("/Account/VisitorRegistration")"  method="post" class="clearfix">
+                    <div class="input-left">
+							
+				       @Html.HiddenFor(x => x.Id)
+                       @Html.ValidationSummary(true)
+                       @Html.ValidationMessage("InvalidEmailPass")
+  
+                      <label for="FirstName">FirstName</label>
+                       @Html.TextBoxFor(m => m.FirstName, new { @class = "" })
+                       @Html.ValidationMessageFor(model => model.FirstName)
+
+                       <label for="LastName">LastName</label>
+                       @Html.TextBoxFor(m => m.LastName, new { @class = "span4" })
+                       @Html.ValidationMessageFor(model => model.LastName)
+
+                        <label for="Email">Email</label>
+                         @Html.TextBoxFor(m => m.Email, new { @class = "span5" })
+                         
+                          @Html.ValidationMessageFor(model => model.Email)
+                        
+                        <label for="Password">Password</label>
+                         @Html.TextBoxFor(m => m.Password, new { @class = "span3",@type="password" })
+                         @Html.ValidationMessageFor(model => model.Password)
+                        
+                       
+
+                        <label for="Mobile">Mobile</label>
+                         @Html.TextBoxFor(m => m.Mobile, new { @class = "span4" })
+                            @Html.ValidationMessageFor(model => model.Mobile)
+
+
+                           @Html.AreYouaHuman("6aa712dd5b8430ca0c74a5f1312a674c455cfde7") 
+                            @if (Model.Id == 0)
+                            {
+                                <input type="submit" value="Create Account" class="btn btn-primary" />
+                            }
+                            else
+                            {
+                                <input type="submit" value="Edit Account" class="btn btn-primary" />
+                            }
+                           
+
+                  
+
+							
+				    </div>
+                </form>
+            </div>
+				
+        </div>
+			
+        <div class="booking-side-wrapper">
+            <div class="booking-side clearfix">
+                <h4 class="title-style4">User Registration<span class="title-block"></span></h4>
+
+                <h4><a href="/Account/VisitorRegistration"><span style="color:white">Visitor Registration</span></a></h4>
+                <br/>
+                <h4><a href="/Account/ClientRegistration"><span style="color:white">Agent Registration</span></a></h4>
+                
+                <hr class="space9" />		
+            </div>
+				
+        </div>
+			
+        <!-- END .content-wrapper -->
+    </div>

@@ -1,0 +1,169 @@
+﻿@model eZeroOne.eHorakelle.Models.RoomModel
+@{
+    ViewBag.Title = "Add Room";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<link href="@Url.Content("~/Content/AjaxForms.css")" rel="stylesheet" type="text/css"/>
+<link href="@Url.Content("~/Content/jquery-ui.css")" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="/js/jquery-1.9.1.js"></script>
+<script type="text/javascript" src="/js/gmap.js"></script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+
+       // $("#Description").cleditor();
+        $('#Description').maxlength({ max: 500 });
+
+        $("#btnback").click(function () {
+            window.location = "/Admin/PropertyAdmin/PropertyList";
+        });
+
+        $("#btnLink").click(function () {
+            //  alert("hii;");
+            var url = "/Admin/PropertyAdmin/FindLatLong";
+            window.open(url, "Find location", "height=600,width=800,resizable=no");
+        });
+
+        //attaching the date jquery plugins
+        $('#txtActiveFrom').datepicker({ dateFormat: "dd/mm/yy" });
+        $('#txtActiveTo').datepicker({ dateFormat: "dd/mm/yy" });
+      
+
+    });
+</script>
+ 
+
+<!-- Adding users -->
+<div class="modal hide" id="gmap-location">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">x </button>
+        <h3>Find the Location</h3>
+    </div>
+    <div class="modal-body">
+     
+    </div>
+    <div class="modal-footer">
+        <span id="delValidationMessage" style="color: red"></span>
+
+        <a href="#" id="btcancel" class="btn" data-dismiss="modal">Cancel </a>
+        <a href="#" id="btnadd" class="btn-primary btn">Add</a>
+    </div>
+</div>
+<!-- End adding user -->
+<section id="main">
+    <div class="body-text">
+        <div class="container-fluid">
+
+            <div class="row-fluid">
+                <div class="span3">
+                    <div class="qbox">
+                        <h3><i class="pull-right"></i>Menu</h3>
+                   <a  href="/Admin/PropertyAdmin/Addproperty" class="active"> Add Property</a><br/>
+                <a href="/Admin/PropertyAdmin/PropertyList"> Property List</a><br/>
+                <a  href="/Admin/PropertyAdmin/AddRoom" class="active"> Add Room</a><br/>
+                <a href="/Admin/PropertyAdmin/RoomList"> Room List</a><br/>
+                 <a href="/Admin/PropertyAdmin/Clients"> Agents </a>
+                    </div>
+                </div>
+                <!--west pane with width of span12-->
+                <div class="span9">
+                    <div class=" qbox form-horizontal contact-info">
+                        <h3><i class="pull-right"></i>Add Room</h3>
+                        <form action="/Admin/PropertyAdmin/AddRoom" method="POST" enctype = "multipart/form-data">
+                            @Html.HiddenFor(m => m.Id)
+                            
+                            <div class="control-group">
+
+                                <div class="control-label">
+                                    <label>Property Name</label>
+
+                                </div>
+                                <div class="controls">
+                                    @Html.DropDownListFor(model => model.PropertyId, (SelectList)ViewBag.Properties, new { @class = "chzn-select", @style = "100%" })
+
+                                </div>
+                            </div>
+
+                            <div class="control-group">
+                                <div class="control-label">
+                                    <label>Room</label>
+                                </div>
+                                <div class=" controls">
+                                    @Html.TextBoxFor(m => m.Name, new { @class = "input-xlarge" })
+                                </div>
+
+                            </div>
+                            <div class="control-group">
+                                <div class="control-label">
+                                    <label>Descripation</label>
+                                </div>
+                                <div class=" controls">
+                                    @Html.TextAreaFor(m => m.Description, new { @class = "span8", @style = "width:100%;height:250px;" })
+                                </div>
+
+                            </div>
+                           
+
+                         <div class="control-group">
+
+                                <div class="control-label">
+                                    <label>Square feet (m)</label>
+
+                                </div>
+                                <div class="controls">
+                                    @Html.TextBoxFor(m => m.Squarefeet, new { @class = "input-small" })
+                                </div>
+                            </div>
+                            @*<div class="control-group">
+                                <div class="control-label">
+                                    <label>Rate for rooms ($)</label>
+                                </div>
+                                <div class=" controls">
+                                    @Html.TextBoxFor(m => m.DisplayPrice, new { @class = "input-small" })
+                                </div>
+                            </div>*@
+                         
+                          <div class="control-group">
+                                <div class="control-label">
+                                    <label>Video Url</label>
+                                </div>
+                                <div class=" controls">
+                                    @Html.TextBoxFor(m => m.VideoUrl, new { @class = "input-xlarge" })
+                                </div>
+
+                            </div>
+                            <div class="control-group">
+                                <div class="control-label">
+                                </div>
+                                <div class=" controls">
+                                    @if (Model.Id == 0)
+                                    {
+                                        <input type="submit" class="btn btn-primary" value="Save" />
+                                    }
+                                    else
+                                    {
+                                        <input type="submit" class="btn btn-primary" value="Update" />
+                                    }
+                                    <input id="btnback" class="btn" style="width: 50px;" value="Cancel" />
+                                </div>
+                            </div>
+
+
+                            <div class="span12">&nbsp;</div>
+                            <div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+            <!--end of span12-->
+
+        </div>
+    </div>
+    <!-- end body-text -->
+
+    <!-- /container -->
+</section>
+<div>&nbsp;</div>

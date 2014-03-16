@@ -1,0 +1,229 @@
+﻿@model eZeroOne.eHorakelle.Models.BookingModel
+@{
+    ViewBag.Title = "Choose date";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script type="text/javascript" src="@Url.Content("~/js/jquery-1.9.1.js")"></script>
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        
+        $(".bookbutton").click(function (e) {
+
+            //$("#loader").show();
+            var checkIn = $("#open_date_from").val();
+            var checkout = $("#open_date_to").val();
+            var adult = $("#adults").val();
+            var child = $("#children").val();
+            var below = $("#belowYrs").val();
+            if (checkIn != "" && checkout != "" && adult != 0) {
+                var url = "/Property/ChooseRoom?checkIn=" + checkIn + "&checkOut=" + checkout + "&adult=" + adult + "&child=" + child + "&yrsbelow=" + below;
+                window.location = url;
+            } else {
+                alert("Please select check in,check out dates & adults for find availability ");
+            }
+
+
+
+        });
+        
+        $(function () {
+            $("#dialog").dialog({
+                autoOpen: false,
+                show: {
+                    effect: "blind",
+                    duration: 1000
+                },
+                hide: {
+                    effect: "explode",
+                    duration: 1000
+                }
+            });
+            $("#opener").click(function () {
+                $("#dialog").dialog("open");
+            });
+        });
+
+    });
+</script>
+
+@*<div id="dialog" title="Basic dialog">
+    <p>This is an animated dialog which is useful for displaying information. The dialog window can be moved, resized and closed with the 'x' icon.</p>
+</div>*@
+
+<div id="page-header" >
+    <h2>Reservation: Choose Your Date</h2>
+  @*  <button id="opener">Open Dialog</button>*@
+
+		</div>
+
+		<!-- BEGIN .content-wrapper -->
+		<div class="content-wrapper clearfix">
+			
+			<!-- BEGIN .booking-step-wrapper -->
+			<div class="booking-step-wrapper clearfix">
+			
+				<div class="step-wrapper clearfix">
+					<div class="step-icon-wrapper">
+						<div class="step-icon step-icon-current">1.</div>
+					</div>
+					<div class="step-title">Choose Your Date</div>
+				</div>
+			
+				<div class="step-wrapper clearfix">
+					<div class="step-icon-wrapper">
+						<div class="step-icon">2.</div>
+					</div>
+					<div class="step-title">Choose Your Room</div>
+				</div>
+			
+				
+        <div class="step-wrapper">
+            <div class="step-icon-wrapper">
+                <div class="step-icon">3.</div>
+            </div>
+            <div class="step-title">Place Your Reservation</div>
+        </div>
+			
+        <div class="step-wrapper last-col">
+            <div class="step-icon-wrapper">
+                <div class="step-icon">4.</div>
+            </div>
+            <div class="step-title">Confirmation</div>
+        </div>
+			
+				<div class="step-line"></div>
+			
+			<!-- END .booking-step-wrapper -->
+			</div>
+			
+			<div class="booking-main-wrapper" style="float:left">
+				
+				<div class="booking-main">
+					
+					<div class="dark-notice calendar-notice"><p>Please select your dates from the calendar</p></div>
+					
+					<div id="open_datepicker"></div>
+					
+					<div class="clearboth"></div>
+					
+					<div class="datepicker-key clearfix">
+						
+						@*<div class="key-unavailable-wrapper clearfix">
+							<div class="key-unavailable-icon"></div>
+							<div class="key-unavailable-text">Unavailable</div>
+						</div>*@
+						
+						<div class="key-available-wrapper clearfix">
+							<div class="key-available-icon"></div>
+							<div class="key-available-text">Available</div>
+						</div>
+						
+						<div class="key-selected-wrapper clearfix">
+							<div class="key-selected-icon"></div>
+							<div class="key-selected-text">Selected Dates</div>
+						</div>
+						
+					</div>
+					
+				</div>
+				
+			</div>
+			
+			<div class="booking-side-wrapper" style="float:right">
+				
+				<div class="booking-side">
+				
+					<h4 class="title-style4">Your Reservation<span class="title-block"></span></h4>
+					
+					<div class="booking-form" name="bookroom" >
+						
+						<div class="clearfix">
+							
+							<div class="one-half-form">
+								<label for="open_date_from">Check In</label>
+								<input name="open_date_from" type="text" id="open_date_from" size="10" class="datepicker2">
+							</div>
+						
+							<div class="one-half-form last-col">
+								<label for="open_date_to">Check Out</label>
+								<input name="open_date_to" type="text" id="open_date_to" size="10" class="datepicker2">
+							</div>
+						
+						</div>
+						
+						
+						<!-- BEGIN .rooms-wrapper -->
+						<div class="rooms-wrapper">
+						
+							<!-- BEGIN .room-0 -->
+							<div class="room-0 clearfix">
+								<hr class="space8" />
+								<div class="one-third-form">
+									<label for="book_room_adults" style="height:25px;">Adults</label>
+									<div class="select-wrapper">
+										<select name="book_room_adults" id="adults">
+											
+											<option value="1">1</option>
+							                <option value="2">2</option>
+							                <option value="3">3</option>
+							                <option value="4">4</option>
+						                    <option value="5">5</option>
+						                    <option value="6">6</option>
+						                    <option value="7">7</option>
+						                    <option value="8">8</option>
+						                    <option value="9">9</option>
+										</select>
+									</div>
+								</div>
+								<div class="one-third-form">
+									<label for="book_room_children">Children below 12 yrs</label>
+									<div class="select-wrapper">
+										<select name="book_room_children" id="children">
+											<option value="0">0</option>
+											<option value="1">1</option>
+											<option value="2">2</option>
+											<option value="3">3</option>
+											<option value="4">4</option>
+											<option value="5">5</option>
+										</select>
+									</div>
+								</div>
+							<!-- BEGIN .room-0 -->
+								<div class="one-third-form last-col">
+									<label for="book_room_children">Children below 6 Yrs</label>
+									<div class="select-wrapper">
+										<select name="book_room_children" id="belowYrs">
+											<option value="0">0</option>
+											<option value="1">1</option>
+											<option value="2">2</option>
+											<option value="3">3</option>
+											<option value="4">4</option>
+											<option value="5">5</option>
+										</select>
+									</div>
+								</div>
+							<!-- BEGIN .room-0 -->
+                            
+							</div>
+
+				
+
+						<!-- BEGIN .rooms-wrapper -->
+						</div>
+
+						<hr class="space8" />
+						
+						<input class="bookbutton" type="submit" value="Check Availability" />
+
+					</div>
+					
+				</div>
+				
+			</div>
+			
+		<!-- END .content-wrapper -->
+		</div>
+		

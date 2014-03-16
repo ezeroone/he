@@ -1,0 +1,10 @@
+F:\eZeroOneTech\My Live Projects\Projects\HorakellEstate\eHorakelle\eZeroOne.NotificationAgent\bin\Release\eZeroOne.NotificationAgent.dll
+F:\eZeroOneTech\My Live Projects\Projects\HorakellEstate\eHorakelle\eZeroOne.NotificationAgent\bin\Release\eZeroOne.NotificationAgent.pdb
+F:\eZeroOneTech\My Live Projects\Projects\HorakellEstate\eHorakelle\eZeroOne.NotificationAgent\obj\Release\eZeroOne.NotificationAgent.dll
+F:\eZeroOneTech\My Live Projects\Projects\HorakellEstate\eHorakelle\eZeroOne.NotificationAgent\obj\Release\eZeroOne.NotificationAgent.pdb
+F:\eZeroOneTech\My Live Projects\Projects\HorakellEstate\eHorakelle\eZeroOne.NotificationAgent\obj\Release\eZeroOne.NotificationAgent.csprojResolveAssemblyReference.cache
+E:\eZeroOneTech\My Live Projects\Projects\HorakellEstate\eHorakelle\eZeroOne.NotificationAgent\bin\Release\eZeroOne.NotificationAgent.dll
+E:\eZeroOneTech\My Live Projects\Projects\HorakellEstate\eHorakelle\eZeroOne.NotificationAgent\bin\Release\eZeroOne.NotificationAgent.pdb
+E:\eZeroOneTech\My Live Projects\Projects\HorakellEstate\eHorakelle\eZeroOne.NotificationAgent\obj\Release\eZeroOne.NotificationAgent.csprojResolveAssemblyReference.cache
+E:\eZeroOneTech\My Live Projects\Projects\HorakellEstate\eHorakelle\eZeroOne.NotificationAgent\obj\Release\eZeroOne.NotificationAgent.dll
+E:\eZeroOneTech\My Live Projects\Projects\HorakellEstate\eHorakelle\eZeroOne.NotificationAgent\obj\Release\eZeroOne.NotificationAgent.pdb

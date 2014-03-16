@@ -1,0 +1,253 @@
+﻿@using eZeroOne.eHorakelle.Models
+@{
+    ViewBag.Title = "Booking Success";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+		<div id="page-header" >
+			<h2>Reservation: Confirmation</h2>
+		</div>
+
+		<!-- BEGIN .content-wrapper -->
+<div class="content-wrapper clearfix">
+			
+    <!-- BEGIN .booking-step-wrapper -->
+    <div class="booking-step-wrapper clearfix">
+			
+        <div class="step-wrapper">
+            <div class="step-icon-wrapper">
+                <div class="step-icon">1.</div>
+            </div>
+            <div class="step-title">Choose Your Date</div>
+        </div>
+			
+        <div class="step-wrapper">
+            <div class="step-icon-wrapper">
+                <div class="step-icon">2.</div>
+            </div>
+            <div class="step-title">Choose Your Room</div>
+        </div>
+			
+			
+        <div class="step-wrapper">
+            <div class="step-icon-wrapper">
+                <div class="step-icon step-icon-current">3.</div>
+            </div>
+            <div class="step-title">Place Your Reservation</div>
+        </div>
+			
+        <div class="step-wrapper last-col">
+            <div class="step-icon-wrapper">
+                <div class="step-icon step-icon-current">4.</div>
+            </div>
+            <div class="step-title">Confirmation</div>
+        </div>
+			
+        @*<div class="step-wrapper last-col">
+					<div class="step-icon-wrapper">
+						<div class="step-icon step-icon-current">4.</div>
+					</div>
+					<div class="step-title">Confirmation</div>
+				</div>*@
+			
+        <div class="step-line"></div>
+			
+        <!-- END .booking-step-wrapper -->
+    </div>
+			
+    <div class="booking-main-wrapper">
+				
+        <div class="booking-main">
+				
+            @{
+                var msg = (string)TempData["ErroMsg"];
+            }	
+            @if (string.IsNullOrWhiteSpace(msg.ToString()))
+            {
+                <h4 class="title-style4">Reservation Complete<span class="title-block"></span></h4>
+
+                <p>Details of your reservation have just been sent to you in a confirmation email, we look forward to seeing you soon. In the meantime if you have any questions feel free to contact us.</p>
+
+            }
+            else
+            {
+                <h4 class="title-style4">Reservation Process Incomplete, due to invalid user/ guest registration<span class="title-block"></span></h4>
+
+            }
+           		
+            <ul class="contact_details_list contact_details_list_dark">
+              <li class="phone_list"><strong>Phone:</strong>+94 772-367 061</li>
+						<li class="fax_list"><strong>Fax:</strong>+94 772-367 061</li>
+						<li class="email_list"><strong>Email:</strong> email@horakelle.com</li>
+            </ul>	
+					
+        </div>
+        <br/>
+        <a href="/" class="button0">Thank you !</a>
+						
+    </div>
+    @{
+        var tempData = (TempBooking)ViewBag.TempData;
+        var dateDiff = (@tempData.CheckOut - @tempData.CheckIn).TotalDays ;
+        var starDate = tempData.CheckIn;
+
+        var priceBreakDown = (List<DayWiseRate>)ViewBag.PriceBreakDowns;
+        var tottalAmount = Convert.ToDecimal(ViewBag.TotalPrice);
+
+        var deposit = Convert.ToDecimal(ViewBag.Deposit);
+
+        var dayWises = (List<DateWisePrice>)ViewBag.DayWisePrices;
+    }	
+            
+    <div class="booking-side-wrapper">
+				
+        <div class="booking-side clearfix">
+				
+            <h4 class="title-style4">Your Reservation<span class="title-block"></span></h4>
+		
+            <ul>
+                <li><span>Check in Date: </span> @String.Format("{0:ddd, MMM d, yyyy}", @tempData.CheckIn)</li>
+                <li><span>Check Out Date: </span> @String.Format("{0:ddd, MMM d, yyyy}", @tempData.CheckOut)</li>
+               
+                <li><span>No Of Days: </span> @dateDiff</li>
+                <li><span>Guests: </span> @tempData.Adult Adults</li>
+                <li><span>Below 12 years: </span>  @tempData.Children</li>
+                <li><span>Below 6 years: </span> @tempData.Below6Yrs</li>
+            </ul>
+					
+           <div class="price-details">
+						
+						<p class="deposit">25% Deposit Due Now</p>
+						<h3 class="price">$@deposit.ToString("#0.00")</h3>
+						<hr class="total-line" />
+						<p class="total">Total Price</p>
+					    <h3 class="total-price">$ @tottalAmount.ToString("#0.00")</h3>
+                        
+					    <p class="price-breakdown">
+					        <span>
+					            Discount : $ @ViewBag.Discount.ToString("#0.00") <br/> -(@ViewBag.DiscountPercentage.ToString("#0.00")) % 
+					        </span>
+					    </p>
+					    <p class="price-breakdown"><a href="#price-breakdown-display">View Price Breakdown</a></p>
+					    <p id="price-breakdown-display" class="price-breakdown-display">
+					        
+					        @foreach (var d in priceBreakDown.OrderBy(o=>o.Date))
+                            {
+                                if (@d.Rate == 0)
+                                {
+                                    continue;
+                                }
+                                <span>@String.Format("{0:ddd, MMM d}", @d.Date):</span>
+                                <b>$ @d.Rate.ToString("#0.00")</b>
+                                <br/>
+                                <span>Accomadation:</span><br/>
+                                foreach (var r in d.Rooms)
+                                {
+                                    <b style="margin-right: 20px;float:right">@r.Name $ @r.Rate.ToString("#0.00")</b>
+                                    <br />
+                                }
+                                 <span>Meal Plan:</span><br/>
+                                foreach (var m in d.Dinings)
+                                {
+                                    <b style="margin-right: 20px;float:right">@m.Name $ @m.Rate.ToString("#0.00")</b>
+                                    <br />
+                                }
+                                <span>Activities:</span><br/>
+                                foreach (var a in d.Activities)
+                                {
+                                    <b style="margin-right: 20px;float:right">@a.Name $@a.Rate.ToString("#0.00")</b>
+                                    <br />
+                                }
+                            }
+                            <span>Transports</span><br />
+                           @foreach (var d in priceBreakDown)
+                           {
+                                foreach (var a in d.Transports)
+                                {
+                                      <b style="margin-right: 20px;float:right">@a.Name $@a.Rate.ToString("#0.00")</b><br />
+                                }
+                              
+                           }
+					    </p>
+						
+					</div>
+					
+        </div>
+				
+    </div>
+			
+    <!-- END .content-wrapper -->
+</div>
+
+@*<table>
+					            <tr>
+					                <td>
+					                    Description
+					                </td>
+                                    <td>
+					                    Price
+					                </td>
+					            </tr>
+					        <tbody>
+					            @foreach (var d in priceBreakDown.OrderBy(o=>o.Date))
+					            {
+					                <tr>
+					                    <td>
+					                        @String.Format("{0:ddd, MMM d}", @d.Date)
+					                    </td>
+                                        <td>
+					                        <b>$ @d.Rate.ToString("#0.00")</b>
+					                    </td>
+					                </tr>
+					               
+					                foreach (var r in d.Rooms)
+					                {
+					                   <tr>
+					                    <td>
+					                       @r.Name
+					                    </td>
+                                        <td>
+					                        <b>$ @r.Rate</b>
+					                    </td>
+					                </tr>
+					                }
+					                foreach (var m in d.Dinings)
+					                {
+					                    <tr>
+					                    <td>
+					                       @m.Name
+					                    </td>
+                                        <td>
+					                        <b>$ @m.Rate</b>
+					                    </td>
+					                </tr>
+					                }
+					                foreach (var a in d.Activities)
+					                {
+					                   <tr>
+					                    <td>
+					                       @a.Name
+					                    </td>
+                                        <td>
+					                        <b>$ @a.Rate</b>
+					                    </td>
+					                </tr>
+					                }
+					            }
+                                
+                                 @foreach (var d in priceBreakDown.OrderBy(o => o.Date))
+                                 {
+                                     foreach (var a in d.Transports)
+					                {
+					                   <tr>
+					                    <td>
+					                       @a.Name
+					                    </td>
+                                        <td>
+					                        <b>$ @a.Rate</b>
+					                    </td>
+					                </tr>
+					                }
+                                 }
+
+					        </tbody>
+					        </table>*@

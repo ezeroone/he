@@ -1,0 +1,56 @@
+﻿@model eZeroOne.eHorakelle.Models.LoginModel
+@{
+    ViewBag.Title = "welcome to horakelle estate";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+  
+<!-- BEGIN .content-wrapper -->
+    <div class="content-wrapper clearfix">
+			
+		<div class="booking-main-wrapper">
+				
+            <div class="booking-main">
+					
+                <h4 class="title-style4">Login Details<span class="title-block"></span></h4>
+
+                <form action="/Account/Login" method="post" class="clearfix">
+                    <div class="input-left">
+							
+							<label for="Email">User Name</label>
+							<input type="text" name="Email" id="Email">
+							
+							<label for="Password">Password</label>
+							<input type="password" name="Password" id="Password" >
+							
+							<label> Remember me<input id="remember_me" type="checkbox" name="KeepMeSignedIn" value="1" /></label> 
+                    
+                        <input class="btn btn-primary"  type="submit" value="Sign In"/>	
+							
+						</div>
+                   
+                    				
+                              
+                </form>
+            </div>
+				
+        </div>
+			
+        <div class="booking-side-wrapper">
+            <div class="booking-side clearfix">
+                <h4 class="title-style4">User Registration<span class="title-block"></span></h4>
+
+                <h4><a href="/Account/VisitorRegistration"><span style="color:white">Visitor Registration</span></a></h4>
+                <br/>
+                <h4><a href="/Account/ClientRegistration"><span style="color:white">Agent Registration</span></a></h4>
+                
+                <hr class="space9" />		
+            </div>
+				
+        </div>
+			
+        <!-- END .content-wrapper -->
+    </div>
+    
+    

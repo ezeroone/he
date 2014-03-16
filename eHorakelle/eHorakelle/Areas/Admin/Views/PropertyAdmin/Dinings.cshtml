@@ -1,0 +1,214 @@
+﻿@model eZeroOne.eHorakelle.Models.DiningRateModel
+@{
+    ViewBag.Title = "Add Dining Rates";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+@section Scripts
+{
+    <script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
+}
+  
+<script type="text/javascript">
+    $(document).ready(function () {
+        
+        $("#btnback").click(function () {
+            window.location = "/Admin/PropertyAdmin/RoomList";
+        });
+       
+        $(".icon-remove").click(function (e) {
+            var id = $(this).attr("id");
+            $("#deleteId").val(id);
+            
+        });
+
+        $("#btndelete").click(function (e) {
+
+            var id = $("#deleteId").val();
+           
+            if (id > 0) {
+                $("#loader").show();
+                var url = "/Admin/PropertyAdmin/DeleteDining?id=" + id;
+
+                $.post(url, function () {
+                    window.location = "/Admin/PropertyAdmin/Dinings";
+                });
+           }
+
+        });
+        
+    });
+</script>
+
+<style>
+    #loader
+    {
+        background:#fff url(/Content/images/loading.gif) no-repeat center center;
+        height: 100px;
+        width: 100px;
+        position: fixed;
+        z-index: 1000;
+        left: 50%;
+        top: 50%;
+        margin: -25px 0 0 -25px;
+    }
+</style>
+
+
+@Html.Hidden("deleteId","0")
+@Html.Hidden("propertyId","0")
+
+<!-- delete record-->
+<div id="loader" style="display:none"></div>
+<div class="modal hide" id="deleteRecord">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">
+            x
+        </button>
+        <h3>Delete Dining Rate</h3>
+    </div>
+    <div class="modal-body">
+        <span> Are you sure ? do you wish to delete this <span style="color:red;font-size:14px">Dining Rate</span> ?</span>
+    </div>
+    <div class="modal-footer">
+        <a href="#" id="btncancel" class="btn" data-dismiss="modal">No </a>
+        <a href="#" id="btndelete" class="btn btn-primary" data-dismiss="modal">Yes </a>
+    </div>
+</div>
+<!-- End delete-->
+<section id="main">
+    <div class="body-text">
+<div class="container-fluid" >
+        <div class="row-fluid">
+            <div class="span3">
+                <div class="qbox">
+                <h3><i class="pull-right"></i>Extra Items</h3>
+              
+                <a href="/Admin/PropertyAdmin/FeatureGroup"> Feature groups</a><br/>
+                <a href="/Admin/PropertyAdmin/Features" class="active "> Features</a><br/>
+                <a  href="/Admin/PropertyAdmin/MealTypes" > Meal types</a><br/>
+                <a  href="/Admin/PropertyAdmin/TravelBy" > Travel by</a><br/>
+                <a  href="/Admin/PropertyAdmin/AddSliderImage" > Slider Image</a><br/>
+                <a  href="/Admin/PropertyAdmin/AddYoutubeUrl" > Youtube Url</a><br/>
+                <a  href="/Admin/PropertyAdmin/AddRecommandation" > Add Testimonial</a><br/>
+                <a  href="/Admin/PropertyAdmin/Beds" > Add Beds</a><br/>
+               
+                
+
+            </div>
+            </div>
+            <div class="span9">
+            <div class=" qbox form-horizontal contact-info">
+            <h3><i class="pull-right"></i>Add Dining rate ::</h3>
+                <form action="@Url.Content("~/Admin/PropertyAdmin/Dinings")" method="post">
+                    @Html.HiddenFor(x => x.Id)
+                    
+                    <div class="control-group">
+                        <div class="control-label">
+                            <label for="PlaceName"> Name</label>
+                        </div>
+                        <div class="controls">
+                            @Html.TextBoxFor(m=>m.Name,new{@class="span8"})
+                        </div>
+
+                    </div>
+                     <div class="control-group">
+                        <div class="control-label">
+                            <label for="PlaceName">Rate($)</label>
+                        </div>
+                        <div class="controls">
+                             @Html.TextBoxFor(m=>m.Rate,new{@class="span3"})
+                        </div>
+
+                    </div>
+                    <div class="control-group">
+                        <div class="control-label">
+                            <label for="PlaceName">Rate For Children($)</label>
+                        </div>
+                        <div class="controls">
+                             @Html.TextBoxFor(m=>m.ChildRate,new{@class="span3"})
+                        </div>
+
+                    </div>
+                   
+                    <div class="control-group">
+
+                        <div class="controls">
+                            @if (Model.Id == 0)
+                            {
+                                <input type="submit" value="Add Rate" class="btn btn-primary" />
+                            }
+                            else
+                            {
+                                <input type="submit" value="Edit Rate" class="btn btn-primary" />
+                            }
+
+                            
+                            <input id="btnback" value="Back" class="btn" type="button" >
+                        </div>
+                    </div>
+                    <div class="box">
+                       <div>
+                               <table class="table table-bordered " style="background:white">
+                                            <thead>
+                                                <tr>
+                                                    <th class="small">
+                                                         Name
+                                                    </th>      
+                                                    <th class="small">
+                                                         Rate
+                                                    </th>                          
+                                                    <th class="small">
+                                                         Rate for children
+                                                    </th> 
+                                                    
+                                                    <th>
+                                                           Action
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach (var item in Model.DiningRates)
+                                                {
+                                                    <tr >                                                                                   
+                                                        <td>
+                                                            @item.Name 
+                                                        </td>
+                                                         <td>
+                                                            @item.Rate 
+                                                        </td>
+                                                        <td>
+                                                            @item.ChildRate 
+                                                        </td>
+                                                        
+                                                        <td>
+                                                             @{
+                                                    var editurl = "~/Admin/PropertyAdmin/Dinings?id=" + @item.Id;
+                                                            }
+                                                            <a id="btnEdit" href="@Url.Content(editurl)" title="click to edit" class="icon-edit"></a>
+                                        
+                                                          <a href="#deleteRecord" data-toggle="modal" class="icon-remove" id=@item.Id ></a>
+                                                       
+                                                        
+                                                        </td>
+                                                    </tr>
+                                                }
+                                            </tbody>
+                                         
+                                        </table>
+
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+        </div>
+        </div>
+    <!-- end body-text -->
+
+    <!-- /container -->
+</section>
+<div>&nbsp;</div>

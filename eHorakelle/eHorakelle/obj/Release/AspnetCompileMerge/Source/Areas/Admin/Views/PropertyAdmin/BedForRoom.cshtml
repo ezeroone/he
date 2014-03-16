@@ -1,0 +1,95 @@
+﻿@model List<eZeroOne.eHorakelle.Models.BedRoomModel>
+@{
+    ViewBag.Title = "AddFeatures";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<script src="@Url.Content("~/Scripts/jquery-1.7.2.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery-ui-1.8.24.min.js")" type="text/javascript"></script>
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        $("#spnSaved").hide();
+        $("#btnBack").click(function () {
+            window.location = "/Admin/PropertyAdmin/RoomList";
+        });
+        
+        var roomId = '@ViewBag.RoomId';
+        
+        $('#btnfeature').click(function () {
+
+            var selectedFeatures = new Array();
+            $(".feature:checked").each(function () {
+                selectedFeatures.push($(this).attr('id'));
+            });
+            var serializedData = $(".container-fluid").serialize();
+            $.post('/Admin/PropertyAdmin/SaveBedForRoom/', serializedData + '&featureList=' + selectedFeatures + '&roomId=' + roomId, function (data) {
+                $("#spnSaved").show();
+                window.location = "/Admin/PropertyAdmin/RoomList";
+            });
+           
+         });
+    });
+</script>
+
+
+<section id="main">
+    <div class="body-text">
+<div class="container-fluid">
+
+    <div class="row-fluid">
+        <div class="span3">
+            <div class="qbox">
+                <h3><i class="pull-right"></i>Menu</h3>
+                <a  href="/Admin/PropertyAdmin/Addproperty" class="active"> Add Property</a><br/>
+                <a href="/Admin/PropertyAdmin/PropertyList"> Property List</a><br/>
+                <a  href="/Admin/PropertyAdmin/AddRoom" class="active"> Add Room</a><br/>
+                <a href="/Admin/PropertyAdmin/RoomList"> Room List</a>
+            </div>
+        </div>
+        <!--west pane with width of span12-->
+        <div class="span9">
+            <div class=" qbox form-horizontal contact-info">
+                <h3><i class="pull-right"></i>Available Rooms</h3>
+                <div>
+                    <div class="span12">
+                       
+                        @if (Model.Any())
+                            {
+                                foreach (var b in Model)
+                                {
+                                    <div class="span3">
+                                     @Html.CheckBox(b.Bed, b.IsAllowed,new { id = b.BedId, @class = "feature"})  @b.Bed
+                                    </div>
+                                }
+                               <br/>
+                            }
+                           
+                        
+                        <br/>
+                           
+                    </div>
+                    
+                    <div >
+                            
+                        <a id="btnfeature" class="btn btn-primary btn-small ">Save</a>
+                        <a id="btnBack" class="btn  btn-small ">Back</a>
+                                    <span id="spnSaved" style="color:red;display:none"> Saved Successfully...</span>  
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!--end of span12-->
+
+</div>
+        </div>
+    <!-- end body-text -->
+
+    <!-- /container -->
+</section>
+<div>&nbsp;</div>

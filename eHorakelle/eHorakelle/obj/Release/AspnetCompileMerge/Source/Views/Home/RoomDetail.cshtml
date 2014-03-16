@@ -1,0 +1,287 @@
+﻿
+@using eZeroOne.eHorakelle.Models
+@model eZeroOne.eHorakelle.Models.PropertyModel
+
+@{
+    ViewBag.Title = "RoomDetail";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script type="text/javascript" src="@Url.Content("~/js/jquery-1.9.1.js")"></script>
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+        
+
+        $(".bookbutton").click(function (e) {
+
+            //$("#loader").show();
+            var checkIn = $("#datefrom").val();
+            var checkout = $("#dateto").val();
+            var adult = $("#adults").val();
+            var child = $("#children").val();
+            var below = $("#belowYrs").val();
+            if (checkIn != "" && checkout != "" && adult != 0) {
+                var url = "/Property/ChooseRoom?checkIn=" + checkIn + "&checkOut=" + checkout + "&adult=" + adult + "&child=" + child + "&yrsbelow=" + below;
+                window.location = url;
+            } else {
+                alert("Please select check in,check out dates & adults for find availability ");
+            }
+
+
+
+        });
+
+    });
+</script>
+<div id="page-header" >
+			<h2>@Model.Name </h2>
+		</div>
+
+		<!-- BEGIN .content-wrapper -->
+		<div class="content-wrapper clearfix">
+			
+			<!-- BEGIN .main-content -->
+			<div class="main-content left-main-content">
+				
+				<!-- BEGIN .slider -->
+				<div class="slider accommodation-slider">
+					<ul class="slides">
+                        @foreach (var i in Model.Images)
+                        {
+                            <li>
+							<img src="@i.ImagePath" alt="@i.ImageDescription"  title="@i.ImageDescription"/>
+						</li>
+                        }
+						
+
+
+					</ul>
+				<!-- END .slider -->
+				</div>
+				
+				<div class="page-content">	
+					<h3 class="title-style1">Room Description<span class="title-block"></span></h3>
+					<p>@Model.Description</p>
+				</div>
+				
+				<hr class="space1" />
+				
+				<div id="tabs">
+					<ul class="nav clearfix">
+					    <li><a href="#tabs-tab-title-1">Room Overview &nbsp; <strong id="rate"> $ @Model.DisplayPrice</strong></a> </li>
+                        <li><a href="#tabs-tab-title-2">Dinings</a></li>
+					    <li><a href="#tabs-tab-title-3">Activities</a></li>
+                        <li><a href="#tabs-tab-title-4">Transport</a></li>
+					</ul>
+					
+					<div id="tabs-tab-title-1" class="page-content">
+						
+						<table>
+							<tbody>
+								<tr>
+								    <td data-title="Column 1"><strong>Accommodation:
+                                      @foreach (var b in Model.BedModels.OrderBy(o=>o.BedName))
+                                {
+                                    <a style="cursor:pointer;color:blueviolet" data-rate="@b.Rate" data-occupancy="@b.Occupancy" data-childoccupancy="@b.ChildOccupancy" class="bedprice">@b.BedName </a> 
+                                   <b>,&nbsp;</b>
+                                }</strong>
+								    
+								</td>
+									<td data-title="Column 1"><strong>Wi-fi Zone:</strong> Yes</td>
+								</tr>
+								<tr>
+									<td data-title="Column 2"><strong>Occupancy:</strong><span id="occupancy">@Model.Occupancy Adults</span> </td>
+									<td data-title="Column 2"><strong>A/C:</strong> Fully Air conditioned with supplementary Fan</td>
+								</tr>
+								
+								<tr>
+									<td data-title="Column 4"><strong>View:</strong> Garden</td>
+									<td data-title="Column 4"><strong>Bathroom:</strong> Hot & Cold Shower Cubicle</td>
+								</tr>
+							    <tr>
+							       
+							        <td data-title="Column 5"><strong>Complementary :</strong> Self-serving tea making facilities</td>
+                                     <td data-title="Column 5"></td>
+							    </tr>
+                              
+							</tbody>
+						</table>	
+						
+					</div>
+					
+				    <div id="tabs-tab-title-2" class="page-content">
+				        <h3>DININGS</h3>
+				        <ul>
+				            @foreach (var d in Model.Meals)
+				            {
+				                <li><h3>@d.MealType</h3></li>
+                                foreach (var m in d.Meals)
+                                {
+                                    <li style="margin-left:20px;">
+                                        <span>@m.MealType</span> @*&nbsp;&nbsp;                                       
+                                        <span style="color:#00BFFF">$ @m.Price </span>*@
+                                    </li>
+                                }
+                                 
+				            }
+				        </ul>
+				    </div>
+				    <div id="tabs-tab-title-3" class="page-content">
+				        
+				        <h3>ACTIVITIES</h3>
+				        <p>	Horakelle estate famous for its large jungle tracts of “Hora” variety of timber trees, is located in Dunagaha. The greenery of the estate compounded with the salubrious climate throughout, gives the guest peace of mind in a tranquil and serene atmosphere. Guests could laze or while away their time whilst engaging themselves in the several of activities such as</p>
+				        <table>
+				            <tr>
+				                <th>
+				                    Name
+				                </th>
+				                <th>
+				                    Description
+				                </th>
+				             
+				            </tr>
+				            @foreach (var a in Model.Activities)
+				            {
+				                <tr>
+				                    <td>
+				                        @a.Name 
+                                       
+				                    </td>
+				                    <td>
+				                        @a.Description
+				                        <hr/>
+				                        <span style="color:#00BFFF">Rate ($) :  @a.Rate /Person</span><br/>
+				                        <span style="color:#00BFFF">Rate for Children($) :  @a.ChildRate /Child</span>
+				                    </td>
+                                    
+				                </tr>
+  
+				            }
+				        </table>
+				    </div>
+                    
+                    <div id="tabs-tab-title-4" class="page-content">
+				        
+                        <h3>Transport</h3>
+                        <p>We porvide transport facility from airport to our estate</p>
+                        @{
+                            var transports = (List<TransportModel>)ViewBag.Transports;
+                           
+                        }
+				        <ul>
+                         @foreach (var t in transports)
+                            {
+                                <li>
+                                    <span>@t.Name</span> &nbsp;&nbsp;
+                                        
+                                    <span style="color:#00BFFF">$ @t.Rate /Person </span>
+                                </li>
+                            }
+                            </ul>
+                    </div>
+				</div>
+				
+			<!-- END .main-content -->	
+			</div>
+				
+			<!-- BEGIN .sidebar -->
+			<div class="sidebar right-sidebar">
+					
+				<!-- BEGIN .widget -->
+				<div class="widget">
+					
+					<h4 class="title-style3">Reserve This Room<span class="title-block"></span></h4>
+						
+					<!-- BEGIN .widget-reservation-box -->
+					<div class="widget-reservation-box">
+							
+						<div class="booking-form" name="bookroom" >
+							
+							<div class="room-price-widget">
+								<p class="from">Room From</p>
+								<h3 id="roomPrice" class="price">$  @Model.DisplayPrice</h3>
+								<p class="price-detail">Per Night</p> 
+							</div>
+							
+							<input type="text" id="datefrom" name="book_date_from" value="Check In" class="datepicker">
+							<input type="text" id="dateto" name="book_date_to" value="Check Out" class="datepicker">
+							
+							<div class="select-wrapper">
+								<select id="adults" name="book_room_adults">
+									<option value="0">Adults</option>
+									<option value="1">1</option>
+									<option value="2">2</option>
+									<option value="3">3</option>
+									<option value="4">4</option>
+									<option value="5">5</option>
+								</select>
+							</div>
+							
+							<div class="select-wrapper">
+								<select id="children" class="styled" name="book_room_children">
+									<option value="0">Children</option>
+									<option value="1">1</option>
+									<option value="2">2</option>
+									<option value="3">3</option>
+									<option value="4">4</option>
+									<option value="5">5</option>
+								</select>
+							</div>
+                            
+							<div class="select-wrapper">
+							    <select id="belowYrs" class="styled" name="book_room_tripple">
+							        <option value="0">Child Below 6Yrs</option>
+							        <option value="1">1</option>
+							        <option value="2">2</option>
+							        <option value="3">3</option>
+							        <option value="4">4</option>
+							        <option value="5">5</option>
+							    </select>
+							</div>
+
+							<input class="bookbutton" type="submit" value="Check Availability" />
+
+
+						</div>
+						
+					<!-- END .widget-reservation-box -->
+					</div>
+					
+				<!-- END .widget -->
+				</div>
+					
+				<!-- BEGIN .widget -->
+				<div class="widget">
+					
+					<h4 class="title-style3">Direct Reservations<span class="title-block"></span></h4>
+						
+					<ul class="contact_details_list">
+						<li class="phone_list"><strong>Phone:</strong>+94 772-367 061</li>
+						<li class="fax_list"><strong>Fax:</strong>+94 772-367 061</li>
+						<li class="email_list"><strong>Email:</strong> email@horakelle.com</li>
+					</ul>
+					
+				<!-- END .widget -->
+				</div>
+					
+			<!-- END .sidebar -->	
+			</div>
+				
+		<!-- END .content-wrapper -->
+		</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        
+        $('.bedprice').click(function () {
+
+            $("#occupancy").html($(this).attr("data-occupancy") + "Adults");
+            $("#rate").html("$ " + $(this).attr("data-rate"));
+            $("#roomPrice").html("$ " + $(this).attr("data-rate"));
+            
+        });
+     });
+</script>

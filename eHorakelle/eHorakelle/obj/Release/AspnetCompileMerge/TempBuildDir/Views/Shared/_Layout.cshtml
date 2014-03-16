@@ -1,0 +1,77 @@
+﻿<!DOCTYPE html>
+<html>
+    <head>
+    <!--Meta Tags-->
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	
+    <title>Welcome to horakelle estate, srilanka</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+        
+    <!-- Stylesheets -->
+    @*<link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">*@
+     
+	<link rel="stylesheet" href="/css/style.css" type="text/css"  media="all" />
+	<link rel="stylesheet" href="/css/colours/goldblack.css" type="text/css"  media="all"  />
+	<link rel="stylesheet" href="/css/flexslider.css" type="text/css"  media="all" />
+	<link rel="stylesheet" href="/css/superfish.css" type="text/css"  media="all" />
+    <link rel="stylesheet" href="/css/prettyPhoto.css" type="text/css"  media="all" />
+           @*<link href="~/content/bootstrap.min.css" rel="stylesheet">*@
+    <link rel="stylesheet" href="/css/responsive.css" type="text/css"  media="all" />
+         
+
+    @* <link href="~/content/imperio.css" rel="stylesheet">*@
+
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic' rel='stylesheet' type='text/css'>
+	<link href='http://fonts.googleapis.com/css?family=Merriweather:400,300,700,900' rel='stylesheet' type='text/css'>
+
+	<!-- Favicon -->
+	<link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+
+    
+    </head>
+
+			 			
+
+     <!-- BEGIN body -->
+<body class="loading">
+	
+	<!-- BEGIN #background-wrapper -->
+    <div id="background-wrapper">
+	
+        @{
+            var url = ViewBag.YoutubeUrls;
+            var userName = ViewBag.UserName;
+        }
+        <!-- BEGIN #wrapper -->
+        <div id="wrapper">
+            @Html.Partial("_Header")
+            @RenderBody()
+            @Html.Partial("_Footer")
+         </div>
+    </div>
+    
+	<!-- JavaScript -->
+	<script type="text/javascript" src="/js/jquery-1.9.1.js"></script>
+	<script type='text/javascript' src='/js/jquery-ui.js'></script>
+	<script type="text/javascript" src="/js/superfish.js"></script>
+	<script type="text/javascript" src="/js/jquery.flexslider-min.js"></script>
+	<script type="text/javascript" src="/js/jquery.prettyPhoto.js"></script>
+	<script type="text/javascript" src="/js/gmap.js"></script>
+    <script type="text/javascript" src="/js/scripts.js"></script>
+    <script src="http://www.jscache.com/wejs?wtype=selfserveprop&amp;uniq=812&amp;locationId=6384710&amp;lang=en_US&amp;rating=true&amp;nreviews=5&amp;writereviewlink=true&amp;popIdx=false&amp;iswide=false&amp;border=true"></script>
+    <script src="~/content/js/include/bootstrap.min.js"></script> 	
+    
+    
+    @*	 <script src="//code.jquery.com/jquery-1.9.1.js"></script>
+<script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>*@
+<!-- END body -->
+</body>
+  @*  @RenderSection("styles", required: false)
+    @RenderSection("scripts", required: false)*@
+
+   
+</html>
+

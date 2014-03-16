@@ -1,0 +1,204 @@
+﻿@using eZeroOne.eHorakelle.Models
+@model List<eZeroOne.eHorakelle.Models.DiningModel>
+@{
+    ViewBag.Title = "Choose Dinings";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script type="text/javascript" src="@Url.Content("~/js/jquery-1.9.1.js")"></script>
+
+
+<div id="page-header">
+			<h2>Reservation: Choose Your Dining</h2>
+		</div>
+
+		<!-- BEGIN .content-wrapper -->
+<div class="content-wrapper clearfix">
+			
+    <!-- BEGIN .booking-step-wrapper -->
+    <div class="booking-step-wrapper clearfix">
+			
+        <div class="step-wrapper">
+            <div class="step-icon-wrapper">
+                <div class="step-icon">1.</div>
+            </div>
+            <div class="step-title">Choose Your Date</div>
+        </div>
+			
+        <div class="step-wrapper">
+            <div class="step-icon-wrapper">
+                <div class="step-icon step-icon-current">2.</div>
+            </div>
+            <div class="step-title">Choose Your Room</div>
+        </div>
+			
+        
+        <div class="step-wrapper">
+            <div class="step-icon-wrapper">
+                <div class="step-icon">3.</div>
+            </div>
+            <div class="step-title">Place Your Reservation</div>
+        </div>
+			
+        <div class="step-wrapper last-col">
+            <div class="step-icon-wrapper">
+                <div class="step-icon">4.</div>
+            </div>
+            <div class="step-title">Confirmation</div>
+        </div>
+			
+        <div class="step-line"></div>
+			
+        <!-- END .booking-step-wrapper -->
+    </div>
+			
+    <div class="booking-main-wrapper">
+				
+        <div class="booking-main">
+					
+            <h4 class="title-style4" >Choose Your Dinings<span class="title-block"></span>
+                <input style="float:right" type="button" id="btnBook" class="button3" value="Continue booking"/>
+            </h4>
+				
+            @{
+                var tempData = (TempBooking)ViewBag.TempData;
+                var dateDiff = (@tempData.CheckOut - @tempData.CheckIn).TotalDays ;
+                var starDate = tempData.CheckIn;
+            }	
+               	
+            <ul class="room-list-wrapper clearfix">
+				
+                <li class="room-item clearfix">
+                    <h2><label>Available Menu</label></h2>
+							
+                    <!-- BEGIN .room-list-left -->
+                    <div class="room-list-left">
+                    </div>
+                    <div class="room-list-right">
+                        @foreach (var d in Model)
+                        {
+                            <div class="room-meta">
+                                <h4>@d.MealType</h4><br/>
+                                <ul>
+                                    @foreach (var m in d.Meals)
+                                    {
+                                        <li><span>&bull;</span> @m.MealType </li>
+                                    
+                                    }
+                                </ul>
+                            </div>
+                        }
+                    </div>
+                </li>
+                
+                 @{
+                     var dinings = (List<DiningModel>)ViewBag.Dinings;
+                           
+                }
+                @for (var i = 0; i < dateDiff; i++)
+                {
+                    
+                    var groupName = "dining" + starDate.AddDays(i).ToString("MM-dd-yyyy");
+                    
+                    <li class="room-item clearfix">
+                        <h2><label><input type="checkbox" checked="checked" id="@starDate.AddDays(i).ToString("MM-dd-yyyy")" name="dates" />@String.Format("{0:ddd, MMM d, yyyy}", @starDate.AddDays(i)) / head</label></h2>
+							
+                        <!-- BEGIN .room-list-left -->
+                        <div class="room-list-left">
+                           
+                             <label class="button2"><input class="mealtype" name="@groupName" type="radio" data-date="@starDate.AddDays(i).ToShortDateString()" data-mealtype="0" style="cursor:pointer;color:blueviolet" />None </label>
+                    
+                        </div>
+                        <div class="room-list-right">
+                            
+                            @foreach (var d in dinings.OrderBy(o=>o.Id))
+                            {
+                                <label class="button2" style="margin:0 10px 3px 0"><input class="mealtype" checked="checked" name="@groupName" type="radio" data-date="@starDate.AddDays(i).ToShortDateString()" data-mealtype="@d.Id" style="cursor:pointer;color:blueviolet" />@d.MealType ($ @d.Price)  </label>
+                            }
+                           @* <label class="button2"><input class="mealtype" checked="checked" name="@groupName" type="radio" data-date="@starDate.AddDays(i).ToShortDateString()" data-mealtype="fb" style="cursor:pointer;color:blueviolet" />Full Board </label>
+                            <label class="button2"><input class="mealtype" name="@groupName" type="radio" data-date="@starDate.AddDays(i).ToShortDateString()" data-mealtype="hb" style="cursor:pointer;color:blueviolet" />Half Board </label>
+                            <label class="button2"><input class="mealtype" name="@groupName" type="radio" data-date="@starDate.AddDays(i).ToShortDateString()" data-mealtype="bf" style="cursor:pointer;color:blueviolet" />Break Fast </label> *@
+                        </div>
+                    </li>
+                }
+                
+           
+
+            </ul>
+					
+        </div>
+				
+    </div>
+			
+    <div class="booking-side-wrapper">
+				
+        <div class="booking-side clearfix">
+				
+            <h4 class="title-style4">Your Reservation<span class="title-block"></span></h4>
+			
+            <ul>
+                <li><span>Check in Date: </span> @String.Format("{0:ddd, MMM d, yyyy}", @tempData.CheckIn)</li>
+                <li><span>Check Out Date: </span> @String.Format("{0:ddd, MMM d, yyyy}", @tempData.CheckOut)</li>
+               
+                <li><span>No of Nights: </span> @dateDiff</li>
+                <li><span>Guests: </span> @tempData.Adult Adults</li>
+                <li><span>Below 12 years: </span>  @tempData.Children</li>
+                <li><span>Below 6 years: </span> @tempData.Below6Yrs</li>
+            </ul>
+					
+            <a href="/Property/ChooseDate" class="button3">Edit Reservation</a>
+					
+        </div>
+				
+    </div>
+			
+    <!-- END .content-wrapper -->
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        
+        $('#btnBook').click(function () {
+
+            var adult = '@tempData.Adult';
+            var child = '@tempData.Children';
+            var belowYrs = '@tempData.Below6Yrs';
+            var checkIn = '@tempData.CheckIn';
+            var checkOut = '@tempData.CheckOut';
+            
+            var selectedDates = new Array();
+            var canBook = false;
+           
+            $("input:checkbox[name=dates]:checked").each(function () {
+                
+                var date = $(this).attr('id');
+                var groupName = "dining" + date;
+                $("input:radio[name=" + groupName + "]:checked").each(function () {
+
+                    selectedDates.push(date + "_" + $(this).attr('data-mealtype'));
+                    canBook = true;
+                });
+               
+            });
+           
+            var url = "/Property/Activities?checkIn=" + checkIn + "&checkOut=" + checkOut + "&adult=" + adult + "&child=" + child + "&yrsbelow=" + belowYrs;// + "&rooms=" + selectedRoom_Beds + "&extra=" + selectedRoom_ExtraBeds;
+            
+            var postData = { checkIn: checkIn, checkOut: checkOut, adult: adult, child: child, yrsbelow: belowYrs, dinings: selectedDates };
+            if (canBook) {
+
+                $.ajax({
+                    type: "POST",
+                    url: "/Property/BookingDiningData",
+                    data: postData,
+                    success: function (data) {
+                        window.location = url;
+                    },
+                    dataType: "json",
+                    traditional: true
+                });
+            }
+  
+        });
+    });
+    
+</script>	
