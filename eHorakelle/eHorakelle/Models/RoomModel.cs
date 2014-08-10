@@ -1,4 +1,5 @@
-﻿using System;
+﻿using eZeroOne.Domain;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
@@ -106,7 +107,48 @@ namespace eZeroOne.eHorakelle.Models
         [Required]
         public int UserId { get; set; }
 
+        public int RoleId {get; set;}
+
         public List<PriceBreakDown> PriceBreakDowns { get; set; }
+
+
+        public Visitor GetVisitorInfo(Visitor model)
+        {
+            if (model == null) { model = new Visitor(); }
+
+            model.UserId = this.UserId;
+            model.FirstName = this.FirstName;
+            model.LastName = this.LastName;
+            model.Email = this.Email;
+            model.Phone = this.Phone;
+            model.Address = this.Adderss;
+            model.City = this.City;
+            model.Street = this.Street;
+            model.Country = 210;
+            model.Zip = this.ZipCode;
+
+
+            return model;
+        }
+
+
+        public Client GetClientInfo(Client model)
+        {
+            if(model == null){model = new Client();}
+
+            model.UserId = this.UserId;
+                model.FirstName = this.FirstName;
+                model.LastName = this.LastName;
+                model.Email = this.Email;
+                model.Phone = this.Phone;
+                model.Address = this.Adderss;
+                model.City = this.City;
+                model.Street = this.Street;
+                model.Country = 210;
+                model.Zip = this.ZipCode;
+
+                return model;
+        }
     }
 
 

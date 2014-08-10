@@ -6,6 +6,7 @@ using eZeroOne.Domain;
 using eZeroOne.MailService;
 using eZeroOne.Service.Common;
 using eZeroOne.Service.Customers;
+using eZeroOne.Service.Visitors;
 using eZeroOne.Service.Repository;
 using eZeroOne.Service.Users;
 using eZeroOne.eHorakelle.Models;
@@ -19,11 +20,13 @@ namespace eZeroOne.eHorakelle.Controllers
         private readonly IUserService _userService;
         private readonly ICustomerService _customerService;
         private readonly ICommon _common;
+        private readonly IVisitorService _visitor;
         public AccountController(IRepository repository, IUnitOfWork unitOfWork)
         {
             _userService = new UserService(repository, unitOfWork);
             _common = new eZeroOne.Service.Common.Common(repository, unitOfWork);
             _customerService = new CustomerService(repository, unitOfWork);
+            _visitor = new VisitorService(repository, unitOfWork);
         }
 
         [HttpGet]
@@ -130,10 +133,16 @@ namespace eZeroOne.eHorakelle.Controllers
                     Created=DateTime.Now,
                     RoleId=3
                 };
+
                 
                 var result = _customerService.SaveCustomerLogin(newUser);
                 if (result)
                 {
+                    //save visitor information and continue
+                    var newVisitor = model.GetVisitorInfo();
+                    newVisitor.UserId = newUser.UserId;
+                    _visitor.SaveVisitor(newVisitor);
+
                    //send the activation email to the user
                     var activationToken = new EmailActivationToken
                     {

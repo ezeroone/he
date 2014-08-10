@@ -1,4 +1,5 @@
-﻿using System;
+﻿using eZeroOne.Domain;
+using System;
 using System.ComponentModel.DataAnnotations;
 
 namespace eZeroOne.eHorakelle.Models
@@ -44,7 +45,31 @@ namespace eZeroOne.eHorakelle.Models
         public DateTime? CreatedDate { get; set; }
         [DataType(DataType.Date)]
         public DateTime? ModifiedDate { get; set; }
+
+
+        public Visitor GetVisitorInfo()
+        {
+            var result = new Visitor()
+            {
+                Title = this.TitleId,
+                LastName = this.LastName,
+                FirstName = this.FirstName,
+                Address = this.Address,
+                Email = this.Email,
+                DateOfBirth = this.DateOfBirth,
+                Mobile = this.Mobile,
+                Zip = this.Zip,
+                Phone = this.Phone,
+                Street = this.Street,
+                Country = this.CountryId,
+                Remarks = this.Remarks
+            };
+
+            return result;
+        }
+
     }
+
 
     public class ReviewModel
     {

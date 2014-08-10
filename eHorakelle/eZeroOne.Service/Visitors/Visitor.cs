@@ -7,77 +7,59 @@ using eZeroOne.Service.Repository;
 
 namespace eZeroOne.Service.Visitors
 {
-    public class Visitor : IVisitor
+    public class VisitorService : IVisitorService
     {
         private readonly IRepository _repository;
         private readonly IUnitOfWork _unitOfWork;
 
-        public Visitor(IRepository repository, IUnitOfWork unitOfWork)
+        public VisitorService(IRepository repository, IUnitOfWork unitOfWork)
         {
             _repository = repository;
             _unitOfWork = unitOfWork;
         }
-        public Domain.Visitor SaveEmployee(Domain.Visitor employee, out bool isExist)
+
+
+        public eZeroOne.Domain.Visitor GetVisitor(int VisitorId)
         {
-            isExist = false;
-
-            if (!string.IsNullOrWhiteSpace(employee.FirstName) || !string.IsNullOrWhiteSpace(employee.LastName))
-            {
-                var emp = _repository.Single<Domain.Visitor>(t => t.FirstName == employee.FirstName.Trim() && t.LastName == employee.LastName.Trim());
-                if (emp != null)
-                {
-                    employee = emp;
-                    isExist = true;
-                    return employee;
-                }
-            }
-
-            var nemEmp = new eZeroOne.Domain.Visitor
-                                 {
-                                     Title = employee.Title,
-                                     FirstName = employee.FirstName,
-                                     LastName = employee.LastName,
-                                     //Occupation = employee.Occupation,
-                                     //Organisation = employee.Organisation,
-                                     //Address = employee.Address,
-                                     //Street = employee.Street,
-                                     //City = employee.City,
-                                     //Phone = employee.Phone,
-                                     //Mobile = employee.Mobile,
-                                     //Fax = employee.Fax,
-                                     Email = employee.Email,
-                                     //Website = employee.Website,
-                                     //Remarks = employee.Remarks,
-                                     //Country = employee.Country,
-                                     Created = System.DateTime.UtcNow,
-                                     Gender=employee.Title==1?1:2,
-                                     Active = true
-                                 };
-
-            _repository.Add(nemEmp);
-            _unitOfWork.Commit();
-            employee = nemEmp;
-
-            return employee;
+            return _repository.All<Domain.Visitor>().FirstOrDefault(m => (m.VisitorId == VisitorId));
         }
 
-        public bool UpdateEmployee(eZeroOne.Domain.Visitor employee)
+        public eZeroOne.Domain.Visitor GetVisitorbyUser(int userId)
         {
-            var emp = _repository.Single<Domain.Visitor>(t => t.VisitorId == employee.VisitorId);
-            if (emp != null)
-            {
-                emp.FirstName = employee.FirstName;
-                emp.Title = employee.Title;
-                emp.LastName = employee.LastName;
-                emp.Email = employee.Email;
-            }
-
-            _unitOfWork.Commit();
-                
-            
-            return true;
+            return _repository.All<Domain.Visitor>().FirstOrDefault(m => (m.UserId == userId));
         }
-        
+
+        public Domain.Visitor SaveVisitor(Domain.Visitor visitor)
+        {
+            Domain.Visitor dbObj = null;
+            if (visitor.VisitorId <= 0) { dbObj = new Domain.Visitor(); }
+            else  { dbObj = GetVisitor(visitor.VisitorId);   }
+
+            dbObj.Title = visitor.Title;
+            dbObj.FirstName = visitor.FirstName;
+            dbObj.LastName = visitor.LastName;
+            dbObj.Address = visitor.Address;
+            dbObj.Street = visitor.Street;
+            dbObj.City = visitor.City;
+            dbObj.Phone = visitor.Phone;
+            dbObj.Mobile = visitor.Mobile;
+            dbObj.Fax = visitor.Fax;
+            dbObj.Email = visitor.Email;
+            dbObj.Remarks = visitor.Remarks;
+            dbObj.Country = visitor.Country;
+            dbObj.Created = dbObj.Created ?? System.DateTime.UtcNow;
+            dbObj.Modified = (dbObj.VisitorId <= 0) ? dbObj.Modified : System.DateTime.UtcNow;
+            dbObj.Gender = visitor.Title;
+            dbObj.Active = true;
+            dbObj.UserId = visitor.UserId;
+
+            _repository.Add(dbObj);
+            _unitOfWork.Commit();
+
+            return dbObj;
+        }
+
+
         
         public void SaveEmailNotifications(Guid id, int empId, int? groupId, int? companyId, int userId)
         {

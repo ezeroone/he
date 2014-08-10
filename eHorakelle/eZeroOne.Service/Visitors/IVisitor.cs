@@ -3,10 +3,11 @@ using System.Collections.Generic;
 
 namespace eZeroOne.Service.Visitors
 {
-    public interface IVisitor
+    public interface IVisitorService
     {
-        eZeroOne.Domain.Visitor SaveEmployee(eZeroOne.Domain.Visitor employee, out bool isExist);
-        bool UpdateEmployee(eZeroOne.Domain.Visitor employee);
+        eZeroOne.Domain.Visitor GetVisitor(int userId);
+        eZeroOne.Domain.Visitor GetVisitorbyUser(int visitorId);
+        eZeroOne.Domain.Visitor SaveVisitor(eZeroOne.Domain.Visitor visitor);
                
         void SaveEmailNotifications(Guid id, int empId,int ? groupId, int?companyId,int userId);
         void UpdateEmailNotifications(Guid id, int empId);

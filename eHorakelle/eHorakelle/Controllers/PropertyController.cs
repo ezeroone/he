@@ -9,6 +9,7 @@ using eZeroOne.Domain;
 using eZeroOne.MailService;
 using eZeroOne.Service.Customers;
 using eZeroOne.Service.Property;
+using eZeroOne.Service.Visitors;
 using eZeroOne.Service.Repository;
 using eZeroOne.Service.Users;
 using eZeroOne.eHorakelle.Models;
@@ -21,12 +22,15 @@ namespace eZeroOne.eHorakelle.Controllers
         private readonly IProperties _properties;
         private readonly IUserService _userService;
         private readonly ICustomerService _customerService;
+        private readonly IVisitorService _visitor;
+
         // GET: /Property/
         public PropertyController(IRepository repository, IUnitOfWork unitOfWork)
         {
             _properties = new Properties(repository, unitOfWork);
             _userService = new UserService(repository, unitOfWork);
             _customerService = new CustomerService(repository, unitOfWork);
+            _visitor = new VisitorService(repository, unitOfWork);
         }
 
         public ActionResult Search()
@@ -1371,6 +1375,7 @@ namespace eZeroOne.eHorakelle.Controllers
         public ActionResult Payment(string checkIn, string checkOut, int adult, int child, int yrsbelow)
         {
             var model = new BookingFlowModel();
+
             ViewBag.TempData = null;
             ViewBag.PriceBreakDowns = null;
             var booingModel = new TempBooking();
@@ -1410,8 +1415,44 @@ namespace eZeroOne.eHorakelle.Controllers
 
                 if (User.Identity.IsAuthenticated)
                 {
+                    // get user information
                     model.UserId = GetUserId(User.Identity.Name);
+                    var user = _userService.GetUser(model.UserId);
+                    model.RoleId = user.RoleId;
 
+                    #region Getting Quest information
+
+                    // client
+                    if(user.RoleId == 2)
+                    {
+                        var client = _customerService.GetClientUserId(user.UserId);
+                        if (client == null) { client = new Client(); }
+                        model.FirstName = client.FirstName;
+                        model.LastName = client.LastName;
+                        model.Email = client.Email;
+                        model.Phone = client.Phone;
+                        model.Adderss = client.Address;
+                        model.City = client.City;
+                        model.Street = client.Street;
+                        model.Country = "Sri Lanka";
+                        model.ZipCode = client.Zip;
+                    } 
+                    else if (user.RoleId == 3)
+                    {
+                        var visitor = _visitor.GetVisitorbyUser(user.UserId);
+                        if (visitor == null) { visitor = new Visitor(); }
+                        model.FirstName = visitor.FirstName;
+                        model.LastName = visitor.LastName;
+                        model.Email = visitor.Email;
+                        model.Phone = visitor.Phone;
+                        model.Adderss = visitor.Address;
+                        model.City = visitor.City;
+                        model.Street = visitor.Street;
+                        model.Country = "Sri Lanka";
+                        model.ZipCode = visitor.Zip;
+                    }
+
+                    #endregion
                 }
                 
                 model.ItemDescription=GetUserName()+" has booked room(s) at horakelle estate from " + checkIn + " to " + checkOut;
@@ -1442,14 +1483,18 @@ namespace eZeroOne.eHorakelle.Controllers
                 }
 
             }
-            if (model.UserId == 0)
+
+            if (model.UserId > 0)
             {
-                var userId = 0;
-                CreateUser(model.FirstName, model.LastName, model.Email, out userId);
-                model.UserId = GetUserId(model.Email);
-            }
-            if (model.UserId>0)
-            {
+
+                #region Save quest information
+
+                if (model.RoleId == 2) { _customerService.UpdateClient(model.GetClientInfo(_customerService.GetClientUserId(model.UserId))); }
+                else if (model.RoleId == 3) { _visitor.SaveVisitor(model.GetVisitorInfo(_visitor.GetVisitorbyUser(model.UserId))); }
+
+                #endregion
+
+
                 if (booingModel.Rooms.Any())
                 {
 
@@ -1955,40 +2000,6 @@ namespace eZeroOne.eHorakelle.Controllers
             return name;
         }
 
-        private bool CreateUser(string firstName,string lastName,string email,out int userId)
-        {
-            userId = 0;
-            var newUser = new User
-            {
-                FirstName = firstName,
-                LastName = lastName,
-                Email = email,
-                Password = "p@ssword",
-                CompanyId = 1,
-                Created = DateTime.Now,
-                RoleId = 3
-            };
-
-            var result = _customerService.SaveCustomerLogin(newUser);
-            if (result)
-            {
-                FormsAuthentication.SetAuthCookie(email, true);
-                //userId = newUser.UserId;
-
-                //send the activation email to the user
-                var activationToken = new EmailActivationToken
-                {
-                    Email = email,
-                    ExpirationDate = DateTime.Now.AddHours(2)
-                };
-                SecurityService.EncryptActivationToken(activationToken);
-
-                EmailService.SendActivationEmail(activationToken.EncryptedForm, email, firstName);
-
-                return true;
-            }
-            return false;
-        }
 
         private int GetUserId(string userEmail)
         {
@@ -2212,5 +2223,9 @@ namespace eZeroOne.eHorakelle.Controllers
             else
                 return false;
         }
+   
+    
+
+      
     }
 }
