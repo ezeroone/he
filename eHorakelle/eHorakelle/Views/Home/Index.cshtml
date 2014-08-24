@@ -3,13 +3,10 @@
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    var property = (PropertyModel)ViewBag.Property;
 }
 <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
-	<script type="text/javascript" src="/js/jquery-1.9.1.js"></script>
-@{ 
-    var property = (PropertyModel)ViewBag.Property;
-  
-}
+<script type="text/javascript" src="/js/jquery-1.9.1.js"></script>
 
 
 <script type="text/javascript">
@@ -218,43 +215,15 @@
 				
 				<!-- BEGIN .one-third -->
 				<div class="one-third last-col clearfix" style="height:300px">
-					<h3 class="title-style1">Location<span class="title-block"></span></h3>
-					
-					<div id="google-map" style="height: 175px;"></div>
+                    <h3 class="title-style1">Videos<span class="title-block"></span></h3>
+                    <div style="width: 100%;  margin-top: -17px;">
+                        <iframe width="100%" height="0" src="http://www.youtube.com/watch?v=KgQAyyuz_qk"></iframe>
+                        <embed width="100%" height="100%"
+                               src="http://www.youtube.com/v/XGSy3_Czz8k"
+                               type="application/x-shockwave-flash">
+                    </div>
 
-					<script type="text/javascript">
-
-					    var lat = '@property.Latitude';
-					    var longi = '@property.Longitude';
-					    
-					    var latlng = new google.maps.LatLng(lat, longi);
-					    var myOptions = {
-					        zoom: 10,
-					        center: latlng,
-					        scrollwheel: true,
-					        scaleControl: false,
-					        disableDefaultUI: false,
-					        mapTypeId: google.maps.MapTypeId.ROADMAP
-					    };
-
-					    mapContent = new google.maps.Map(document.getElementById("google-map"),myOptions);
-					    var contentStringContent = '<div class="gmap-content"><h2>Horakelle estate</h2><p>Dunugha, Gampaha</p></div>';
-					    var infowindowContent = new google.maps.InfoWindow({
-					        content: contentStringContent
-					    });
-
-					    var markerContent = new google.maps.Marker({
-					        position: latlng, 
-					        map: mapContent
-					    });
-
-					    google.maps.event.addListener(markerContent, 'click', function() {
-					        infowindowContent.open(mapContent,markerContent);
-					    });
-	
-					</script>
-
-					<p><a href="/Home/Contactus" class="button1">Directions</a></p>
+					@*<p><a href="/Home/Contactus" class="button1">Directions</a></p>*@
 					
 				<!-- END .one-third -->	
 				</div>
