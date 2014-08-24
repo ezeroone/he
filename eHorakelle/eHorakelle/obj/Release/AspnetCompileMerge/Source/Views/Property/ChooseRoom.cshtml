@@ -55,8 +55,7 @@
         <div class="booking-main">
 			<div id="validateMsg" style="color:red;"></div>
             <h4 class="title-style4" >Choose Your Room<span class="title-block"></span>
-                <input style="float:right" type="button" id="btnBook" class="button3" value="Continue booking"/><br/>
-                
+                <input style="float:right" type="button" class="button3 continueBooking" value="Continue booking" /><br/>
             </h4>
 				<br/>
             <h3>
@@ -126,6 +125,11 @@
 
             </ul>
 					
+            <div class="continueBooking-Bottom">
+                <input style="float:right" type="button" class="button3 continueBooking" value="Continue booking" /><br />
+            </div>
+              
+            
         </div>
 				
     </div>
@@ -173,7 +177,7 @@
            // $("#" + childOccupancyId).html($(this).attr("data-childoccupancy"));
         });
         
-        $('#btnBook').click(function () {
+        $('.continueBooking').click(function () {
 
             var adult = '@Model.Adult';
             var child = '@Model.Children';

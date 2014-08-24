@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Security;
 using System.Web;
 using System.Web.Mvc;
 using eZeroOne.Common;
@@ -15,6 +16,7 @@ using PointOfInterest = eZeroOne.Domain.PointOfInterest;
 
 namespace eZeroOne.eHorakelle.Areas.Clients.Controllers
 {
+    [assembly: AllowPartiallyTrustedCallers]
     [Authorize(Roles = RoleNames.Client)]
     public class ClientPropertyController : Controller
     {

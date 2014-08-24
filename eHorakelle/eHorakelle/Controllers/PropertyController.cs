@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
+using System.Security;
 using System.Web.Mvc;
 using System.Web.Security;
 using eZeroOne.Common;
@@ -17,6 +18,7 @@ using PointOfInterest = eZeroOne.eHorakelle.Models.PointOfInterest;
 
 namespace eZeroOne.eHorakelle.Controllers
 {
+    [assembly: AllowPartiallyTrustedCallers]
     public class PropertyController : BaseController
     {
         private readonly IProperties _properties;

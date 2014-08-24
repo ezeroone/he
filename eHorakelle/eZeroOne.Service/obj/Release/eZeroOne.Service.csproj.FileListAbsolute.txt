@@ -94,3 +94,15 @@ E:\eZeroOneTech\My Live Projects\Projects\HorakellEstate\eHorakelle\eZeroOne.Ser
 E:\eZeroOneTech\My Live Projects\Projects\HorakellEstate\eHorakelle\eZeroOne.Service\obj\Release\eZeroOne.Service.csprojResolveAssemblyReference.cache
 E:\eZeroOneTech\My Live Projects\Projects\HorakellEstate\eHorakelle\eZeroOne.Service\obj\Release\eZeroOne.Service.dll
 E:\eZeroOneTech\My Live Projects\Projects\HorakellEstate\eHorakelle\eZeroOne.Service\obj\Release\eZeroOne.Service.pdb
+E:\eZeroOneTech\My Live Projects\Projects\HorakellEstate\gitWa\he\eHorakelle\eZeroOne.Service\bin\Release\eZeroOne.Service.dll
+E:\eZeroOneTech\My Live Projects\Projects\HorakellEstate\gitWa\he\eHorakelle\eZeroOne.Service\bin\Release\eZeroOne.Service.pdb
+E:\eZeroOneTech\My Live Projects\Projects\HorakellEstate\gitWa\he\eHorakelle\eZeroOne.Service\bin\Release\EntityFramework.dll
+E:\eZeroOneTech\My Live Projects\Projects\HorakellEstate\gitWa\he\eHorakelle\eZeroOne.Service\bin\Release\eZeroOne.Domain.dll
+E:\eZeroOneTech\My Live Projects\Projects\HorakellEstate\gitWa\he\eHorakelle\eZeroOne.Service\bin\Release\eZeroOne.MailService.dll
+E:\eZeroOneTech\My Live Projects\Projects\HorakellEstate\gitWa\he\eHorakelle\eZeroOne.Service\bin\Release\Mvc.Mailer.dll
+E:\eZeroOneTech\My Live Projects\Projects\HorakellEstate\gitWa\he\eHorakelle\eZeroOne.Service\bin\Release\eZeroOne.Domain.pdb
+E:\eZeroOneTech\My Live Projects\Projects\HorakellEstate\gitWa\he\eHorakelle\eZeroOne.Service\bin\Release\eZeroOne.MailService.pdb
+E:\eZeroOneTech\My Live Projects\Projects\HorakellEstate\gitWa\he\eHorakelle\eZeroOne.Service\bin\Release\EntityFramework.xml
+E:\eZeroOneTech\My Live Projects\Projects\HorakellEstate\gitWa\he\eHorakelle\eZeroOne.Service\obj\Release\eZeroOne.Service.csprojResolveAssemblyReference.cache
+E:\eZeroOneTech\My Live Projects\Projects\HorakellEstate\gitWa\he\eHorakelle\eZeroOne.Service\obj\Release\eZeroOne.Service.dll
+E:\eZeroOneTech\My Live Projects\Projects\HorakellEstate\gitWa\he\eHorakelle\eZeroOne.Service\obj\Release\eZeroOne.Service.pdb

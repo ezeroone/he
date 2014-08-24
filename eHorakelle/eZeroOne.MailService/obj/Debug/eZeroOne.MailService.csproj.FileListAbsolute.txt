@@ -95,3 +95,9 @@ E:\eZeroOneTech\My Live Projects\Projects\HorakellEstate\eHorakelle\eZeroOne.Mai
 E:\eZeroOneTech\My Live Projects\Projects\HorakellEstate\eHorakelle\eZeroOne.MailService\obj\Debug\eZeroOne.MailService.csprojResolveAssemblyReference.cache
 E:\eZeroOneTech\My Live Projects\Projects\HorakellEstate\eHorakelle\eZeroOne.MailService\obj\Debug\eZeroOne.MailService.dll
 E:\eZeroOneTech\My Live Projects\Projects\HorakellEstate\eHorakelle\eZeroOne.MailService\obj\Debug\eZeroOne.MailService.pdb
+E:\eZeroOneTech\My Live Projects\Projects\HorakellEstate\gitWa\he\eHorakelle\eZeroOne.MailService\bin\Debug\eZeroOne.MailService.dll
+E:\eZeroOneTech\My Live Projects\Projects\HorakellEstate\gitWa\he\eHorakelle\eZeroOne.MailService\bin\Debug\eZeroOne.MailService.pdb
+E:\eZeroOneTech\My Live Projects\Projects\HorakellEstate\gitWa\he\eHorakelle\eZeroOne.MailService\bin\Debug\Mvc.Mailer.dll
+E:\eZeroOneTech\My Live Projects\Projects\HorakellEstate\gitWa\he\eHorakelle\eZeroOne.MailService\obj\Debug\eZeroOne.MailService.csprojResolveAssemblyReference.cache
+E:\eZeroOneTech\My Live Projects\Projects\HorakellEstate\gitWa\he\eHorakelle\eZeroOne.MailService\obj\Debug\eZeroOne.MailService.dll
+E:\eZeroOneTech\My Live Projects\Projects\HorakellEstate\gitWa\he\eHorakelle\eZeroOne.MailService\obj\Debug\eZeroOne.MailService.pdb

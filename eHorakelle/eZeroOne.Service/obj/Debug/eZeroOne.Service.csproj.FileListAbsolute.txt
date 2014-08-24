@@ -202,3 +202,15 @@ E:\eZeroOneTech\My Live Projects\Projects\HorakellEstate\eHorakelle\eZeroOne.Ser
 E:\eZeroOneTech\My Live Projects\Projects\HorakellEstate\eHorakelle\eZeroOne.Service\obj\Debug\eZeroOne.Service.csprojResolveAssemblyReference.cache
 E:\eZeroOneTech\My Live Projects\Projects\HorakellEstate\eHorakelle\eZeroOne.Service\obj\Debug\eZeroOne.Service.dll
 E:\eZeroOneTech\My Live Projects\Projects\HorakellEstate\eHorakelle\eZeroOne.Service\obj\Debug\eZeroOne.Service.pdb
+E:\eZeroOneTech\My Live Projects\Projects\HorakellEstate\gitWa\he\eHorakelle\eZeroOne.Service\bin\Debug\eZeroOne.Service.dll
+E:\eZeroOneTech\My Live Projects\Projects\HorakellEstate\gitWa\he\eHorakelle\eZeroOne.Service\bin\Debug\eZeroOne.Service.pdb
+E:\eZeroOneTech\My Live Projects\Projects\HorakellEstate\gitWa\he\eHorakelle\eZeroOne.Service\bin\Debug\EntityFramework.dll
+E:\eZeroOneTech\My Live Projects\Projects\HorakellEstate\gitWa\he\eHorakelle\eZeroOne.Service\bin\Debug\eZeroOne.Domain.dll
+E:\eZeroOneTech\My Live Projects\Projects\HorakellEstate\gitWa\he\eHorakelle\eZeroOne.Service\bin\Debug\eZeroOne.MailService.dll
+E:\eZeroOneTech\My Live Projects\Projects\HorakellEstate\gitWa\he\eHorakelle\eZeroOne.Service\bin\Debug\Mvc.Mailer.dll
+E:\eZeroOneTech\My Live Projects\Projects\HorakellEstate\gitWa\he\eHorakelle\eZeroOne.Service\bin\Debug\eZeroOne.Domain.pdb
+E:\eZeroOneTech\My Live Projects\Projects\HorakellEstate\gitWa\he\eHorakelle\eZeroOne.Service\bin\Debug\eZeroOne.MailService.pdb
+E:\eZeroOneTech\My Live Projects\Projects\HorakellEstate\gitWa\he\eHorakelle\eZeroOne.Service\bin\Debug\EntityFramework.xml
+E:\eZeroOneTech\My Live Projects\Projects\HorakellEstate\gitWa\he\eHorakelle\eZeroOne.Service\obj\Debug\eZeroOne.Service.csprojResolveAssemblyReference.cache
+E:\eZeroOneTech\My Live Projects\Projects\HorakellEstate\gitWa\he\eHorakelle\eZeroOne.Service\obj\Debug\eZeroOne.Service.dll
+E:\eZeroOneTech\My Live Projects\Projects\HorakellEstate\gitWa\he\eHorakelle\eZeroOne.Service\obj\Debug\eZeroOne.Service.pdb

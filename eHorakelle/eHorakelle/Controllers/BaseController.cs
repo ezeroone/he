@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Globalization;
+using System.Security;
 using System.Web.Mvc;
 
 namespace eZeroOne.eHorakelle.Controllers
 {
+    [assembly: AllowPartiallyTrustedCallers]
     public class BaseController : Controller
     {
         public class DateTimeBinder : IModelBinder

@@ -57,7 +57,7 @@
         <div class="booking-main">
 					
             <h4 class="title-style4" >Choose Your Dinings<span class="title-block"></span>
-                <input style="float:right" type="button" id="btnBook" class="button3" value="Continue booking"/>
+                <input style="float:right" type="button" class="button3 continueBooking" value="Continue booking"/>
             </h4>
 				
             @{
@@ -125,31 +125,35 @@
            
 
             </ul>
+
+            <div class="continueBooking-Bottom">
+                <input style="float:right" type="button" class="button3 continueBooking" value="Continue booking" /><br />
+            </div>
 					
         </div>
 				
     </div>
 			
     <div class="booking-side-wrapper">
-				
+
         <div class="booking-side clearfix">
-				
+
             <h4 class="title-style4">Your Reservation<span class="title-block"></span></h4>
-			
+
             <ul>
                 <li><span>Check in Date: </span> @String.Format("{0:ddd, MMM d, yyyy}", @tempData.CheckIn)</li>
                 <li><span>Check Out Date: </span> @String.Format("{0:ddd, MMM d, yyyy}", @tempData.CheckOut)</li>
-               
+
                 <li><span>No of Nights: </span> @dateDiff</li>
                 <li><span>Guests: </span> @tempData.Adult Adults</li>
                 <li><span>Below 12 years: </span>  @tempData.Children</li>
                 <li><span>Below 6 years: </span> @tempData.Below6Yrs</li>
             </ul>
-					
+
             <a href="/Property/ChooseDate" class="button3">Edit Reservation</a>
-					
+
         </div>
-				
+
     </div>
 			
     <!-- END .content-wrapper -->
@@ -158,7 +162,7 @@
 <script type="text/javascript">
     $(document).ready(function () {
         
-        $('#btnBook').click(function () {
+        $('.continueBooking').click(function () {
 
             var adult = '@tempData.Adult';
             var child = '@tempData.Children';

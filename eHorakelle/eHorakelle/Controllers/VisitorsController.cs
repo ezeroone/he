@@ -1,7 +1,9 @@
-﻿using System.Web.Mvc;
+﻿using System.Security;
+using System.Web.Mvc;
 
 namespace eZeroOne.eHorakelle.Controllers
 {
+    [assembly: AllowPartiallyTrustedCallers]
     public class VisitorsController : Controller
     {
         //

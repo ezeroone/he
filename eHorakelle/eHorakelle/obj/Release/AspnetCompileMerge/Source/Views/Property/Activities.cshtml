@@ -57,7 +57,7 @@
         <div class="booking-main">
 					
             <h4 class="title-style4" >Choose Your Activities<span class="title-block"></span>
-                <input style="float:right" type="button" id="btnBook" class="button3" value="Continue booking"/>
+                <input style="float:right" type="button" class="button3 continueBooking" value="Continue booking"/>
             </h4>
 				
             @{
@@ -88,7 +88,12 @@
                                         <span style="color:#00BFFF">Rate ($) :  @a.Rate /Person</span><br/>
                                         <span style="color:#00BFFF">Rate for Children($) :  @a.ChildRate /Child</span>
                                     </li>
-                                    <li><hr/></li>
+
+                                    @*if not the last item of the list*@
+                                    @if (a.Id != Model.Last().Id)
+                                    { 
+                                      <li><hr/></li>
+                                    }
                                 </ul>
                             </div>
                         }
@@ -122,9 +127,13 @@
                     </li>
                 }
                 
-                <li><hr/></li>
+                @*<li><hr/></li>*@
 
             </ul >
+        
+            <div class="continueBooking-Bottom">
+                <input style="float:right" type="button" class="button3 continueBooking" value="Continue booking" /><br />
+            </div>
         </div>
         <div>&nbsp;</div>
         <div class="booking-main">
@@ -148,8 +157,14 @@
                     </li>
                 }
             </ul>	
+
+            <div class="continueBooking-Bottom">
+                <input style="float:right" type="button" class="button3 continueBooking" value="Continue booking" /><br />
+            </div>
         </div>
-				
+		
+
+        		
     </div>
 			
     <div class="booking-side-wrapper">
@@ -180,7 +195,7 @@
 <script type="text/javascript">
     $(document).ready(function () {
         
-        $('#btnBook').click(function () {
+        $('.continueBooking').click(function () {
 
             var adult = '@tempData.Adult';
             var child = '@tempData.Children';

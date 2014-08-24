@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Security;
 using System.Web.Mvc;
 using System.Web.Security;
 using eZeroOne.Common;
@@ -13,6 +14,7 @@ using eZeroOne.eHorakelle.Models;
 
 namespace eZeroOne.eHorakelle.Controllers
 {
+    [assembly: AllowPartiallyTrustedCallers]
     public class AccountController : Controller
     {
         //
