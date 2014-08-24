@@ -3,127 +3,120 @@
 <!-- BEGIN #header-gmap -->
 <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
 <script type="text/javascript" src="/js/jquery-1.9.1.js"></script>
-		<div id="header-gmap">
-			
-			<div id="map-canvas"></div>
-			
-		<!-- END #header-gmap -->
-		</div>
-		
-		<!-- BEGIN #topbar -->
-		<div id="topbar">
-			
-			<!-- #topbar-wrapper -->
-			<div id="topbar-wrapper" class="clearfix">
-				
-				<!-- BEGIN .topbar-left -->
-				<div class="topbar-left">
-					
-					<a href="#" class="gmap-button"></a>
-					
-				<!-- END .topbar-left -->
-				</div>
-				
-				<!-- BEGIN .topbar-right -->
-				<div class="topbar-right clearfix">
-					
-				    <a href="/Property/ChooseDate" class="button0">Book Now</a>
+<div id="header-gmap">
 
-				    @*<ul id="language-selection">
-						<li><a href="#">English</a></li>
-					</ul>*@
+    <div id="map-canvas"></div>
 
-					@{
-					    var username = "Welcome "+@ViewBag.UserName + "!";
-					}
-				    <ul class="header-contact">
-                        <li>
-                            @if (User.Identity.IsAuthenticated)
-                            {
-                                @Html.Raw(username)
-                            }
-                        </li>
-				        <li class="phone_icon">+94 772-367 061</li>
-				        <li class="email_icon">email@horakelle.com</li>
-				    </ul>
-					
-				<!-- END .topbar-right -->
-				</div>
-			
-			<!-- END #topbar-right -->
-			</div>
-			
-		<!-- END #topbar -->
-		</div>
-		
-		<div role="banner">
-		
-			<!-- BEGIN .content-wrapper -->
-			<div class="content-wrapper clearfix">
-			
-				<!-- BEGIN #logo -->
-				<div id="logo">	
-					<h1><a href="/">Horakelle </a><span>Estate</span></h1>
-				<!-- END #logo -->
-				</div>
-				
-				<!-- .main-navigation -->
-				<nav class="main-navigation">
+    <!-- END #header-gmap -->
+</div>
 
-					<ul id="navigation">
-						<li class="current-menu-item current_page_item"><a href="/"><strong>Home<span>welcome</span></strong></a></li>
-						<li><a href="/Home/Rooms"><strong>Rooms<span>rates &amp; reservation</span></strong></a></li>
-						<li><a href="/Home/Terms"><strong>term & conditions<span>of this estate</span></strong></a></li>
-					    <li><a href="/Home/Contactus"><strong>Contact Us<span>get in touch</span></strong></a></li>
-                        @*<li><a href="/Home/VisitorRegistration"><strong>Registration<span>to have full access</span></strong></a></li>*@
+<!-- BEGIN #topbar -->
+<div id="topbar">
 
-					    @if (User.Identity.IsAuthenticated)
+    <!-- #topbar-wrapper -->
+    <div id="topbar-wrapper" class="clearfix">
+
+        <!-- BEGIN .topbar-left -->
+        <div class="topbar-left">
+
+            <a href="#" class="gmap-button"></a>
+
+            <!-- END .topbar-left -->
+        </div>
+
+        <!-- BEGIN .topbar-right -->
+        <div class="topbar-right clearfix">
+
+            <a href="/Property/ChooseDate" class="button0">Book Now</a>
+
+            @*<ul id="language-selection">
+                    <li><a href="#">English</a></li>
+                </ul>*@
+            <ul class="header-contact">
+                <li>               
+                    @Html.Action("UserLogonInfo", "Account")
+                 </li>
+                <li class="phone_icon">+94 772-367 061</li>
+                <li class="email_icon">email@horakelle.com</li>
+            </ul>
+
+            <!-- END .topbar-right -->
+        </div>
+
+        <!-- END #topbar-right -->
+    </div>
+
+    <!-- END #topbar -->
+</div>
+
+<div role="banner">
+
+    <!-- BEGIN .content-wrapper -->
+    <div class="content-wrapper clearfix">
+
+        <!-- BEGIN #logo -->
+        <div id="logo">
+            <h1><a href="/">Horakelle </a><span>Estate</span></h1>
+            <!-- END #logo -->
+        </div>
+
+        <!-- .main-navigation -->
+        <nav class="main-navigation">
+
+            <ul id="navigation">
+                <li class="current-menu-item current_page_item"><a href="/"><strong>Home<span>welcome</span></strong></a></li>
+                <li><a href="/Home/Rooms"><strong>Rooms<span>rates &amp; reservation</span></strong></a></li>
+                <li><a href="/Home/Terms"><strong>term & conditions<span>of this estate</span></strong></a></li>
+                <li><a href="/Home/Contactus"><strong>Contact Us<span>get in touch</span></strong></a></li>
+                @*<li><a href="/Home/VisitorRegistration"><strong>Registration<span>to have full access</span></strong></a></li>*@
+
+                @if (User.Identity.IsAuthenticated)
                         {
-                           <li><a href="/Account/Logout"><strong>Logout<span>Logout</span></strong></a></li>
+                    <li><a href="/Account/Logout"><strong>Logout<span>Logout</span></strong></a></li>
                         }
                         else
                         {
-                           <li><a href="/Account/Login"><strong>Login<span>to have full access</span></strong></a></li>
+                    <li><a href="/Account/Login"><strong>Login<span>to have full access</span></strong></a></li>
                         }
 
-					</ul>
-				
-				<!-- .main-navigation -->
-				</nav>
-				
-				<!-- BEGIN .mobile-menu-wrapper -->
-				<div class="mobile-menu-wrapper clearfix">
-					<div class="mobile-menu-button"></div>
-					<div class="mobile-menu-title">Navigation</div>
-					
-					<!-- mobile-menu-inner -->
-					<div class="mobile-menu-inner">
-						<ul id="mobile-menu">
-							<li class="current-menu-item current_page_item"><a href="/">Home</a></li>
-							<li><a href="/Home/Rooms">Rooms</a></li>
-						    <li><a href="#"><strong>term & conditions<span>of this estate</span></strong></a></li>
-						
-						    <li><a href="#"><strong>Contact Us<span>get in touch</span></strong></a></li>
-                            @*<li><a href="/Home/VisitorRegistration"><strong>Registration<span>to have full access</span></strong></a></li>*@
+            </ul>
 
-                            @if (User.Identity.IsAuthenticated)
+            <!-- .main-navigation -->
+        </nav>
+
+        <!-- BEGIN .mobile-menu-wrapper -->
+        <div class="mobile-menu-wrapper clearfix">
+            <div class="mobile-menu-button"></div>
+            <div class="mobile-menu-title">Navigation</div>
+
+            <!-- mobile-menu-inner -->
+            <div class="mobile-menu-inner">
+                <ul id="mobile-menu">
+                    <li class="current-menu-item current_page_item"><a href="/">Home</a></li>
+                    <li><a href="/Home/Rooms">Rooms</a></li>
+                    <li><a href="#"><strong>term & conditions<span>of this estate</span></strong></a></li>
+
+                    <li><a href="#"><strong>Contact Us<span>get in touch</span></strong></a></li>
+                    @*<li><a href="/Home/VisitorRegistration"><strong>Registration<span>to have full access</span></strong></a></li>*@
+
+                    @if (User.Identity.IsAuthenticated)
                             {
-                                <li><a href="/Account/Logout"><strong>Logout<span>Logout</span></strong></a></li>
+                        <li><a href="/Account/Logout"><strong>Logout<span>Logout</span></strong></a></li>
                             }
                             else
                             {
-                                <li><a href="/Account/Login"><strong>Login<span>to have full access</span></strong></a></li>
+                        <li><a href="/Account/Login"><strong>Login<span>to have full access</span></strong></a></li>
                             }
-                        
-						<!-- END #main-menu -->
-						</ul>
-					<!-- mobile-menu-inner -->
-					</div>
 
-				<!-- END .mobile-menu-wrapper -->
-				</div>
+                    <!-- END #main-menu -->
+                </ul>
+                <!-- mobile-menu-inner -->
+            </div>
 
-			<!-- END .content-wrapper -->
-			</div>
-		
-		</div>
+            <!-- END .mobile-menu-wrapper -->
+        </div>
+
+        <!-- END .content-wrapper -->
+    </div>
+
+</div>

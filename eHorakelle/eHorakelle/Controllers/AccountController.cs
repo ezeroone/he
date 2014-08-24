@@ -88,9 +88,9 @@ namespace eZeroOne.eHorakelle.Controllers
                 var userEmail = User.Identity.Name;
                 var user = _userService.GetUser(userEmail, 1);
                 if (user != null)
-                    userModel.UserName = string.Format("{0} {1}", user.FirstName.ToUpper(), user.LastName.ToUpper());
-
+                    userModel.UserName = string.Format("{0} {1}", user.FirstName, user.LastName);
             }
+
             return PartialView(userModel);
         }
 

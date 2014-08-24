@@ -1,2 +1,9 @@
-﻿<strong>  Welcome @ViewBag.UserName !</strong>
+﻿@model eZeroOne.eHorakelle.Models.LoginUserDetails
+
+@if (Model != null)
+{
+     @:Welcome <strong>@Model.UserName !</strong>
+}
+
+
    
