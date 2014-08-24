@@ -1403,11 +1403,6 @@ namespace eZeroOne.eHorakelle.Controllers
                 ViewBag.PriceBreakDowns = GetPriceBreakDowns(checkIn, checkOut, adult, child, yrsbelow, booingModel.Rooms, booingModel.ExtraBeds, booingModel.DiningsByDays,
                                               booingModel.ActivitiesByDays,booingModel.Transports);
 
-                ////var totPrice = ViewBag.TotalPrice;
-                ////var afterDicount=   ViewBag.AfterDiscountPrice;
-                //model.TotalAmount = 5;//(decimal)totPrice;
-                //model.DiscountAmount = 1;// (decimal)totPrice - (decimal)afterDicount;
-
                 var totPrice = ViewBag.TotalPrice;
                 var afterDicount = ViewBag.AfterDiscountPrice;
                 model.TotalAmount = (decimal)totPrice;
@@ -1508,17 +1503,18 @@ namespace eZeroOne.eHorakelle.Controllers
                     if (booingModel.Rooms.Any())
                     {
                         var totPrice = ViewBag.TotalPrice;
-                        var afterDiscount = ViewBag.AfterDiscountPrice;
+                        var payingAmount = ViewBag.AfterDiscountPrice;
+                        var discountAmount = totPrice - payingAmount;
+
                         model.TotalAmount = (decimal)totPrice;
-                        model.DiscountAmount = (decimal)totPrice - (decimal)afterDiscount;
-                        var payingAmount=(decimal)totPrice - (decimal)afterDiscount;
+                        model.DiscountAmount = (decimal)discountAmount;
 
                         var invoice = new Invoice();
                         var paidAmount = model.PayFull?totPrice:payingAmount;
 
                        var booked= Booking(booingModel.CheckIn.ToShortDateString(), booingModel.CheckOut.ToShortDateString(),
                                 booingModel.Adult, booingModel.Children, booingModel.Below6Yrs,
-                                booingModel.Rooms.Count(), totPrice, paidAmount, afterDiscount, 0, 2, out invoice);
+                                booingModel.Rooms.Count(), totPrice, payingAmount, discountAmount, 0, 2, out invoice);
 
                        if (booked && invoice.Id> 0)
                         {
@@ -1532,7 +1528,41 @@ namespace eZeroOne.eHorakelle.Controllers
                     
                         }
 
-                       return RedirectToAction("PayPalPayment", new { checkIn = booingModel.CheckIn.ToShortDateString(), checkOut = booingModel.CheckOut.ToShortDateString(), userName = model.ItemDescription, amount = model.TotalAmount,companyId=1, invoiceId = invoice.Id });
+                       // Email user invoice, before goging to payment
+
+                       #region Email Invoice
+
+                       var emailInvoice = new EmailInvoiceDetails();
+                       emailInvoice.CustomerName = model.FirstName + " " + model.LastName;
+                       emailInvoice.Email = model.Email;
+                       emailInvoice.InvoiceId = invoice.Id.ToString();
+                       emailInvoice.InvoicedDate = DateTime.Now;
+                       emailInvoice.TotalAmount = invoice.TotalAmount;
+                       emailInvoice.TotalDiscount = invoice.Discount;
+                       emailInvoice.TotalTax = invoice.Tax;
+                       emailInvoice.BillAmount = invoice.BillAmount;
+
+                       var daywisebilling = (List<DayWiseRate>)ViewBag.PriceBreakDowns;
+                       foreach (var dayitem in daywisebilling)
+                       {
+                           var newItem = new ItemDetails()
+                           {
+                               Discount = 0,
+                               ItemName = dayitem.Date.ToShortDateString(),
+                               Price = dayitem.Rate,
+                               Qty = 1,
+                               Tax = 0,
+                               Total = dayitem.Rate
+                           };
+
+                           emailInvoice.ItemDetails.Add(newItem);
+                       }
+
+                       EmailService.SendInvoiceDetails(emailInvoice);
+
+                       #endregion
+
+                        return RedirectToAction("PayPalPayment", new { checkIn = booingModel.CheckIn.ToShortDateString(), checkOut = booingModel.CheckOut.ToShortDateString(), userName = model.ItemDescription, amount = model.TotalAmount,companyId=1, invoiceId = invoice.Id });
          
                     }
                     

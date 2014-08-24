@@ -4,152 +4,236 @@
 <#@ import namespace="System.Text" #>
 <#@ import namespace="System.Collections.Generic" #>
 
-
-<!DOCTYPE HTML>
+<!doctype html>
 <html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>customer's invoice</title>
-<link href='http://fonts.googleapis.com/css?family=Lobster|Terminal+Dosis' rel='stylesheet' type='text/css'>
-<link href='https://fonts.googleapis.com/css?family=Ubuntu:300,400,500,700|Lobster' rel='stylesheet' type='text/css'>
-<link href='https://fonts.googleapis.com/css?family=Roboto:regular,medium,thin,italic,mediumitalic' rel='stylesheet' type='text/css'>
-<link href='https://fonts.googleapis.com/css?family=Lobster|Lobster+Two' rel='stylesheet' type='text/css'>
+	<head>
+		<meta charset="utf-8">
+		<title>Invoice</title>
+		<style type="text/css">
+        *
+{
+	border: 0;
+	box-sizing: content-box;
+	color: inherit;
+	font-family: inherit;
+	font-size: inherit;
+	font-style: inherit;
+	font-weight: inherit;
+	line-height: inherit;
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	text-decoration: none;
+	vertical-align: top;
+}
 
-</head>
+/* heading */
 
-<body style="font-family: 'Roboto',Arial, Helvetica, sans-serif; font-size: 12px; text-transform:lowercase;">
+h1 { font: bold 100% sans-serif; letter-spacing: 0.5em; text-align: center; text-transform: uppercase; }
 
-<table width="600px" border="0" cellpadding="0" cellspacing="0" style="margin-left: auto; margin-right: auto; margin-top: 100px;">
-  <tr style="width:100%">
-     <td colspan="2">
-           <div style="background-color:#00A0DC;  font-size: 1px;line-height: 0.8em;height: 15px;">&nbsp;-</div>
-        </td>
-    </tr>
-    <tr style="background-color:#FFF; text-align: left">
-    	<td valign="top" style="padding-left: 20px; padding-right: 20px; padding-top: 30px; padding-bottom: 20px;background-color:#FFF;">
-        	<h1 style="color:#00A0DC; font-size: 16px; font-weight: bold;">globalspices online shopping</h1>
-            <h2 style="color:#333; font-size: 14px; font-weight: bold;">Customer Invoice :: 
-			<# WriteLine(Invoice.CustomerName); #>
-			
-			</h2>
-			
-        </td>
-        <td valign="top" style="text-align:right; padding-right: 20px;padding-top:30px;background-color:#FFF;">
-        	<img src="~/Content/images/logo.gif" width="44" height="44" alt="">
-        </td>
-    </tr>
-    
-    <tr style="background-color:#FFF; text-align: left">
-    	<td  style="padding-left: 20px; padding-right: 20px; padding-top: 0px;font-size: 14px;">
-        	<b>
-			Invoice Number :<# WriteLine(Invoice.InvoiceId); #>
-			</b>
-			
-        </td>
-		<td style="padding-left: 20px; padding-right: 20px; padding-top: 0px;font-size: 14px;">
-        	<b>
-			Invoice Date :<# WriteLine(Invoice.InvoicedDate.ToLongDateString()); #>
-			</b>
-			
-        </td>
-    </tr>
-    <tr> <td>&nbsp;</td> <td>&nbsp;</td>  </tr>
-   <tr> <td>&nbsp;&nbsp;</td> <td>&nbsp;&nbsp;&nbsp;</td>  </tr>
-    <tr style="background-color:#FFF; text-align: left">
-   	  <td colspan="2" style="padding-left: 20px; padding-right: 20px; padding-top: 0px; padding-bottom: 10px">
-          
-		  <table class="table table-bordered">
-              <thead>
-                <tr>
-                  <th style="width:150px;">Product</th>
-				  <th style="width:150px;">Price</th>
-                  <th style="width:150px;">Quantity</th>
-				  <th style="width:150px;">Discount %</th>
-                  <th style="width:150px;">Tax</th>
-				  <th style="width:150px;">Total</th>
-                  
+/* table */
+
+table { font-size: 75%; table-layout: fixed; width: 100%; }
+table { border-collapse: separate; border-spacing: 2px; }
+th, td { border-width: 1px; padding: 0.5em; position: relative; text-align: left; }
+th, td { border-radius: 0.25em; border-style: solid; }
+th { background: #EEE; border-color: #BBB; }
+td { border-color: #DDD; }
+
+/* page */
+
+html { font: 16px/1 'Open Sans', sans-serif; overflow: auto; padding: 0.5in; }
+html { background: #999; cursor: default; }
+
+body { box-sizing: border-box; margin: 0 auto; overflow: hidden; padding: 0.5in; width: 8.5in; }
+body { background: #FFF; border-radius: 1px; box-shadow: 0 0 1in -0.25in rgba(0, 0, 0, 0.5); }
+
+/* header */
+
+header { margin: 0 0 3em; }
+header:after { clear: both; content: ""; display: table; }
+
+header h1 { background: #000; border-radius: 0.25em; color: #FFF; margin: 0 0 1em; padding: 0.5em 0; }
+header address { float: left; font-size: 75%; font-style: normal; line-height: 1.25; margin: 0 1em 1em 0; }
+header address p { margin: 0 0 0.25em; }
+header span, header img { display: block; float: right; }
+header span { margin: 0 0 1em 1em; max-height: 25%; max-width: 60%; position: relative; }
+header img { max-height: 100%; max-width: 100%; }
+header input { cursor: pointer; -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=0)"; height: 100%; left: 0; opacity: 0; position: absolute; top: 0; width: 100%; }
+
+/* article */
+
+article, article address, table.meta, table.inventory { margin: 0 0 3em; }
+article:after { clear: both; content: ""; display: table; }
+article h1 { clip: rect(0 0 0 0); position: absolute; }
+
+article address { float: left; font-size: 125%; font-weight: bold; }
+
+/* table meta & balance */
+
+table.meta, table.balance { float: right; width: 36%; }
+table.meta:after, table.balance:after { clear: both; content: ""; display: table; }
+
+/* table meta */
+
+table.meta th { width: 40%; }
+table.meta td { width: 60%; }
+
+/* table items */
+
+table.inventory { clear: both; width: 100%; }
+table.inventory th { font-weight: bold; text-align: center;  width: 10%; }
+table.inventory th:nth-child(1) { width: auto; }
+
+table.inventory td { text-align: right; }
+table.inventory td:nth-child(1) { text-align: left; }
+table.inventory td:nth-child(3), table.inventory td:nth-child(4) { text-align: center; }
+
+/* table balance */
+
+table.balance th, table.balance td { width: 50%; }
+table.balance td { text-align: right; }
+
+/* aside */
+
+aside h1 { border: none; border-width: 0 0 1px; margin: 0 0 1em; }
+aside h1 { border-color: #999; border-bottom-style: solid; }
+
+
+@media print {
+	* { -webkit-print-color-adjust: exact; }
+	html { background: none; padding: 0; }
+	body { box-shadow: none; margin: 0; }
+	span:empty { display: none; }
+}
+
+@page { margin: 0; }
+        </style>
+
+	</head>
+	<body>
+		<header>
+			<h1>Invoice</h1>
+			<address >
+				<p><# WriteLine(Invoice.CustomerName); #></p>
+				<p><# WriteLine(Invoice.Address); #></p>
+				<p><# WriteLine(Invoice.Telephone); #></p>
+			</address>
+			<span><img alt="" src="data:image/jpg;base64,iVBORw0KGgoAAAANSUhEUgAAAOgAAAA9CAYAAACnWiXkAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJ
+bWFnZVJlYWR5ccllPAAAAyJpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdp
+bj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6
+eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0
+NTY2MSwgMjAxMi8wMi8wNi0xNDo1NjoyNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJo
+dHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlw
+dGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAv
+IiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RS
+ZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpD
+cmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNiAoV2luZG93cykiIHhtcE1NOkluc3RhbmNl
+SUQ9InhtcC5paWQ6NzdFQTlCREJDMzBCMTFFM0E5RTQ5MDk2MEExREExNDkiIHhtcE1NOkRvY3Vt
+ZW50SUQ9InhtcC5kaWQ6NzdFQTlCRENDMzBCMTFFM0E5RTQ5MDk2MEExREExNDkiPiA8eG1wTU06
+RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo3N0VBOUJEOUMzMEIxMUUzQTlF
+NDkwOTYwQTFEQTE0OSIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDo3N0VBOUJEQUMzMEIxMUUz
+QTlFNDkwOTYwQTFEQTE0OSIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1w
+bWV0YT4gPD94cGFja2V0IGVuZD0iciI/Pu5zuO0AAAdDSURBVHja7F3dcds4EEYyeQ9vJu+hKohS
+QegKpFRgugJZFViuQHYFpiuwXIHoCkJXEObdD+pARySLO56OWPwQJEXp+2Y4joc0Aezut7v4Webd
+fr8XAAAcJ95DBAAAggIAAIICAAgKAAAICgAACAoAICgAACAoAICgAACAoAAAgKAAAIICAOCFDzYP
+fZrOkurHN83tl+rKPdpOq+uz5t5jdZVQTyvE1XV5gvLV2c2v6so0f8PZ722bzrwVz8MTlAa30txb
+eRL0kgSnIz0I2p6gqxOUr85ucoagnP3eHvNgkeICAAgKAAAICgAgKAAAICgAACAoAICgAAB44cMJ
+jmlKV30zW25iF3R1hUj82Z/7Qr+/ij97czvLv1X9/nhwT/a9FH57zceApGFcah+2HOF4Yrp+H3z4
+NJ3V70mdl2/FcwGC/p+Ui+qak7HrIMmyEX82p12MYyuaN8cviDiy3QdN21l1LTVEnVO/E8t+yL7f
+d0zWlMaigxzPlYUR39C7OBQ0nmwENnZNuopND1ak/cfOKrK2ckJjT3EjMqYfZAyRxfPyuZ/VtbZ4
+3gaSZE/Mu1JNP57oShzb2hoI1NbRtSXnDck3dWjvJ/37WJ3/D7KX2MEuf9tZRdb0XAk6rRHT1yNu
+W5I0tiBLU5q7JbJ1FeV85bk1RLul4R2yTytPOW5b6LLLdHbb0nk8tCHp+xGTc+vg0Uwk9yWpTRTO
+GyJMiGiROkZfk8fnnFVB6fzOQM60ZR8ejiySPgTKstYVSb3eE2IOuvL0ml0KrqA5gPKC3NxUecmv
+nkZlwvNBWysDmfODlJYz2MsA89EQ5Lw2kNNFH0+ki93A5OQc4I7kXtRkOGcChrqfDUHQvsFFICm4
+7w1Gu6RolzKRVL63TWVDSUa4qxmhEP9dOV4wf3/R0O/b2hxX51xCkHPKjMlEzohkF0ofMclp6CqT
+hUEmvxd/auVmyypKrslZNeHzOaS4ESOAncbI1T25uHFniAK+6Yz0jBMyvFtqa9KwoDJnshBdJNzU
+ok+TY2mVelk4O1MkSxm5mfSRMe8ceu6pk8uV0OwAVGRdMvLy0tXYIiiXGi2FeZ9zyaQiauXtziNy
+LjVGeEisSS1tUgXE8vdHQxuFhtxt5kfcnFE5O5v9vEvGadnoI2UIUgxkZ1Knf1EfpIy/0M/YYkpR
+aFLj6BwIOmMEapvf3wr9CujMg6CZ43wpP/hpk8pFgeW4YKK5CzkjJjLYfGpAzeUSjS6KAW1tV9PR
+JvC6RK8ELYXfiZCpx2DmTBpoiw1D0MRjHC8dplgz6lMc+P1zg3wKBx1ydmHrsJIO0vdeUM07pwe6
+OjqCZp4T+q0jITiFvTp6xpIx+tjR4eQBZJhQyquUHQ9oczLlvLck6dQwv7V1Rn1kDaHWQBJKeRPP
+IHOyKW4UwFvXnw9F0DZEmIl2Bxa6wprSXBM+GpxOW6d1LHaX0ly796h+iofl+15M8Entj21Dvokc
+c8epwymCO2PdC1Bu1i9B1QkoG3LK1FkuWMmtjtVAUTQ6Y93KqPlkIQO1mCR19FUELmT4cCJkcJ2z
+xYGjoi04b1xSxHpuUPKXjvqTUbsrjYzaHBi4GDE5Y8McWs7P5dZYflhadlB+BoJ6GHDEEHTXIUG5
+Y3uSKFc9y7PeZqqRybXgP3L9YtBXOVKCLhhHyh2wOPsUN2eM34Uoru8PgW+MIZvIGXVITsG0Hxki
+SWlI58eKhJFb1qeuxkbQZyYlSS3fcePx/hCYtkipk8B9eWxwTJzzSzyi5MIyldzTvHxLzuCGieh9
+wUtXVLEyPWeCbgyLGibhrA3pbXZExlAnZx/R6MogNy4a6/qdWuhDPZtQSr0SA6+cttDVInSDYyNo
+yRiEqsxINPcehP6gvcSyh74Lpm86I3/qUbZ3jGFeW0bjOjiZXzPTDRnNi4HtTJdNpJroqZxLUIxx
+H1QdeI8YkrrUHyqD6Dp6vjARRaV09+LfcrVLy9Q2CTh3vhX66pQb0XzuuBR8TfCaIktOz5pqJ1U/
+hl7rSBmn8005JjrqZ/OtouRcCKoOc3NFxlOHtFCS+XtP6Tm3t5h4KjEKLNulJqKrus+mTONe8KvU
+LmsEd2L4Lxg+GvqbCo+SODlHfSuenQrRx3pQwabKv8/32Bq/71ZKycy/Z4H7mTHp5bWGhC4VMKa2
+l0dgX7lwr2qySc+dj3WO+SSRFMKkRWoqFdD3pzU2HiTdUD/vGaWHXlDhSLI2ZDa+xwNXov+9YJMM
+XG1rVUVITgaX50TQelSaCLu6TLVSOxnQU2fC7khYTgavvmqQa8YXifCrhzljZInga0m/U78zS/0p
+fRzjf6R7ReMpLXQ6qcipxqDbrkvof6u3xrv9ft9qBKGPNgXAUF+W90FMfa2fhHqlfpbiNJDQOA/1
+UYpxfS2/ya7kwl/hOq/slaAAAHQHVLMAAAgKAAAICgAgKAAAICgAACAoAICgAACAoAAAggIAAIIC
+AACCAsBR428BBgB3F8VSXU+pMwAAAABJRU5ErkJggg=="></span>
+		</header>
+		<article>
+			<table class="meta">
+				<tr>
+					<th><span>Invoice #</span></th>
+					<td><span><# WriteLine(Invoice.InvoiceId); #></span></td>
 				</tr>
-              </thead>
+				<tr>
+					<th><span>Date</span></th>
+					<td><span><# WriteLine(Invoice.InvoicedDate.ToShortDateString()); #></span></td>
+				</tr>
+				<tr>
+					<th><span>Amount Due</span></th>
+					<td><span>$</span><span><# WriteLine(Invoice.BillAmount.ToString()); #></span></td>
+				</tr>
+			</table>
+			<table class="inventory">
+				<thead>
+					<tr>
+						<th><span>Item</span></th>
+						<th><span>Price</span></th>
+						<th><span>Quantity</span></th>
+						<th><span>Discount (%)</span></th>
+						<th><span>Tax</span></th>
+						<th><span>Total</span></th>
+					</tr>
+				</thead>
+				<tbody>
+					<# foreach (var item in Invoice.ItemDetails)
+					{#>
+					<tr>
+						<td><span><# WriteLine(item.ItemName); #></span></td>
+						<td><span data-prefix>%</span><span><# WriteLine(item.Price.ToString()); #></span></td>
+						<td><span><# WriteLine(item.Qty.ToString()); #></span></td>
+						<td><span><# WriteLine(item.Discount.ToString()); #></span></td>
+						<td><span data-prefix>$</span><span><# WriteLine(item.Tax.ToString()); #></span></td>
+						<td><span data-prefix>$</span><span><# WriteLine(item.Total.ToString()); #></span></td>
+					</tr>
+					<#}#>
+				</tbody>
+			</table>
 
-  				<# foreach (var item in Invoice.ItemDetails)
-					{
-						
-						WriteLine("<tr>");
-						WriteLine("<td style=\"width:150px;\">");
-						WriteLine("<span style=\"display: block; color: #3F3126; font-size: 12px; font-weight: bold; padding-top: 0px; padding-bottom: 4px;\">{0}</span>", new object[]{item.ItemName});
-						WriteLine("</td>");
-
-						WriteLine("<td style=\"width:150px;\">");
-						WriteLine("<span style=\"display: block; color: #3F3126; font-size: 12px; font-weight: bold; padding-top: 0px; padding-bottom: 4px;\">${0}</span>", new object[]{item.Price.ToString("0.00")});
-						WriteLine("</td>");
-
-						WriteLine("<td style=\"width:150px;\">");
-						WriteLine("<span style=\"display: block; color: #3F3126; font-size: 12px; font-weight: bold; padding-top: 0px; padding-bottom: 4px;\">{0}</span>", new object[]{item.Qty.ToString("0.00")});
-						WriteLine("</td>");
-
-						WriteLine("<td style=\"width:150px;\">");
-						WriteLine("<span style=\"display: block; color: #3F3126; font-size: 12px; font-weight: bold; padding-top: 0px; padding-bottom: 4px;\">{0}</span>", new object[]{item.Discount.ToString("0.00")});
-						WriteLine("</td>");
-
-						WriteLine("<td style=\"width:150px;\">");
-						WriteLine("<span style=\"display: block; color: #3F3126; font-size: 12px; font-weight: bold; padding-top: 0px; padding-bottom: 4px;\">${0}</span>", new object[]{item.Tax.ToString("0.00")});
-						WriteLine("</td>");
-
-						WriteLine("<td style=\"width:150px;\">");
-						WriteLine("<span style=\"display: block; color: #3F3126; font-size: 12px; font-weight: bold; padding-top: 0px; padding-bottom: 4px;\">${0}</span>", new object[]{item.Total.ToString("0.00")});
-						WriteLine("</td>");
-
-						
-						WriteLine("</tr>");
-				  }
-					#>
-
-			    <tr>
-                  <td colspan="5" style="text-align:right"><b>Total Price:</b>	</td>
-                  <td>
-				  $<# WriteLine(Invoice.TotalAmount.ToString("0.00")); #>
-						
-				  </td>
-                </tr>
-				 <tr>
-                  <td colspan="5" style="text-align:right"><b>Total Discount:</b>	</td>
-                   <td> 
-				    $<# WriteLine(Invoice.TotalDiscount.ToString("0.00")); #>
-				   
-				   </td>
-                </tr>
-                 <tr>
-                  <td colspan="5" style="text-align:right"><b>Total Tax:	</b></td>
-                  <td>
-				  
-				   $<# WriteLine(Invoice.TotalTax.ToString("0.00")); #>
-				   
-				  </td>
-                </tr>
-				 <tr>
-                  <td colspan="5" style="text-align:right"><b>Total Bill Amount:	</b></td>
-                  <td>
-				   $<# WriteLine(Invoice.BillAmount.ToString("0.00")); #>
-				    <span>==========</span>
-				  </td>
-                </tr>
-
-               </table>         
-        </td>
-    </tr>
-    
-    <tr style="background-color:#FFF; text-align: left;">
-    	<td colspan="2" style="padding-top: 0px; padding-bottom: 30px; padding-left: 20px; padding-right: 20px;">
-       		<a href="http://globalspices.com.au/" target="_blank" style="text-decoration: none; color:#00A0DC;font-size: 12px; ">more shopping...</a></td>
-    </tr>
-    
-    <tr style="background-color:#CECECE; text-align: left;">
-    	<td colspan="2" style="padding: 20px; color: #FFF; font-size: 10px">
-       	</td>
-    </tr>
-    
-</table>
-
-
-</body>
+			<table class="balance">
+				<tr>
+					<th><span >Total</span></th>
+					<td><span data-prefix>$</span><span><# WriteLine(Invoice.TotalAmount.ToString()); #></span></td>
+				</tr>
+				<tr>
+					<th><span >Total Discount</span></th>
+					<td><span data-prefix>$</span><span ><# WriteLine(Invoice.TotalDiscount.ToString()); #></span></td>
+				</tr>
+				<tr>
+					<th><span >Total Tax</span></th>
+					<td><span data-prefix>$</span><span><# WriteLine(Invoice.TotalTax.ToString()); #></span></td>
+				</tr>
+				<tr>
+					<th><span >Total Bill Amount</span></th>
+					<td><span data-prefix>$</span><span><# WriteLine(Invoice.BillAmount.ToString()); #></span></td>
+				</tr>
+			</table>
+		</article>
+		<aside>
+			<h1><span >Additional Notes</span></h1>
+			<div >
+				<p>A finance charge of 1.5% will be made on unpaid balances after 30 days.</p>
+			</div>
+		</aside>
+	</body>
 </html>

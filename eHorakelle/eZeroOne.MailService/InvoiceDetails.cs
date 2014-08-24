@@ -38,6 +38,14 @@ namespace eZeroOne.MailService
         public decimal BillAmount { get; set; }
 
         public List<ItemDetails> ItemDetails { get; set; }
+
+
+        public EmailInvoiceDetails()
+        {
+            this.ItemDetails = new List<ItemDetails>();
+        }
+
+
     }
     public class ItemDetails
     {

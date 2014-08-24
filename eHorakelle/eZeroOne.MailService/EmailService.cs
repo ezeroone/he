@@ -41,27 +41,10 @@ namespace eZeroOne.MailService
             }
             else
             {
-                //string user = "navaseelan@ezeroonetech.com";
-                //string password = "nava1qaz!";
-                //var loginInfo = new NetworkCredential(user, password);
-                //var smtpClient = new SmtpClient("mail.ezeroonetech.com", 25)
-                string user = "riza@besthomestaylanka.com";
-                string password = "riza123!";
-                var loginInfo = new NetworkCredential(user, password);
-                var smtpClient = new SmtpClient("mail.besthomestaylanka.com", 25)
+                using (var smtpClient = new SmtpClient())
                 {
-                    EnableSsl = false,
-                    UseDefaultCredentials = false,
-                    Credentials = loginInfo,
-
-                };
-
-                smtpClient.Send(message);
-
-                //using (var emailClient = new SmtpClient())
-                //{
-                //    emailClient.Send(message);
-                //}
+                    smtpClient.Send(message);
+                }
             }
            
         }
@@ -441,13 +424,13 @@ namespace eZeroOne.MailService
             }
         }
 
-        public static void SendInvoiceDetails(string emailAddress, EmailInvoiceDetails invoice)
+        public static void SendInvoiceDetails(EmailInvoiceDetails invoice)
         {
-            var subject = "Globalspices invoice";
+            var subject = "Horakelle Invoice";
             var from = new MailAddress("donotreply.ezeroone@gmail.com");
             var to = new MailAddress(invoice.Email);
-
-            var copyTo = new MailAddress(invoice.CompanyEmail);
+            MailAddress copyTo = null;
+            if (!string.IsNullOrEmpty(invoice.CompanyEmail)) { copyTo = new MailAddress(invoice.CompanyEmail); }
 
             var mailTemplate = new CustomerInvoice() { Invoice = invoice };
             var message = new MailMessage(from, to)
@@ -457,10 +440,9 @@ namespace eZeroOne.MailService
                 Priority = MailPriority.High,
                 Body = mailTemplate.TransformText()
             };
-
-            message.CC.Add(copyTo);
+            if (copyTo != null) { message.CC.Add(copyTo); }
+           
             SendEmail(message, false);
-            
         }
 
         public static void SendInvoiceDetails(string emailAddress,  string body)
