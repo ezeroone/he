@@ -2,7 +2,11 @@
 @using eZeroOne.eHorakelle.Models
 @{
     var url = ViewBag.YoutubeUrls;
-    var property = (PropertyModel)ViewBag.Property;
+    var property = new PropertyModel()
+    {
+        Latitude = (decimal)7.0800000000,
+        Longitude = (decimal)79.9700000000
+    };
 }
 <!-- BEGIN #footer -->
 <div id="footer">

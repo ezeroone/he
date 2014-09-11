@@ -161,12 +161,3 @@ E:\eZeroOneTech\My Live Projects\Projects\HorakellEstate\eHorakelle\eZeroOne.Dom
 E:\eZeroOneTech\My Live Projects\Projects\HorakellEstate\eHorakelle\eZeroOne.Domain\obj\Debug\eZeroOne.Domain.csprojResolveAssemblyReference.cache
 E:\eZeroOneTech\My Live Projects\Projects\HorakellEstate\eHorakelle\eZeroOne.Domain\obj\Debug\eZeroOne.Domain.dll
 E:\eZeroOneTech\My Live Projects\Projects\HorakellEstate\eHorakelle\eZeroOne.Domain\obj\Debug\eZeroOne.Domain.pdb
-E:\eZeroOneTech\My Live Projects\Projects\HorakellEstate\gitWa\he\eHorakelle\eZeroOne.Domain\bin\Debug\eZeroOne.Domain.dll
-E:\eZeroOneTech\My Live Projects\Projects\HorakellEstate\gitWa\he\eHorakelle\eZeroOne.Domain\bin\Debug\eZeroOne.Domain.pdb
-E:\eZeroOneTech\My Live Projects\Projects\HorakellEstate\gitWa\he\eHorakelle\eZeroOne.Domain\bin\Debug\EntityFramework.dll
-E:\eZeroOneTech\My Live Projects\Projects\HorakellEstate\gitWa\he\eHorakelle\eZeroOne.Domain\bin\Debug\eZeroOne.Common.dll
-E:\eZeroOneTech\My Live Projects\Projects\HorakellEstate\gitWa\he\eHorakelle\eZeroOne.Domain\bin\Debug\eZeroOne.Common.pdb
-E:\eZeroOneTech\My Live Projects\Projects\HorakellEstate\gitWa\he\eHorakelle\eZeroOne.Domain\bin\Debug\EntityFramework.xml
-E:\eZeroOneTech\My Live Projects\Projects\HorakellEstate\gitWa\he\eHorakelle\eZeroOne.Domain\obj\Debug\eZeroOne.Domain.csprojResolveAssemblyReference.cache
-E:\eZeroOneTech\My Live Projects\Projects\HorakellEstate\gitWa\he\eHorakelle\eZeroOne.Domain\obj\Debug\eZeroOne.Domain.dll
-E:\eZeroOneTech\My Live Projects\Projects\HorakellEstate\gitWa\he\eHorakelle\eZeroOne.Domain\obj\Debug\eZeroOne.Domain.pdb

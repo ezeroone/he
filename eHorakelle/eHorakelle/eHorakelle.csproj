@@ -614,6 +614,22 @@
     <Content Include="js\superfish.js" />
     <Content Include="js\tables.js" />
     <Content Include="js\wsdindex.html" />
+    <Content Include="PropertyImages\30\thumbs\10429268_647871951953915_1443549607708640205_n.jpg" />
+    <Content Include="PropertyImages\30\thumbs\demo_image_05.jpg" />
+    <Content Include="PropertyImages\30\thumbs\nava.jpg" />
+    <Content Include="PropertyImages\SliderImages\demo_image_01.jpg" />
+    <Content Include="PropertyImages\SliderImages\demo_image_03.jpg" />
+    <Content Include="PropertyImages\SliderImages\demo_image_04.jpg" />
+    <Content Include="RoomImages\1\thumbs\1549407_459350420833021_532166752_n.jpg" />
+    <Content Include="RoomImages\1\thumbs\nava.jpg" />
+    <Content Include="RoomImages\2\thumbs\1.jpg" />
+    <Content Include="RoomImages\2\thumbs\slide1.jpg" />
+    <Content Include="RoomImages\3\thumbs\house5.jpg" />
+    <Content Include="RoomImages\4\thumbs\2.jpg" />
+    <Content Include="RoomImages\4\thumbs\slide2.jpg" />
+    <Content Include="RoomImages\5\thumbs\house2.jpg" />
+    <Content Include="RoomImages\5\thumbs\house4.jpg" />
+    <Content Include="RoomImages\5\thumbs\house7.jpg" />
     <Content Include="Scripts\ipmapper.js" />
     <Content Include="Scripts\jquery-1.7.2.min.js" />
     <Content Include="Content\images\icons\Thumbs.db" />
@@ -821,7 +837,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>0</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:41723/</IISUrl>
+          <IISUrl>http://localhost:4348/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

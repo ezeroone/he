@@ -1,8 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eHorakelle", "eHorakelle\eHorakelle.csproj", "{5439BBD2-86D0-4570-A2BB-4F4D69814DD8}"
-EndProject
+# Visual Studio 2013
+VisualStudioVersion = 12.0.21005.1
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eHorakelle.Tests", "eHorakelle.Tests\eHorakelle.Tests.csproj", "{3BF39AF0-34B1-4518-8A84-C835BA730850}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eZeroOne.Common", "eZeroOne.Common\eZeroOne.Common.csproj", "{56A3C845-D9E0-43CE-8DF6-510DBC683BBC}"
@@ -15,16 +15,14 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eZeroOne.Service", "eZeroOn
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eZeroOne.Domain", "eZeroOne.Domain\eZeroOne.Domain.csproj", "{60B96007-F820-45BD-AC18-E0AB4F02DE4F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eHorakelle", "eHorakelle\eHorakelle.csproj", "{5439BBD2-86D0-4570-A2BB-4F4D69814DD8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{5439BBD2-86D0-4570-A2BB-4F4D69814DD8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5439BBD2-86D0-4570-A2BB-4F4D69814DD8}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5439BBD2-86D0-4570-A2BB-4F4D69814DD8}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5439BBD2-86D0-4570-A2BB-4F4D69814DD8}.Release|Any CPU.Build.0 = Release|Any CPU
 		{3BF39AF0-34B1-4518-8A84-C835BA730850}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{3BF39AF0-34B1-4518-8A84-C835BA730850}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3BF39AF0-34B1-4518-8A84-C835BA730850}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -49,6 +47,10 @@ Global
 		{60B96007-F820-45BD-AC18-E0AB4F02DE4F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{60B96007-F820-45BD-AC18-E0AB4F02DE4F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{60B96007-F820-45BD-AC18-E0AB4F02DE4F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5439BBD2-86D0-4570-A2BB-4F4D69814DD8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5439BBD2-86D0-4570-A2BB-4F4D69814DD8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5439BBD2-86D0-4570-A2BB-4F4D69814DD8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5439BBD2-86D0-4570-A2BB-4F4D69814DD8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,9 +1,12 @@
 ﻿@model eZeroOne.eHorakelle.Models.LoginUserDetails
 
-@if (Model != null)
+@if (Model != null && Model.UserName!=null)
 {
      @:Welcome <strong>@Model.UserName !</strong>
 }
-
+else
+{
+    @:Welcome !
+}
 
    

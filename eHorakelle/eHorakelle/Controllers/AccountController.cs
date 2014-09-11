@@ -35,7 +35,7 @@ namespace eZeroOne.eHorakelle.Controllers
         public ActionResult Login()
         {
             var model = new LoginModel();
-            return View();
+            return View(model);
         }
 
         [HttpPost]

@@ -184,13 +184,13 @@
 					<h3 class="title-style1">Horakelle<span class="title-block"></span></h3>
 					<img src="@property.DefaultImageUrl" alt="" class="image-style1 respond-img" />
 				    <p style="height:60px">
-				        @if (property.Description.Length > 50)
+				        @if (property.Description.Length > 75)
 				        {
-				            property.Description.Substring(0, 50);
+				           @property.Description.Substring(0, 75) <span>&nbsp;...</span>;
 				        }
 				        else
 				        {
-				            @property.Description
+				           @property.Description
 				        }
 
 				    </p>
