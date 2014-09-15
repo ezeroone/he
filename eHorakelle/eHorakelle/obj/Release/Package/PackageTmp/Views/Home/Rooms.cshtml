@@ -22,7 +22,16 @@
 					<h3 class="title-style1"><a href="#">@r.Name</a><span class="title-block"></span></h3>
 					<ul class="no-style-list">
 					    @*<li><strong>Beds:</strong> Queen</li>*@
-                        @{
+					    @{
+					        var minimumRateBed = r.BedModels.FirstOrDefault();
+					        var bedName = "";
+                            var minimumRate = r.DisplayPrice;
+					        if (minimumRateBed != null)
+					        {
+					            minimumRate = minimumRateBed.Rate;
+					            bedName = minimumRateBed.BedName;
+					        }
+                            
                             var bedRateId = "bedRate" + @r.Id;
                             var occupancyId = "occupancy" + @r.Id;
                             var childOccupancyId = "childOccupancy" + @r.Id;
@@ -30,7 +39,7 @@
 					
 					    <li><strong  >Occupancy (Adult) :</strong> <span id="@occupancyId">@r.Occupancy</span></li>
 					 @*   <li><strong  >Children Occupancy :</strong> <span id="@childOccupancyId">@r.ChildOccupancy</span></li>*@
-					    <li><strong >Rates :</strong><span id="@bedRateId">$@r.DisplayPrice</span> </li>
+					    <li><strong >Rates :</strong><span id="@bedRateId">$ @minimumRate</span> </li>
 
                         <li><strong>Size:</strong>@r.Squarefeet sqf</li>
                         <li><strong> Beds :

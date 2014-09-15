@@ -39,4 +39,5 @@ namespace eZeroOne.Service.Customers
 
         Visitor GetVisitorUserId(int id);
     }
+
 }

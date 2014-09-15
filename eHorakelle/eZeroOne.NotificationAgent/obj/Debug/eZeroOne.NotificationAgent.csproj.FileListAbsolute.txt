@@ -38,5 +38,6 @@ E:\eZeroOneTech\My Live Projects\Projects\HorakellEstate\eHorakelle\eZeroOne.Not
 E:\eZeroOneTech\My Live Projects\Projects\HorakellEstate\eHorakelle\eZeroOne.NotificationAgent\obj\Debug\eZeroOne.NotificationAgent.pdb
 E:\eZeroOneTech\My Live Projects\Projects\HorakellEstate\gitWa\he\eHorakelle\eZeroOne.NotificationAgent\bin\Debug\eZeroOne.NotificationAgent.dll
 E:\eZeroOneTech\My Live Projects\Projects\HorakellEstate\gitWa\he\eHorakelle\eZeroOne.NotificationAgent\bin\Debug\eZeroOne.NotificationAgent.pdb
+E:\eZeroOneTech\My Live Projects\Projects\HorakellEstate\gitWa\he\eHorakelle\eZeroOne.NotificationAgent\obj\Debug\eZeroOne.NotificationAgent.csprojResolveAssemblyReference.cache
 E:\eZeroOneTech\My Live Projects\Projects\HorakellEstate\gitWa\he\eHorakelle\eZeroOne.NotificationAgent\obj\Debug\eZeroOne.NotificationAgent.dll
 E:\eZeroOneTech\My Live Projects\Projects\HorakellEstate\gitWa\he\eHorakelle\eZeroOne.NotificationAgent\obj\Debug\eZeroOne.NotificationAgent.pdb

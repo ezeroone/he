@@ -50,3 +50,4 @@ E:\eZeroOneTech\My Live Projects\Projects\HorakellEstate\gitWa\he\eHorakelle\eHo
 E:\eZeroOneTech\My Live Projects\Projects\HorakellEstate\gitWa\he\eHorakelle\eHorakelle\bin\System.Web.WebPages.Razor.xml
 E:\eZeroOneTech\My Live Projects\Projects\HorakellEstate\gitWa\he\eHorakelle\eHorakelle\obj\Release\eZeroOne.eHorakelle.dll
 E:\eZeroOneTech\My Live Projects\Projects\HorakellEstate\gitWa\he\eHorakelle\eHorakelle\obj\Release\eZeroOne.eHorakelle.pdb
+E:\eZeroOneTech\My Live Projects\Projects\HorakellEstate\gitWa\he\eHorakelle\eHorakelle\obj\Release\eHorakelle.csprojResolveAssemblyReference.cache

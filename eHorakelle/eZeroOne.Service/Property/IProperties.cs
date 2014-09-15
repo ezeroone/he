@@ -456,6 +456,8 @@ namespace eZeroOne.Service.Property
         }
         public bool AddBannerImage(string filePath, string place, string description, string loction, decimal lat, decimal lon)
         {
+            var displayOrder = _repository.All<Domain.BannerImage>().Max(r=>r.DisplayOrder);
+
             var image = new BannerImage
             {
                 Id = 0,
@@ -464,7 +466,8 @@ namespace eZeroOne.Service.Property
                 Lat = lat,
                 Lon = lon,
                 ImageName = filePath,
-                PlaceName = place
+                PlaceName = place,
+                DisplayOrder = displayOrder+1
             };
             try
             {
@@ -614,11 +617,20 @@ namespace eZeroOne.Service.Property
         public bool RemoveBannerImage(int imageId)
         {
             var image = _repository.All<BannerImage>().FirstOrDefault(p => p.Id == imageId);
+            var order = 0;
+            var images = _repository.All<BannerImage>();
             if (image != null)
             {
+                order = image.DisplayOrder;
                 _repository.Delete(image);
-                _unitOfWork.Commit();
+               
             }
+            foreach (var i in images.Where(o => o.DisplayOrder > order))
+            {
+                i.DisplayOrder = order;
+                order++;
+            }
+            _unitOfWork.Commit();
             return true;
         }
         public bool RemoveRecommandation(int id)
@@ -1452,7 +1464,6 @@ namespace eZeroOne.Service.Property
         {
             return _repository.All<Domain.VisitorReview>().FirstOrDefault(p => p.Id == id);
         }
-
         public IEnumerable<VisitorReview> GetReviewComments()
         {
             return _repository.All<Domain.VisitorReview>();
@@ -1599,8 +1610,7 @@ namespace eZeroOne.Service.Property
         }
 
         #endregion
-
-
+        
         #region Dining rates
         public bool SaveDiningRate(DiningRate rate)
         {
@@ -1826,7 +1836,6 @@ namespace eZeroOne.Service.Property
             _unitOfWork.Commit();
             return true;
         }
-
         public bool SaveBookingRoom(Booking  booking)
         {
             _repository.Add(booking);
@@ -1844,7 +1853,6 @@ namespace eZeroOne.Service.Property
             _unitOfWork.Commit();
             return true;
         }
-
         public  string InvoiceNumber()
         {
             var no = string.Empty;

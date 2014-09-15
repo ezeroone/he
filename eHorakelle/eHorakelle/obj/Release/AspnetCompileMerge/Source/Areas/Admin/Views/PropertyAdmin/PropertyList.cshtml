@@ -143,8 +143,10 @@
                                                             @{
                                                                 var viewurl = "~/Admin/PropertyAdmin/PropertyDetail?id=" + @item.Id;
                                                             }
-                                                            <a id="btnview" href="@Url.Content(viewurl)" title="View Property "> @item.Name </a>
+                                                            @*<a id="btnview" href="@Url.Content(viewurl)" title="View Property "> </a>*@
+                                                            @item.Name
 
+                                                            
                                                            
                                                         </td>
                                   
@@ -197,7 +199,7 @@
                                                             <a id="btnFeature" href="@Url.Content(feartueUrl)" title="add features "class="icon-filter"></a>
                                                             <a id="btnContact" href="@Url.Content(activityUrl)" title="add activities "class="icon-comment"></a>
                                                             <a id="btnFood" href="@Url.Content(foodUrl)" title="add dinings "class="icon-file"></a>
-                                                            <a href="#deleteRecord" data-toggle="modal" class="icon-remove"  propertyId=@item.Id title="Delete accomodation" ></a>
+                                                            @*<a href="#deleteRecord" data-toggle="modal" class="icon-remove"  propertyId=@item.Id title="Delete accomodation" ></a>*@
                                                         
                                                         </td>
                                                     </tr>

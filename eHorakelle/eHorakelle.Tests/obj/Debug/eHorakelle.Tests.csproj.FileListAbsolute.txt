@@ -71,5 +71,6 @@ E:\eZeroOneTech\My Live Projects\Projects\HorakellEstate\gitWa\he\eHorakelle\eHo
 E:\eZeroOneTech\My Live Projects\Projects\HorakellEstate\gitWa\he\eHorakelle\eHorakelle.Tests\bin\Debug\System.Web.WebPages.xml
 E:\eZeroOneTech\My Live Projects\Projects\HorakellEstate\gitWa\he\eHorakelle\eHorakelle.Tests\bin\Debug\System.Web.WebPages.Deployment.xml
 E:\eZeroOneTech\My Live Projects\Projects\HorakellEstate\gitWa\he\eHorakelle\eHorakelle.Tests\bin\Debug\System.Web.WebPages.Razor.xml
+E:\eZeroOneTech\My Live Projects\Projects\HorakellEstate\gitWa\he\eHorakelle\eHorakelle.Tests\obj\Debug\eHorakelle.Tests.csprojResolveAssemblyReference.cache
 E:\eZeroOneTech\My Live Projects\Projects\HorakellEstate\gitWa\he\eHorakelle\eHorakelle.Tests\obj\Debug\eHorakelle.Tests.dll
 E:\eZeroOneTech\My Live Projects\Projects\HorakellEstate\gitWa\he\eHorakelle\eHorakelle.Tests\obj\Debug\eHorakelle.Tests.pdb
