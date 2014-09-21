@@ -95,7 +95,7 @@ $(document).ready(function() {
 	$(".gmap-button").click(function(){
 		$('#header-gmap').slideToggle(900);
 		if (!map) {
-		    initialize(6.9344123, 79.8428120);
+		    initialize(7.2220533, 79.97801779999998);
 		}
 		$('.gmap-button').toggleClass('gmap-button-hover');
 	});

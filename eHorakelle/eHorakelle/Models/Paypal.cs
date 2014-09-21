@@ -15,5 +15,6 @@
         public string currency_code { get; set; }
         public string item_name { get; set; }
         public string amount { get; set; }
+        public string InvoiceId { get; set; }
     }
 }

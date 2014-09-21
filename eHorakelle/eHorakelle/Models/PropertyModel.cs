@@ -14,12 +14,12 @@ namespace eZeroOne.eHorakelle.Models
         public string Description { get; set; }
         public string AccommodationType { get; set; }
         public string AccommodationStandard { get; set; }
-        [Required]
+        //[Required]
         [DataType(DataType.Currency)]
         public decimal DisplayPrice { get; set; }
-        [Required]
+        //[Required]
         public int NoOfRooms { get; set; }
-        [Required]
+        //[Required]
         public decimal Squarefeet { get; set; }
         public DateTime ActiveFrom { get; set; }
         public DateTime ActiveTo { get; set; }
@@ -44,15 +44,15 @@ namespace eZeroOne.eHorakelle.Models
         public string Street { get; set; }
         public string ZipCode { get; set; }
         public string Fax { get; set; }
-        [Required]
+        //[Required]
         
         public string LandLinePrimary { get; set; }
-        [Required]
+       // [Required]
        
         public string MobilePrimary { get; set; }
         public string LandLineSecondary { get; set; }
         public string MobileSecondary { get; set; }
-        [Required]
+        //[Required]
         [Display(Name = "Contact Person")]
         public string ContactPerson1 { get; set; }
         public string ContactPerson2 { get; set; }

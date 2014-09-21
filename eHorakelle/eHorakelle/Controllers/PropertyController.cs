@@ -1534,17 +1534,19 @@ namespace eZeroOne.eHorakelle.Controllers
 
                        #region Email Invoice
 
-                       var emailInvoice = new EmailInvoiceDetails();
-                       emailInvoice.CustomerName = model.FirstName + " " + model.LastName;
-                       emailInvoice.Email = model.Email;
-                       emailInvoice.InvoiceId = invoice.Id.ToString();
-                       emailInvoice.InvoicedDate = DateTime.Now;
-                       emailInvoice.TotalAmount = invoice.TotalAmount;
-                       emailInvoice.TotalDiscount = invoice.Discount;
-                       emailInvoice.TotalTax = invoice.Tax;
-                       emailInvoice.BillAmount = invoice.BillAmount;
+                       var emailInvoice = new EmailInvoiceDetails
+                       {
+                           CustomerName = model.FirstName + " " + model.LastName,
+                           Email = model.Email,
+                           InvoiceId = invoice.Id.ToString(),
+                           InvoicedDate = DateTime.Now,
+                           TotalAmount = invoice.TotalAmount,
+                           TotalDiscount = invoice.Discount,
+                           TotalTax = invoice.Tax,
+                           BillAmount = invoice.BillAmount
+                       };
 
-                       var daywisebilling = (List<DayWiseRate>)ViewBag.PriceBreakDowns;
+                        var daywisebilling = (List<DayWiseRate>)ViewBag.PriceBreakDowns;
                        foreach (var dayitem in daywisebilling)
                        {
                            var newItem = new ItemDetails()
@@ -1771,7 +1773,7 @@ namespace eZeroOne.eHorakelle.Controllers
                                                    select a).FirstOrDefault();
                                     if (isCheck == null)
                                     {
-                                        var childRate = ((bed.Rate / totAdults) * (decimal)(.5 * yrsbelow));
+                                        var childRate = ((bed.Rate / bed.Occupancy) * (decimal)(.5 * yrsbelow));
                                         totalPrice = totalPrice + childRate;
                                         dayByDay.Rate = dayByDay.Rate + childRate;
                                         dayByDay.Rooms.Add(new DayRate
@@ -1831,7 +1833,8 @@ namespace eZeroOne.eHorakelle.Controllers
                                                    select a).FirstOrDefault();
                                     if (isCheck == null)
                                     {
-                                        var childRate = ((rate.Rate) * (decimal)(.5 * yrsbelow));
+                                        //10% discount
+                                        var childRate = ((rate.Rate) * (decimal)(.1 * yrsbelow));
                                         totalPrice = totalPrice + childRate;
                                         dayByDay.Rate = dayByDay.Rate + childRate;
                                         dayByDay.Dinings.Add(new DayRate
@@ -1889,7 +1892,8 @@ namespace eZeroOne.eHorakelle.Controllers
                                                    select b).FirstOrDefault();
                                     if (isCheck == null)
                                     {
-                                        var childRate = ((rate.Rate) * (decimal)(.5 * yrsbelow));
+                                        //15% discount
+                                        var childRate = ((rate.Rate) * (decimal)(.15 * yrsbelow));
                                         totalPrice = totalPrice + childRate;
                                         dayByDay.Rate = dayByDay.Rate + childRate;
                                         dayByDay.Activities.Add(new DayRate
@@ -1963,7 +1967,8 @@ namespace eZeroOne.eHorakelle.Controllers
                                                select a).FirstOrDefault();
                                 if (isCheck == null)
                                 {
-                                    var childRate = ((rate.Rate) * (decimal)(.5 * yrsbelow));
+                                    //15% discount
+                                    var childRate = ((rate.Rate) * (decimal)(.15 * yrsbelow));
                                     totalPrice = totalPrice + childRate;
                                     transCost = transCost + childRate;
                                     dayByDay.Rate = dayByDay.Rate + childRate;
@@ -2032,7 +2037,6 @@ namespace eZeroOne.eHorakelle.Controllers
             return name;
         }
 
-
         private int GetUserId(string userEmail)
         {
             var id = 0;
@@ -2073,42 +2077,6 @@ namespace eZeroOne.eHorakelle.Controllers
 
         public ActionResult PayPalPayment(string checkIn, string checkOut, string userName, decimal amount,int companyId, int invoiceId)
         {
-            //var model = new BookingFlowModel();
-            //ViewBag.TempData = null;
-            //ViewBag.PriceBreakDowns = null;
-            //var booingModel = new TempBooking();
-            //if (TempData["BookingData"] != null)
-            //{
-            //    var tempData = (TempBooking)TempData["BookingData"];
-            //    booingModel = tempData;
-            //    ViewBag.TempData = TempData["BookingData"];
-            //}
-            //else
-            //{
-            //    if (HttpContext.Session != null)
-            //    {
-            //        var temp = HttpContext.Session["TempData"];
-            //        var tempData = (TempBooking)temp;
-            //        booingModel = tempData;
-            //        TempData["BookingData"] = tempData;
-            //        ViewBag.TempData = tempData;
-            //    }
-
-            //}
-
-            //if (booingModel.Rooms.Any())
-            //{
-            //    ViewBag.PriceBreakDowns = GetPriceBreakDowns(booingModel.CheckIn.ToShortDateString(),
-            //                                                   booingModel.CheckOut.ToShortDateString(),
-            //                                                   booingModel.Adult, booingModel.Children,
-            //                                                   booingModel.Below6Yrs, booingModel.Rooms,
-            //                                                   booingModel.ExtraBeds, booingModel.DiningsByDays,
-            //                                                   booingModel.ActivitiesByDays, booingModel.Transports);
-            //}
-
-            //checkIn = "07/04/2014";
-            //checkIn = "09/04/2014";
-            //amount = 10;
 
             //var item = userName + " has booked room(s) at horakelle estate from " + checkIn + " to " + checkOut;
             ViewBag.UserName = userName;
@@ -2122,9 +2090,9 @@ namespace eZeroOne.eHorakelle.Controllers
 
             bool useSandbox = Convert.ToBoolean(ConfigurationManager.AppSettings["UseSandbox"]);
             if (useSandbox)
-                ViewBag.actionURl = "https://www.sandbox.paypal.com/cgi-bin/webscr";
+                ViewBag.actionURl = "http://www.sandbox.paypal.com/cgi-bin/webscr";
             else
-                ViewBag.actionURl = "https://www.paypal.com/cgi-bin/webscr";
+                ViewBag.actionURl = "http://www.paypal.com/cgi-bin/webscr";
 
             paypal.cancel_return = ConfigurationManager.AppSettings["CancelURL"] + "?companyId=" + companyId + "&invoiceId=" + invoiceId;
             paypal.@return = ConfigurationManager.AppSettings["ReturnURL"] + "?companyId=" + companyId + "&invoiceId=" + invoiceId; 
@@ -2133,6 +2101,7 @@ namespace eZeroOne.eHorakelle.Controllers
 
             paypal.item_name = userName;
             paypal.amount = amount.ToString();
+            paypal.InvoiceId = invoiceId.ToString();
 
             return View(paypal);
 

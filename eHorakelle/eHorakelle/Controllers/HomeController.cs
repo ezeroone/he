@@ -487,6 +487,7 @@ namespace eZeroOne.eHorakelle.Controllers
 
         public ActionResult Rooms()
         {
+            PreLoadData();
             var model = LoadRooms();
 
             return View(model);
@@ -627,11 +628,14 @@ namespace eZeroOne.eHorakelle.Controllers
         private void PreLoadData()
         {
             var propertyId = 0;
+            ViewBag.PropetyDescription= "";
             var results = _properties.GetHotelsList().ToList().Take(1).ToList();
             var model = new List<PropertyModel>();
             foreach (var p in results)
             {
                 propertyId = p.Id;
+                ViewBag.PropetyDescription = p.Description;
+
                 var property = new PropertyModel
                 {
                     Id = p.Id,
@@ -706,6 +710,7 @@ namespace eZeroOne.eHorakelle.Controllers
 
             ViewBag.ReviewComments = GetReviewComments();
 
+            
         }
 
         private List<PropertyModel> LoadRooms()

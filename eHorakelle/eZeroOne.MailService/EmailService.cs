@@ -426,7 +426,7 @@ namespace eZeroOne.MailService
 
         public static void SendInvoiceDetails(EmailInvoiceDetails invoice)
         {
-            var subject = "Horakelle Invoice";
+            var subject = "Horakelle Estate Invoice";
             var from = new MailAddress("donotreply.ezeroone@gmail.com");
             var to = new MailAddress(invoice.Email);
             MailAddress copyTo = null;

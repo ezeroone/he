@@ -27,18 +27,26 @@
         <!-- BEGIN .topbar-right -->
         <div class="topbar-right clearfix">
 
-            <a href="/Property/ChooseDate" class="button0">Book Now</a>
+            @*<a href="/Property/ChooseDate" class="button0">Book Now</a>*@
 
             @*<ul id="language-selection">
                     <li><a href="#">English</a></li>
                 </ul>*@
-            <ul class="header-contact">
-                <li>               
-                    @*@Html.Action("UserLogonInfo", "Account")*@
+            <ul class="header-contact" style="padding:5px;">
+                <li>
                     Welcome !
-                 </li>
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                          @Html.Action("UserLogonInfo", "Account")
+                    }              
+                  
+                    
+                </li>
                 <li class="phone_icon">+94 772-367 061</li>
                 <li class="email_icon">email@horakelle.com</li>
+                <li><a target="_blank" href="#"><span class="facebook-icon"></span></a></li>
+                <li><a target="_blank" href="#"><span class="twitter-icon"></span></a></li>
+
             </ul>
 
             <!-- END .topbar-right -->
@@ -65,20 +73,19 @@
         <nav class="main-navigation">
 
             <ul id="navigation">
-                <li class="current-menu-item current_page_item"><a href="/"><strong>Home<span>welcome</span></strong></a></li>
+                <li class=""><a href="/"><strong>Home<span>welcome</span></strong></a></li>
                 <li><a href="/Home/Rooms"><strong>Rooms<span>rates &amp; reservation</span></strong></a></li>
                 <li><a href="/Home/Terms"><strong>term & conditions<span>of this estate</span></strong></a></li>
                 <li><a href="/Home/Contactus"><strong>Contact Us<span>get in touch</span></strong></a></li>
-                @*<li><a href="/Home/VisitorRegistration"><strong>Registration<span>to have full access</span></strong></a></li>*@
-
+               
                 @if (User.Identity.IsAuthenticated)
-                        {
+                {
                     <li><a href="/Account/Logout"><strong>Logout<span>Logout</span></strong></a></li>
-                        }
-                        else
-                        {
+                }
+                else
+                {
                     <li><a href="/Account/Login"><strong>Login<span>to have full access</span></strong></a></li>
-                        }
+                }
 
             </ul>
 
@@ -98,16 +105,15 @@
                     <li><a href="#"><strong>term & conditions<span>of this estate</span></strong></a></li>
 
                     <li><a href="#"><strong>Contact Us<span>get in touch</span></strong></a></li>
-                    @*<li><a href="/Home/VisitorRegistration"><strong>Registration<span>to have full access</span></strong></a></li>*@
-
+                   
                     @if (User.Identity.IsAuthenticated)
-                            {
+                    {
                         <li><a href="/Account/Logout"><strong>Logout<span>Logout</span></strong></a></li>
-                            }
-                            else
-                            {
+                    }
+                    else
+                    {
                         <li><a href="/Account/Login"><strong>Login<span>to have full access</span></strong></a></li>
-                            }
+                    }
 
                     <!-- END #main-menu -->
                 </ul>
@@ -121,3 +127,22 @@
     </div>
 
 </div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        
+        //$("#navigation li").click(function () {
+        //    //alert(this.id); // id of clicked li by directly accessing DOMElement property
+        //    //alert($(this).attr('id')); // jQuery's .attr() method, same but more verbose
+        //    //alert($(this).html()); // gets innerHTML of clicked li
+        //    //alert($(this).text()); // gets text contents of clicked li
+        //    $(this).addClass("current-menu-item current_page_item");
+        //});
+        $('ul > li').click(function () {
+            $('ul > li').removeClass('current-menu-item current_page_item ');
+            $(this).addClass('active');
+        });
+  
+    });
+</script>
