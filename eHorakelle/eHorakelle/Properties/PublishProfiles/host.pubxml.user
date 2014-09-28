@@ -6,7 +6,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <TimeStampOfAssociatedLegacyPublishXmlFile />
-    <_PublishTargetUrl>E:\eZeroOneTech\My Live Projects\Projects\HorakellEstate\hostfiles</_PublishTargetUrl>
+    <_PublishTargetUrl>E:\ezeroonetech\my live projects\projects\horakellestate\hostfiles</_PublishTargetUrl>
   </PropertyGroup>
   <ItemGroup>
     <File Include="Areas/Admin/Views/PropertyAdmin/AccomodationStandards.cshtml">
@@ -37,7 +37,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>01/20/2014 20:22:15</publishTime>
     </File>
     <File Include="Areas/Admin/Views/PropertyAdmin/AddProperty.cshtml">
-      <publishTime>09/15/2014 20:04:44</publishTime>
+      <publishTime>09/21/2014 21:14:56</publishTime>
     </File>
     <File Include="Areas/Admin/Views/PropertyAdmin/AddRecommandation.cshtml">
       <publishTime>02/13/2014 22:56:54</publishTime>
@@ -178,10 +178,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>01/20/2014 20:01:07</publishTime>
     </File>
     <File Include="bin/App_global.asax.compiled">
-      <publishTime>09/15/2014 21:01:15</publishTime>
+      <publishTime>09/25/2014 19:57:49</publishTime>
     </File>
     <File Include="bin/App_global.asax.dll">
-      <publishTime>09/15/2014 21:01:15</publishTime>
+      <publishTime>09/25/2014 19:57:48</publishTime>
     </File>
     <File Include="bin/AreYouAHuman.dll">
       <publishTime>01/30/2012 16:17:48</publishTime>
@@ -208,16 +208,16 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>08/01/2014 21:46:45</publishTime>
     </File>
     <File Include="bin/eZeroOne.eHorakelle.dll">
-      <publishTime>09/15/2014 21:01:03</publishTime>
+      <publishTime>09/23/2014 20:50:54</publishTime>
     </File>
     <File Include="bin/eZeroOne.MailService.dll">
-      <publishTime>08/24/2014 19:30:19</publishTime>
+      <publishTime>09/23/2014 20:50:51</publishTime>
     </File>
     <File Include="bin/eZeroOne.NotificationAgent.dll">
       <publishTime>08/01/2014 21:46:45</publishTime>
     </File>
     <File Include="bin/eZeroOne.Service.dll">
-      <publishTime>09/15/2014 21:01:01</publishTime>
+      <publishTime>09/23/2014 20:50:52</publishTime>
     </File>
     <File Include="bin/log4net.dll">
       <publishTime>04/01/2013 11:10:10</publishTime>
@@ -1879,7 +1879,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>01/21/2014 20:43:01</publishTime>
     </File>
     <File Include="js/scripts.js">
-      <publishTime>01/23/2014 22:54:42</publishTime>
+      <publishTime>09/21/2014 22:12:03</publishTime>
     </File>
     <File Include="js/selectivizr-min.js">
       <publishTime>01/21/2014 20:43:02</publishTime>
@@ -1897,7 +1897,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>01/16/2014 21:30:43</publishTime>
     </File>
     <File Include="PrecompiledApp.config">
-      <publishTime>09/15/2014 21:01:13</publishTime>
+      <publishTime>09/25/2014 19:57:46</publishTime>
     </File>
     <File Include="PropertyImages/30/thumbs/10429268_647871951953915_1443549607708640205_n.jpg">
       <publishTime>09/11/2014 20:36:17</publishTime>
@@ -2020,10 +2020,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>01/20/2014 20:11:55</publishTime>
     </File>
     <File Include="Views/Home/contactus.cshtml">
-      <publishTime>07/27/2014 19:28:40</publishTime>
+      <publishTime>09/21/2014 21:02:49</publishTime>
     </File>
     <File Include="Views/Home/Index.cshtml">
-      <publishTime>09/11/2014 20:56:10</publishTime>
+      <publishTime>09/21/2014 21:14:19</publishTime>
     </File>
     <File Include="Views/Home/Login.cshtml">
       <publishTime>01/20/2014 20:11:58</publishTime>
@@ -2041,7 +2041,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/26/2014 21:33:24</publishTime>
     </File>
     <File Include="Views/Home/Rooms.cshtml">
-      <publishTime>09/15/2014 20:54:21</publishTime>
+      <publishTime>09/21/2014 21:13:15</publishTime>
     </File>
     <File Include="Views/Home/Terms.cshtml">
       <publishTime>07/26/2014 23:01:36</publishTime>
@@ -2062,7 +2062,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>01/20/2014 20:11:39</publishTime>
     </File>
     <File Include="Views/Property/ChooseDate.cshtml">
-      <publishTime>04/28/2014 22:09:33</publishTime>
+      <publishTime>09/21/2014 12:30:32</publishTime>
     </File>
     <File Include="Views/Property/ChooseRoom.cshtml">
       <publishTime>08/24/2014 17:26:38</publishTime>
@@ -2122,16 +2122,16 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>01/20/2014 20:11:59</publishTime>
     </File>
     <File Include="Views/Shared/_Footer.cshtml">
-      <publishTime>08/24/2014 21:31:31</publishTime>
+      <publishTime>09/21/2014 21:53:15</publishTime>
     </File>
     <File Include="Views/Shared/_Header.cshtml">
-      <publishTime>09/11/2014 23:23:54</publishTime>
+      <publishTime>09/21/2014 21:52:21</publishTime>
     </File>
     <File Include="Views/Shared/_HeaderSearch.cshtml">
       <publishTime>01/20/2014 20:11:59</publishTime>
     </File>
     <File Include="Views/Shared/_Layout.cshtml">
-      <publishTime>07/31/2014 21:23:28</publishTime>
+      <publishTime>09/21/2014 22:02:15</publishTime>
     </File>
     <File Include="Views/Shared/_LayoutIndex.cshtml">
       <publishTime>01/20/2014 20:11:59</publishTime>

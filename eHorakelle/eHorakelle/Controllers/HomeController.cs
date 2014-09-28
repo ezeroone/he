@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using eZeroOne.Common;
 using eZeroOne.Domain;
 using eZeroOne.MailService;
+using eZeroOne.Service.Common;
 using eZeroOne.Service.Property;
 using eZeroOne.Service.Repository;
 using eZeroOne.Service.Users;
@@ -20,10 +21,12 @@ namespace eZeroOne.eHorakelle.Controllers
         // GET: /Home/
         private readonly IProperties _properties;
         private readonly IUserService _userService;
+        private readonly ICommon _common;
         public HomeController(IRepository repository, IUnitOfWork unitOfWork)
         {
             _properties = new Properties(repository, unitOfWork);
             _userService = new UserService(repository, unitOfWork);
+            _common = new Service.Common.Common(repository, unitOfWork);
         }
         
         public ActionResult Login()
@@ -791,5 +794,11 @@ namespace eZeroOne.eHorakelle.Controllers
         {
             return View();
         }
+        public ActionResult SensorData()
+        {
+            var data=_common.GetGpsData();
+            return View(data);
+        }
+
     }
 }

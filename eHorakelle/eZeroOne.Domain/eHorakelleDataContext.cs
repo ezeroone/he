@@ -75,6 +75,8 @@ namespace eZeroOne.Domain
         public DbSet<DiningRate> DiningRates { get; set; }
         public DbSet<Transport> Transports { get; set; }
 
+        public DbSet<GpsData> GpsDatas { get; set; }
+
         public eHorakelleEntities()
             : base("eHorakelleDB")
         {

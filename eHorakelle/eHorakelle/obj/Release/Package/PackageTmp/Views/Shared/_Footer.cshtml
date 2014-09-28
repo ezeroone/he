@@ -4,8 +4,8 @@
     var url = ViewBag.YoutubeUrls;
     var property = new PropertyModel()
     {
-        Latitude = (decimal)7.0800000000,
-        Longitude = (decimal)79.9700000000
+        Latitude = (decimal)7.2220533,
+        Longitude = (decimal)79.97801779999998
     };
 }
 <!-- BEGIN #footer -->
@@ -14,42 +14,10 @@
     <!-- BEGIN .content-wrapper -->
     <div class="content-wrapper clearfix">
        
-        <!-- BEGIN .one-fourth -->
+        @*<!-- BEGIN .one-fourth -->
         <div class="one-third">
             <h4 class="title-style2">Location <span class="title-block"></span></h4>
-            <div id="google-map" style="height: 175px;"></div>
-
-            <script type="text/javascript">
-
-					    var lat = '@property.Latitude';
-					    var longi = '@property.Longitude';
-
-					    var latlng = new google.maps.LatLng(lat, longi);
-					    var myOptions = {
-					        zoom: 10,
-					        center: latlng,
-					        scrollwheel: true,
-					        scaleControl: false,
-					        disableDefaultUI: false,
-					        mapTypeId: google.maps.MapTypeId.ROADMAP
-					    };
-
-					    mapContent = new google.maps.Map(document.getElementById("google-map"),myOptions);
-					    var contentStringContent = '<div class="gmap-content"><h2>Horakelle estate</h2><p>Dunugha, Gampaha</p></div>';
-					    var infowindowContent = new google.maps.InfoWindow({
-					        content: contentStringContent
-					    });
-
-					    var markerContent = new google.maps.Marker({
-					        position: latlng,
-					        map: mapContent
-					    });
-
-					    google.maps.event.addListener(markerContent, 'click', function() {
-					        infowindowContent.open(mapContent,markerContent);
-					    });
-
-            </script>
+           
         </div>
         <!-- END .one-fourth -->
  
@@ -69,16 +37,9 @@
          <!-- BEGIN .one-fourth -->
 				<div class="one-third last-col">
 					<h4 class="title-style2">Trip Advisor<span class="title-block"></span></h4>
-					<div id="TA_selfserveprop812" class="TA_selfserveprop">
-        <ul id="WKe6M2cUQI" class="TA_links yrqB9a">
-        <li id="XFIBDwu8eKj" class="LyZVNhn98bDP">
-        <a target="_new" href="http://www.tripadvisor.com/"><img src="http://www.tripadvisor.com/img/cdsi/img2/branding/150_logo-11900-2.png" alt="TripAdvisor"/></a>
-        </li>
-        </ul>
-        </div>
-
+					
 				<!-- END .one-fourth -->
-				</div>
+				</div>*@
 
         <div class="clearboth"></div>
 
@@ -91,7 +52,8 @@
                 <ul class="fr">
                     <li><a href="/Home/Rooms">Rooms</a><span>/</span></li>
                     <li><a href="/Property/ChooseDate">Book Now</a><span>/</span></li>
-                    <li><a href="#">Directions &amp; Map</a><span>/</span></li>
+                    
+                    
                 </ul>
             </nav>
 

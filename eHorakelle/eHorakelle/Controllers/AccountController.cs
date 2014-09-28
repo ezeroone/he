@@ -98,7 +98,8 @@ namespace eZeroOne.eHorakelle.Controllers
         {
             FormsAuthentication.SignOut();
             return RedirectToAction("Index", "Home");
-            //return RedirectToAction("Login", "Account");
+           
+
         }
 
         [HttpGet]

@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace eZeroOne.eHorakelle.Models
 {
@@ -17,5 +18,16 @@ namespace eZeroOne.eHorakelle.Models
 
 
 
+    }
+    public class GpsData
+    {
+        public int Id { get; set; }
+        public string SensorData { get; set; }
+        public DateTime DataTime { get; set; }
+        public int VehicleId { get; set; }
+        public decimal Lat { get; set; }
+        public decimal Long { get; set; }
+        public string DeviceName { get; set; }
+        public bool IsActive { get; set; }
     }
 }

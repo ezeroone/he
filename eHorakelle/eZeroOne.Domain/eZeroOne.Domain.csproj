@@ -76,6 +76,7 @@
     <Compile Include="Models\EmailNotification.cs" />
     <Compile Include="Models\Feature.cs" />
     <Compile Include="Models\FeatureCategory.cs" />
+    <Compile Include="Models\GpsData.cs" />
     <Compile Include="Models\Group.cs" />
     <Compile Include="Models\Invoice.cs" />
     <Compile Include="Models\InvoiceNumber.cs" />

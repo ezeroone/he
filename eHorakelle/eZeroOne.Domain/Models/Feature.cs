@@ -9,7 +9,6 @@
 
 namespace eZeroOne.Domain
 {
-    using System;
     using System.Collections.Generic;
     
     public  class Feature

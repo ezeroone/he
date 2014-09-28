@@ -293,5 +293,15 @@ namespace eZeroOne.Service.Common
                     select e).FirstOrDefault();
         }
 
+        public IEnumerable<GpsData> GetGpsData()
+        {
+            return _repository.All<GpsData>();
+        }
+
+        public void SaveGpsData(GpsData data)
+        {
+            _repository.Add(data);
+            _unitOfWork.Commit();
+        }
     }
 }

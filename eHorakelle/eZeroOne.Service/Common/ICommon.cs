@@ -35,5 +35,7 @@ namespace eZeroOne.Service.Common
         void UpdateTaxDetails(int id, decimal taxValue, bool isincluded);
         void EditCompanyInfo();
 
+        IEnumerable<GpsData> GetGpsData();
+        void SaveGpsData(GpsData data);
     }
 }

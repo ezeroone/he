@@ -151,6 +151,7 @@
     <Compile Include="Controllers\ErrorsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PropertyController.cs" />
+    <Compile Include="Controllers\SersorsController.cs" />
     <Compile Include="Controllers\VisitorsController.cs" />
     <Compile Include="Extensions\CustomMembershipProvider.cs" />
     <Compile Include="Extensions\CustomRoleProvider.cs" />
@@ -171,6 +172,7 @@
     <Compile Include="Models\FeatureGroup.cs" />
     <Compile Include="Models\FeatureList.cs" />
     <Compile Include="Models\Features.cs" />
+    <Compile Include="Models\GpsData.cs" />
     <Compile Include="Models\HotelsModel.cs" />
     <Compile Include="Models\ImageModel.cs" />
     <Compile Include="Models\ImageViewModel.cs" />
@@ -694,6 +696,7 @@
     <Content Include="Views\Shared\Invoice.cshtml" />
     <Content Include="Views\Shared\EmailInvoice.cshtml" />
     <Content Include="Views\Home\Terms.cshtml" />
+    <Content Include="Views\Home\SensorData.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
